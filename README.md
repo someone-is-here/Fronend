@@ -1,5 +1,3 @@
-# Fronend
-
 Web-application: Streaming Service
 
 3 roles: admin, artist and user.
