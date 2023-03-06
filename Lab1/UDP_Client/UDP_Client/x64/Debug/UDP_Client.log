@@ -1,0 +1,4 @@
+﻿  Client.cpp
+D:\University\Course 6\ИТиРОД\Lab1\UDP_Client\UDP_Client\Client.cpp(24,127): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\University\Course 6\ИТиРОД\Lab1\UDP_Client\UDP_Client\Client.cpp(60,126): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  UDP_Client.vcxproj -> D:\University\Course 6\ИТиРОД\Lab1\UDP_Client\x64\Debug\UDP_Client.exe
