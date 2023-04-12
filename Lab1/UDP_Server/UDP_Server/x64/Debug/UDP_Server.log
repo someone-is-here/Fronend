@@ -1,4 +1,4 @@
 ﻿  Server.cpp
 D:\University\Course 6\ИТиРОД\Lab1\UDP_Server\UDP_Server\Server.cpp(30,120): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\University\Course 6\ИТиРОД\Lab1\UDP_Server\UDP_Server\Server.cpp(46,118): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\University\Course 6\ИТиРОД\Lab1\UDP_Server\UDP_Server\Server.cpp(45,119): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   UDP_Server.vcxproj -> D:\University\Course 6\ИТиРОД\Lab1\UDP_Server\x64\Debug\UDP_Server.exe

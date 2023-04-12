@@ -1,0 +1,5 @@
+Lab1/UDP_Client/.vs/*
+Lab1/UDP_Server/.vs/*
+streaming_service/.idea/*
+streaming_service/data/*
+streaming_service/streaming/__pycache__/*
