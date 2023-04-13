@@ -1,0 +1,146 @@
+-- Database: StreamingServiceDB
+
+-- DROP DATABASE IF EXISTS "StreamingServiceDB";
+
+-- CREATE DATABASE "StreamingServiceDB"
+--     WITH
+--     OWNER = postgres
+--     ENCODING = 'UTF8'
+--     LC_COLLATE = 'English_Dominica.1251'
+--     LC_CTYPE = 'English_Dominica.1251'
+--     TABLESPACE = pg_default
+--     CONNECTION LIMIT = -1
+--     IS_TEMPLATE = False;
+	
+CREATE EXTENSION pgcrypto;
+
+CREATE TABLE IF NOT EXISTS roles(
+	id SMALLSERIAL PRIMARY KEY,
+	role VARCHAR(100) NOT NULL UNIQUE	
+);
+
+CREATE TABLE IF NOT EXISTS abstract_users(
+	id BIGSERIAL PRIMARY KEY,
+	role_id SMALLSERIAL,
+	login VARCHAR(100) NOT NULL UNIQUE,
+	email VARCHAR(256) NOT NULL UNIQUE CHECK (email ~* '^[A-Za-z0-9._+%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$'),
+	password TEXT NOT NULL,
+	CONSTRAINT fk_role FOREIGN KEY(role_id) REFERENCES roles(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS logging(
+	id BIGSERIAL PRIMARY KEY,
+	abstr_user_id BIGSERIAL,
+	message VARCHAR(500) NOT NULL,
+	CONSTRAINT fk_abstr_user FOREIGN KEY(abstr_user_id) REFERENCES abstract_users(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS subscriptions(
+	id SMALLSERIAL PRIMARY KEY,
+	title VARCHAR(150) NOT NULL UNIQUE,
+	cost MONEY CHECK(cost >= 0::MONEY)
+);
+
+CREATE TABLE IF NOT EXISTS users(
+	abstr_user_id BIGSERIAL,
+	subscription_id SMALLSERIAL,
+	CONSTRAINT fk_abstr_user FOREIGN KEY(abstr_user_id) REFERENCES abstract_users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_subscription FOREIGN KEY(subscription_id) REFERENCES subscriptions(id) ON UPDATE CASCADE ON DELETE SET NULL	
+);
+
+CREATE TABLE countries(
+	id SMALLSERIAL PRIMARY KEY,
+	title VARCHAR(56) NOT NULL UNIQUE,
+	iso	VARCHAR(2) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS artists(
+	id BIGSERIAL PRIMARY KEY,
+	name VARCHAR(747) NOT NULL UNIQUE,
+	country_id SMALLSERIAL,
+	website VARCHAR(256) NOT NULL UNIQUE,
+	tour_dates SMALLINT NOT NULL DEFAULT 0,
+	CONSTRAINT fk_country_id FOREIGN KEY(country_id) REFERENCES countries(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_abstr_user FOREIGN KEY(id) REFERENCES abstract_users(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS labels(
+	id BIGSERIAL PRIMARY KEY,
+	name VARCHAR(150) NOT NULL UNIQUE,
+	website VARCHAR(256),
+	foundation_year SMALLINT NOT NULL CHECK(foundation_year >= 0 AND foundation_year < date_part('year', CURRENT_DATE) + 1)
+);
+
+CREATE TABLE IF NOT EXISTS artist_label(
+	artist_id BIGSERIAL REFERENCES artists(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	label_id BIGSERIAL REFERENCES labels(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT artist_label_pkey PRIMARY KEY (artist_id, label_id)
+);
+
+CREATE TABLE IF NOT EXISTS genres(
+	id SMALLSERIAL PRIMARY KEY,
+	name VARCHAR(150) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS artist_genre(
+	artist_id BIGSERIAL REFERENCES artists(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	genre_id SMALLSERIAL REFERENCES genres(id) ON UPDATE CASCADE ON DELETE CASCADE, 
+	CONSTRAINT artist_genre_pkey PRIMARY KEY(artist_id, genre_id)
+);
+
+CREATE TABLE IF NOT EXISTS albums(
+	id BIGSERIAL PRIMARY KEY,
+	name VARCHAR(150) NOT NULL,
+	release_date SMALLINT NOT NULL CHECK(release_date >= 0 AND release_date < date_part('year', CURRENT_DATE) + 1)
+);
+
+CREATE TABLE IF NOT EXISTS artist_album(
+	artist_id BIGSERIAL REFERENCES artists(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	album_id SMALLSERIAL REFERENCES albums(id) ON UPDATE CASCADE ON DELETE CASCADE, 
+	CONSTRAINT artist_album_pkey PRIMARY KEY(artist_id, album_id)
+);
+
+CREATE TABLE IF NOT EXISTS tracks(
+	id BIGSERIAL PRIMARY KEY,
+	name VARCHAR(150) NOT NULL,
+	timing TIME NOT NULL,
+	likes BIGINT NOT NULL CHECK(likes >= 0),
+	streaming BIGINT NOT NULL CHECK(streaming >= 0),
+	storage_path VARCHAR(150) NOT NULL,
+	album_id BIGSERIAL,
+	CONSTRAINT fk_album_id FOREIGN KEY (album_id) REFERENCES albums(id)
+); 
+
+CREATE TABLE IF NOT EXISTS track_genre(
+	track_id BIGSERIAL REFERENCES tracks(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	genre_id SMALLSERIAL REFERENCES genres(id) ON UPDATE CASCADE ON DELETE CASCADE, 
+	CONSTRAINT track_genre_pkey PRIMARY KEY(track_id, genre_id)
+);
+
+CREATE TABLE IF NOT EXISTS instruments(
+	id SMALLSERIAL PRIMARY KEY,
+	title VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS artist_instrument(
+	artist_id BIGSERIAL REFERENCES artists(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	instrument_id SMALLSERIAL REFERENCES instruments(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT artist_instrument_pkey PRIMARY KEY (artist_id, instrument_id)
+);
+
+CREATE TABLE IF NOT EXISTS playlists(
+	id BIGSERIAL PRIMARY KEY,
+	name VARCHAR(150) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS playlist_abstr_user(
+	playlist_id BIGSERIAL REFERENCES playlists(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	abstr_user_id BIGSERIAL REFERENCES abstract_users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT playlist_abstr_user_pkey PRIMARY KEY(playlist_id, abstr_user_id)
+);
+
+CREATE TABLE IF NOT EXISTS playlist_track (
+	track_id BIGSERIAL REFERENCES tracks(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	playlist_id BIGSERIAL REFERENCES playlists(id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT track_playlist_pkey PRIMARY KEY(track_id, playlist_id)
+);

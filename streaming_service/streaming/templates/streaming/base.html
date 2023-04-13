@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link type="text/css" href="{% static 'streaming/css/styles.css'%}" rel="stylesheet"/>
+    <link type="text/css" href="{% static 'streaming/css/base_styles.css'%}" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width">
+{#    <link href="{% static 'streaming/css/track_styles.css' %}" rel="stylesheet"/>#}
+</head>
+<body>
+
+{% block menu%}
+<nav class="navbar">
+    <a href="{% url 'home'%}"> <img src="{% static 'streaming/images/icon.png'%}" class="navbar__icon"></a>
+    <ul class="navbar__list">
+        {% for item in menu %}
+        <li class="navbar__list-item">
+            <a href="{% url item.url_name %}" class="navbar__list-item-link">{{item.title}}</a>
+        </li>
+            <br>
+        {% endfor %}
+    </ul>
+    <hr class="navbar-line">
+     <span onclick="openNav()"><img src="{% static 'streaming/images/login.png'%}" class="js-login__img"></span>
+</nav>
+        <menu class="menu-additional">
+        <ul class="menu-additional__list">
+            {%  if request.user.is_authenticated %}
+                <li class="menu-additional__list-item"><a href="{% url 'update_user' user.id %}" class="menu-additional-link">{{user.login}}</a></li>
+            {% if user.role.id == 3 %}
+                <li class="menu-additional__list-item"><a href="{% url 'change_subscription' auth_user %}" class="menu-additional-link">Subscription</a></li>
+        {% endif %}
+
+                <li class="menu-additional__list-item"><a href="{% url 'logout' %}" class="menu-additional-link">Logout</a></li>
+        {% else %}
+                <li class="menu-additional__list-item"><a href="{% url 'login' %}" class="menu-additional-link">Login</a></li>
+                <li class="menu-additional__list-item"><a href="{% url 'register' %}" class="menu-additional-link">Register</a></li>
+    {% endif %}
+        </ul>
+    </menu>
+{% endblock %}
+<aside id="sidenav" class="sidenav">
+  <a href="javascript:void(0)" class="sidenav-button__close" onclick="closeNav()">&times;</a>
+    {%  if request.user.is_authenticated %}
+      <a href="{% url 'update_user' user.id %}" class="sidenav-link">{{user.login}}</a>
+            {% if user.role.id == 3 %}
+                <a href="{% url 'change_subscription' auth_user %}" class="sidenav-link">Subscription</a>
+        {% endif %}
+        <a href="{% url 'create_playlist' %}" class="sidenav-link">Create playlist</a>
+     {% if user.role.id == 2 %}
+                <a href="{% url 'add_instrument' user.id %}" class="sidenav-link">Add instrument</a>
+                <a href="{% url 'create_track' %}" class="sidenav-link">Add track</a>
+                <a href="{% url 'add_genre' user.id %}" class="sidenav-link">Add genre</a>
+                <a href="{% url 'add_label' user.id %}" class="sidenav-link">Add label</a>
+        {% endif %}
+{#  <a href="{% url 'logout' %}" class="sidenav-link">Logout</a>#}
+{#    {% else %}#}
+{#  <a href="{% url 'login' %}" class="sidenav-link">Login</a>#}
+{#  <a href="{% url 'register' %}" class="sidenav-link">Register</a>#}
+    {% endif %}
+  <a href="#" class="sidenav-link">Contact</a>
+</aside>
+
+<div id="content">
+{% block content %}
+{% endblock %}
+</div>
+
+<footer></footer>
+   <script src="{% static 'streaming/js/base_script.js'%}" ></script>
+   <script src="{% static 'streaming/js/script.js'%}" ></script>
+{#  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>#}
+{#  <script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.7/mediaelement-and-player.min.js"></script>#}
+{#  <script src="{% static 'streaming/js/track_js.js' %}"></script>#}
+{#    <script src="{% static 'streaming/js/register.js' %}"></script>#}
+</body>
+</html>
