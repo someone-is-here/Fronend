@@ -5,12 +5,16 @@
     <meta charset="UTF-8">
     <title>{{title}}</title>
     <link type="text/css" href="{% static 'streaming/css/styles.css'%}" rel="stylesheet"/>
+    <link type="text/css" href="{% static 'streaming/css/login_styles.css'%}" rel="stylesheet"/>
     <link type="text/css" href="{% static 'streaming/css/base_styles.css'%}" rel="stylesheet"/>
     <meta name="viewport" content="width=device-width">
 {#    <link href="{% static 'streaming/css/track_styles.css' %}" rel="stylesheet"/>#}
 </head>
 <body>
-
+<div class="div__content">
+{% block content %}
+{% endblock %}
+</div>
 {% block menu%}
 <nav class="navbar">
     <a href="{% url 'home'%}"> <img src="{% static 'streaming/images/icon.png'%}" class="navbar__icon"></a>
@@ -62,11 +66,6 @@
     {% endif %}
   <a href="#" class="sidenav-link">Contact</a>
 </aside>
-
-<div id="content">
-{% block content %}
-{% endblock %}
-</div>
 
 <footer></footer>
    <script src="{% static 'streaming/js/base_script.js'%}" ></script>

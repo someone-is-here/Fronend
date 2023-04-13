@@ -2,11 +2,20 @@
 {% load static %}
 
 {% block content %}
-<div class="delete">
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit" class="button-63">
-</form>
-</div>
+<section class="section__login">
+    <div class="div__login">
+        <div>
+        <form method="post" enctype="multipart/form-data">
+            <h2 class="login__title">Login</h2>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit" class="submit__form"/>
+        </form>
+         <span class="span__no-account">
+                <span>Don't have an account</span>
+                <a href="register.html" class="register__link">Register</a>
+            </span>
+        </div>
+    </div>
+</section>
 {% endblock %}

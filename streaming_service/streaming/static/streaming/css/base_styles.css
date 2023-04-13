@@ -12,6 +12,8 @@ html, body{
     background: black;
     float: left;
     position: fixed;
+    top:0;
+    left:0;
     z-index: 3;
     overflow-x: hidden;
     transition: 0.5s;
@@ -149,4 +151,8 @@ html, body{
 .navbar-line{
     color:white;
     font-style: oblique;
+}
+.div__content{
+    height: 100%;
+    width: 100%;
 }
