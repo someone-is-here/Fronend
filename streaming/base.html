@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Streaming</title>
+    <link type="text/css" href="/css/styles.css" rel="stylesheet"/>
+    <link type="text/css" href="/css/base_styles.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width">
+</head>
+<body>
+<nav class="navbar">
+    <a href="#"> <img src="/images/icon.png" class="navbar__icon"></a>
+    <ul class="navbar__list">
+<!--        {% for item in menu %}-->
+<!--        <li class="navbar__list-item">-->
+<!--            <a href="#" class="navbar__list-item-link">{{item.title}}</a>-->
+<!--        </li>-->
+<!--            <br>-->
+<!--        {% endfor %}-->
+    </ul>
+    <hr class="navbar-line">
+     <span onclick="openNav()"><img src="/images/login.png" class="js-login__img"></span>
+</nav>
+        <menu class="menu-additional">
+        <ul class="menu-additional__list">
+                <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">{{user.login}}</a></li>
+                <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">Subscription</a></li>
+
+                <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">Logout</a></li>
+                <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">Login</a></li>
+                <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">Register</a></li>
+        </ul>
+    </menu>
+<aside id="sidenav" class="sidenav">
+  <a href="javascript:void(0)" class="sidenav-button__close" onclick="closeNav()">&times;</a>
+<!--    {%  if request.user.is_authenticated %}-->
+<!--      <a href="{% url 'update_user' user.id %}" class="sidenav-link">{{user.login}}</a>-->
+<!--            {% if user.role.id == 3 %}-->
+<!--                <a href="{% url 'change_subscription' auth_user %}" class="sidenav-link">Subscription</a>-->
+<!--        {% endif %}-->
+<!--        <a href="{% url 'create_playlist' %}" class="sidenav-link">Create playlist</a>-->
+<!--     {% if user.role.id == 2 %}-->
+<!--                <a href="{% url 'add_instrument' user.id %}" class="sidenav-link">Add instrument</a>-->
+<!--                <a href="{% url 'create_track' %}" class="sidenav-link">Add track</a>-->
+<!--                <a href="{% url 'add_genre' user.id %}" class="sidenav-link">Add genre</a>-->
+<!--                <a href="{% url 'add_label' user.id %}" class="sidenav-link">Add label</a>-->
+<!--        {% endif %}-->
+<!--{#  <a href="{% url 'logout' %}" class="sidenav-link">Logout</a>#}-->
+<!--{#    {% else %}#}-->
+<!--{#  <a href="{% url 'login' %}" class="sidenav-link">Login</a>#}-->
+<!--{#  <a href="{% url 'register' %}" class="sidenav-link">Register</a>#}-->
+<!--    {% endif %}-->
+  <a href="#" class="sidenav-link">Contact</a>
+</aside>
+<div class="div__content">
+        <div class="div__main-content">
+         <div class="div__container-header">
+             <h2 class="div__container-header__name"><a href="#" class="div__container-header__link">Popular</a></h2>
+             <span class="div__container-header__info"><a href="#" class="div__container-header__link">Show all...</a></span>
+        </div>
+
+    <div class="div__container-body">
+<!--        {% for item in tracks %}-->
+<!--            <div class="div__track-item">-->
+<!--                <div class="div__track-cover">-->
+<!--                    <img src="{% static 'streaming/images/play_button.png'%}" class="play__icon-hidden"/>-->
+<!--                    <img alt="" src="{{item.photo.url}}" class="div__track-cover-img"/>-->
+<!--                    <h3><a href="{% url 'detail_track' item.pk %}" class="item-link">{{item.name|lower|capfirst }}</a></h3>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        {% endfor %}-->
+
+    </div>
+    </div>
+     <div class="div__main-content">
+         <div class="div__container-header">
+             <h2 class="div__container-header__name"><a href="#" class="div__container-header__link">Albums</a></h2>
+             <span class="div__container-header__info"><a href="#" class="div__container-header__link">Show all...</a></span>
+        </div>
+
+    <div class="div__container-body">
+<!--        {% for item in albums %}-->
+<!--            <div class="div__track-item">-->
+<!--                <div class="div__track-cover">-->
+<!--                    <img src="{% static 'streaming/images/play_button.png'%}" class="play__icon-hidden"/>-->
+<!--                    {% if item.icon %}-->
+<!--                        <img alt="" src="{{item.icon.url}}" class="div__track-cover-img"/>-->
+<!--                    {% endif %}-->
+<!--                    <h3><a href="{% url 'detail_album' item.pk %}" class="item-link">{{item.name|lower|capfirst }}</a></h3>-->
+<!--                    <h5>{{ item.release_date }}</h5>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        {% endfor %}-->
+
+    </div>
+    </div>
+         <div class="div__main-content">
+         <div class="div__container-header">
+             <h2 class="div__container-header__name"><a href="#" class="div__container-header__link">Playlists</a></h2>
+             <span class="div__container-header__info"><a href="#" class="div__container-header__link">Show all...</a></span>
+        </div>
+
+    <div class="div__container-body">
+<!--        {% for item in playlists %}-->
+<!--            <div class="div__track-item">-->
+<!--                <div class="div__track-cover">-->
+<!--                    <img src="{% static 'streaming/images/play_button.png'%}" class="play__icon-hidden"/>-->
+<!--                    {% if item.icon %}-->
+<!--                        <img alt="" src="{{item.icon.url}}" class="div__track-cover-img"/>-->
+<!--                    {% endif %}-->
+<!--                    <h3 class="item-link">{{item.name|lower|capfirst }}</h3>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        {% endfor %}-->
+
+    </div>
+    </div>
+</div>
+<footer></footer>
+   <script src="/js/base_script.js" ></script>
+   <script src="/js/script.js" ></script>
+</body>
+</html>

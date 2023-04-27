@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+.artist__container{
+    height: 100%;
+    width: 100%;
+    background: greenyellow;
+    margin: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem;
+}
+.artist__container-item{
+    height: 9rem;
+    width: 70%;
+    background: black;
+    background: rgba(0, 0, 0, 0.95);
+    border-top-left-radius: 2rem;
+    -moz-border-radius-topleft: 2rem;
+    border-bottom-right-radius: 2rem;
+    -moz-border-radius-bottomright: 2rem;
+    padding: 1rem;
+    box-shadow: 0.1rem 0.1rem 0.1rem #c503f1, 0 0 1rem blue, 0 0 0.2rem #0cd9a7;
+}
+.artist__container-item__header{
+    height: 50%;
+    width: 100%;
+}
+.artist__name{
+    float: left;
+    color: white;
+}
+.artist__ul{
+    text-decoration: none;
+    color: white;
+}
+.artist__li{
+    list-style-type: none;
+    float: left;
+    margin-left: 1rem;
+}
+.artist__li:before{
+    content: ' *  ';
+}
+.artist__li-green:before{
+    color: greenyellow;
+}
+.artist__li-purple:before{
+    color: #8503ff;
+}
+.artist__li-blue:before{
+    color: #1146f3;
+}
+.span__headline{
+    margin-left: 0.2rem;
+    color: white;
+    float: left;
+}
+.artist__li-instruments:hover{
+    transform: scale(1.05);
+    transition: transform linear 500ms;
+}
+.artist__container-item__body{
+    height: 1.5rem;
+    width: 100%;
+}
+.a__link__no-style{
+    text-decoration: none;
+    color: white;
+}
+.artist__img{
+    float: right;
+    height: 6rem;
+    width: 6rem;
+    border-top-left-radius: 2rem;
+    -moz-border-radius-topleft: 2rem;
+    border-bottom-right-radius: 2rem;
+    -moz-border-radius-bottomright: 2rem;
+}
+@media (max-width: 600px) {
+    .artist__container-item{
+        width: 15rem;
+    }
+}

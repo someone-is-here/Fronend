@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Streaming</title>
+    <link type="text/css" href="css/styles.css" rel="stylesheet"/>
+    <link type="text/css" href="css/register_styles.css" rel="stylesheet"/>
+    <link type="text/css" href="css/base_styles.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width">
+</head>
+<body>
+<nav class="navbar">
+    <a href="index.html"> <img src="images/icon.png" class="navbar__icon"></a>
+    <ul class="navbar__list">
+        <li class="navbar__list-item">
+            <a href="playlists.html" class="navbar__list-item-link">Playlists</a>
+         </li>
+        <li class="navbar__list-item">
+            <a href="artists.html" class="navbar__list-item-link">Artists</a>
+         </li>
+        <li class="navbar__list-item">
+            <a href="albums.html" class="navbar__list-item-link">Albums</a>
+         </li>
+        <li class="navbar__list-item">
+            <a href="tracks.html" class="navbar__list-item-link">Tracks</a>
+         </li>
+
+<!--        {% for item in menu %}-->
+<!--        <li class="navbar__list-item">-->
+<!--            <a href="#" class="navbar__list-item-link">{{item.title}}</a>-->
+<!--        </li>-->
+<!--            <br>-->
+<!--        {% endfor %}-->
+    </ul>
+    <hr class="navbar-line">
+     <span onclick="openNav()"><img src="images/login.png" class="js-login__img"></span>
+</nav>
+        <menu class="menu-additional">
+        <ul class="menu-additional__list">
+<!--                <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">{{user.login}}</a></li>-->
+<!--                <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">Subscription</a></li>-->
+
+<!--                <li class="menu-additional__list-item"><a href="logout.html" class="menu-additional-link">Logout</a></li>-->
+                <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link">Login</a></li>
+                <li class="menu-additional__list-item"><a href="register.html" class="menu-additional-link">Register</a></li>
+        </ul>
+    </menu>
+<aside id="sidenav" class="sidenav">
+  <a href="javascript:void(0)" class="sidenav-button__close" onclick="closeNav()">&times;</a>
+<!--    {%  if request.user.is_authenticated %}-->
+<!--      <a href="{% url 'update_user' user.id %}" class="sidenav-link">{{user.login}}</a>-->
+<!--            {% if user.role.id == 3 %}-->
+<!--                <a href="{% url 'change_subscription' auth_user %}" class="sidenav-link">Subscription</a>-->
+<!--        {% endif %}-->
+<!--        <a href="{% url 'create_playlist' %}" class="sidenav-link">Create playlist</a>-->
+<!--     {% if user.role.id == 2 %}-->
+<!--                <a href="{% url 'add_instrument' user.id %}" class="sidenav-link">Add instrument</a>-->
+<!--                <a href="{% url 'create_track' %}" class="sidenav-link">Add track</a>-->
+<!--                <a href="{% url 'add_genre' user.id %}" class="sidenav-link">Add genre</a>-->
+<!--                <a href="{% url 'add_label' user.id %}" class="sidenav-link">Add label</a>-->
+<!--        {% endif %}-->
+<!--{#  <a href="{% url 'logout' %}" class="sidenav-link">Logout</a>#}-->
+<!--{#    {% else %}#}-->
+<!--{#  <a href="{% url 'login' %}" class="sidenav-link">Login</a>#}-->
+<!--{#  <a href="{% url 'register' %}" class="sidenav-link">Register</a>#}-->
+<!--    {% endif %}-->
+  <a href="#" class="sidenav-link">Contact</a>
+</aside>
+
+<section class="section__register">
+    <div class="div__register">
+        <div>
+    <form action="" method="post" enctype="multipart/form-data" class="form__register">
+        <h2 class="register__title">Register</h2>
+        <input type="hidden" >
+
+        <p>
+          <label for="id_aform_pre-login">Login:</label>
+          <input type="text" name="aform_pre-login" maxlength="100" required id="id_aform_pre-login">
+        </p>
+
+
+  <p>
+    <label for="id_aform_pre-email">Email:</label>
+    <input type="email" name="aform_pre-email" required id="id_aform_pre-email">
+
+
+  </p>
+
+
+  <p>
+    <label for="id_aform_pre-role">Role:</label>
+    <select name="aform_pre-role" required id="id_aform_pre-role">
+  <option value="" selected>---------</option>
+
+  <option value="1">admin</option>
+
+  <option value="2">artist</option>
+
+  <option value="3">user</option>
+
+</select>
+
+
+  </p>
+
+
+  <p>
+    <label for="id_aform_pre-password1">Password1:</label>
+    <input type="password" name="aform_pre-password1" required id="id_aform_pre-password1">
+
+
+  </p>
+
+
+  <p>
+    <label for="id_aform_pre-password2">Password2:</label>
+    <input type="password" name="aform_pre-password2" required id="id_aform_pre-password2">
+
+
+
+
+  </p>
+        <input type="hidden" name="aform_pre" value="Submit" />
+
+        <div>
+            <div id="register_2" class="form__additional">
+                <p>
+    <label for="id_bform_pre-name">Name:</label>
+    <input type="text" name="bform_pre-name" maxlength="747" required id="id_bform_pre-name">
+
+
+  </p>
+
+
+  <p>
+    <label for="id_bform_pre-website">Website:</label>
+    <input type="text" name="bform_pre-website" maxlength="256" required id="id_bform_pre-website">
+
+
+  </p>
+
+
+  <p>
+    <label for="id_bform_pre-tour_dates">Tour dates:</label>
+    <input type="number" name="bform_pre-tour_dates" required id="id_bform_pre-tour_dates">
+
+
+  </p>
+
+
+  <p>
+    <label for="id_bform_pre-country">Country:</label>
+    <select name="bform_pre-country" required id="id_bform_pre-country">
+  <option value="" selected>---------</option>
+
+  <option value="1">Afghanistan</option>
+
+  <option value="2">Albania</option>
+
+  <option value="3">Algeria</option>
+
+  <option value="4">American Samoa</option>
+
+  <option value="5">Andorra</option>
+
+  <option value="6">Angola</option>
+
+  <option value="7">Anguilla</option>
+
+  <option value="8">Antarctica</option>
+
+  <option value="9">Antigua and Barbuda</option>
+
+  <option value="10">Argentina</option>
+
+  <option value="11">Armenia</option>
+
+  <option value="12">Aruba</option>
+
+  <option value="13">Australia</option>
+
+  <option value="14">Austria</option>
+
+  <option value="15">Azerbaijan</option>
+
+  <option value="16">Bahamas</option>
+
+  <option value="17">Bahrain</option>
+
+  <option value="18">Bangladesh</option>
+
+  <option value="19">Barbados</option>
+
+  <option value="20">Belarus</option>
+
+  <option value="21">Belgium</option>
+
+  <option value="22">Belize</option>
+
+  <option value="23">Benin</option>
+
+  <option value="24">Bermuda</option>
+
+  <option value="25">Bhutan</option>
+
+  <option value="26">Bosnia and Herzegovina</option>
+
+  <option value="27">Botswana</option>
+
+  <option value="28">Bouvet Island</option>
+
+  <option value="29">Brazil</option>
+
+  <option value="30">British Indian Ocean Territory</option>
+
+  <option value="31">Brunei Darussalam</option>
+
+  <option value="32">Bulgaria</option>
+
+  <option value="33">Burkina Faso</option>
+
+  <option value="34">Burundi</option>
+
+  <option value="35">Cambodia</option>
+
+  <option value="36">Cameroon</option>
+
+  <option value="37">Canada</option>
+
+  <option value="38">Cape Verde</option>
+
+  <option value="39">Cayman Islands</option>
+
+  <option value="40">Central African Republic</option>
+
+  <option value="41">Chad</option>
+
+  <option value="42">Chile</option>
+
+  <option value="43">China</option>
+
+  <option value="44">Christmas Island</option>
+
+  <option value="45">Cocos (Keeling) Islands</option>
+
+  <option value="46">Colombia</option>
+
+  <option value="47">Comoros</option>
+
+  <option value="48">Congo</option>
+
+  <option value="49">Cook Islands</option>
+
+  <option value="50">Costa Rica</option>
+
+  <option value="51">Croatia</option>
+
+  <option value="52">Cuba</option>
+
+  <option value="53">Cyprus</option>
+
+  <option value="54">Czech Republic</option>
+
+  <option value="55">Denmark</option>
+
+  <option value="56">Djibouti</option>
+
+  <option value="57">Dominica</option>
+
+  <option value="58">Dominican Republic</option>
+
+  <option value="59">Ecuador</option>
+
+  <option value="60">Egypt</option>
+
+  <option value="61">El Salvador</option>
+
+  <option value="62">Equatorial Guinea</option>
+
+  <option value="63">Eritrea</option>
+
+  <option value="64">Estonia</option>
+
+  <option value="65">Ethiopia</option>
+
+  <option value="66">Falkland Islands (Malvinas)</option>
+
+  <option value="67">Faroe Islands</option>
+
+  <option value="68">Fiji</option>
+
+  <option value="69">Finland</option>
+
+  <option value="70">France</option>
+
+  <option value="71">French Guiana</option>
+
+  <option value="72">French Polynesia</option>
+
+  <option value="73">French Southern Territories</option>
+
+  <option value="74">Gabon</option>
+
+  <option value="75">Gambia</option>
+
+  <option value="76">Georgia</option>
+
+  <option value="77">Germany</option>
+
+  <option value="78">Ghana</option>
+
+  <option value="79">Gibraltar</option>
+
+  <option value="80">Greece</option>
+
+  <option value="81">Greenland</option>
+
+  <option value="82">Grenada</option>
+
+  <option value="83">Guadeloupe</option>
+
+  <option value="84">Guam</option>
+
+  <option value="85">Guatemala</option>
+
+  <option value="86">Guernsey</option>
+
+  <option value="87">Guinea</option>
+
+  <option value="88">Guinea-Bissau</option>
+
+  <option value="89">Guyana</option>
+
+  <option value="90">Haiti</option>
+
+  <option value="91">Heard Island and McDonald Islands</option>
+
+  <option value="92">Holy See (Vatican City State)</option>
+
+  <option value="93">Honduras</option>
+
+  <option value="94">Hong Kong</option>
+
+  <option value="95">Hungary</option>
+
+  <option value="96">Iceland</option>
+
+  <option value="97">India</option>
+
+  <option value="98">Indonesia</option>
+
+  <option value="99">Iraq</option>
+
+  <option value="100">Ireland</option>
+
+  <option value="101">Isle of Man</option>
+
+  <option value="102">Israel</option>
+
+  <option value="103">Italy</option>
+
+  <option value="104">Jamaica</option>
+
+  <option value="105">Japan</option>
+
+  <option value="106">Jersey</option>
+
+  <option value="107">Jordan</option>
+
+  <option value="108">Kazakhstan</option>
+
+  <option value="109">Kenya</option>
+
+  <option value="110">Kiribati</option>
+
+  <option value="111">Kuwait</option>
+
+  <option value="112">Kyrgyzstan</option>
+
+  <option value="113">Lao Peoples Democratic Republic</option>
+
+  <option value="114">Latvia</option>
+
+  <option value="115">Lebanon</option>
+
+  <option value="116">Lesotho</option>
+
+  <option value="117">Liberia</option>
+
+  <option value="118">Libya</option>
+
+  <option value="119">Liechtenstein</option>
+
+  <option value="120">Lithuania</option>
+
+  <option value="121">Luxembourg</option>
+
+  <option value="122">Macao</option>
+
+  <option value="123">Madagascar</option>
+
+  <option value="124">Malawi</option>
+
+  <option value="125">Malaysia</option>
+
+  <option value="126">Maldives</option>
+
+  <option value="127">Mali</option>
+
+  <option value="128">Malta</option>
+
+  <option value="129">Marshall Islands</option>
+
+  <option value="130">Martinique</option>
+
+  <option value="131">Mauritania</option>
+
+  <option value="132">Mauritius</option>
+
+  <option value="133">Mayotte</option>
+
+  <option value="134">Mexico</option>
+
+  <option value="135">Monaco</option>
+
+  <option value="136">Mongolia</option>
+
+  <option value="137">Montenegro</option>
+
+  <option value="138">Montserrat</option>
+
+  <option value="139">Morocco</option>
+
+  <option value="140">Mozambique</option>
+
+  <option value="141">Myanmar</option>
+
+  <option value="142">Namibia</option>
+
+  <option value="143">Nauru</option>
+
+  <option value="144">Nepal</option>
+
+  <option value="145">Netherlands</option>
+
+  <option value="146">New Caledonia</option>
+
+  <option value="147">New Zealand</option>
+
+  <option value="148">Nicaragua</option>
+
+  <option value="149">Niger</option>
+
+  <option value="150">Nigeria</option>
+
+  <option value="151">Niue</option>
+
+  <option value="152">Norfolk Island</option>
+
+  <option value="153">Northern Mariana Islands</option>
+
+  <option value="154">Norway</option>
+
+  <option value="155">Oman</option>
+
+  <option value="156">Pakistan</option>
+
+  <option value="157">Palau</option>
+
+  <option value="158">Panama</option>
+
+  <option value="159">Papua New Guinea</option>
+
+  <option value="160">Paraguay</option>
+
+  <option value="161">Peru</option>
+
+  <option value="162">Philippines</option>
+
+  <option value="163">Pitcairn</option>
+
+  <option value="164">Poland</option>
+
+  <option value="165">Portugal</option>
+
+  <option value="166">Puerto Rico</option>
+
+  <option value="167">Qatar</option>
+
+  <option value="168">Romania</option>
+
+  <option value="169">Russian Federation</option>
+
+  <option value="170">Rwanda</option>
+
+  <option value="171">Saint Kitts and Nevis</option>
+
+  <option value="172">Saint Lucia</option>
+
+  <option value="173">Saint Martin (French part)</option>
+
+  <option value="174">Saint Pierre and Miquelon</option>
+
+  <option value="175">Saint Vincent and the Grenadines</option>
+
+  <option value="176">Samoa</option>
+
+  <option value="177">San Marino</option>
+
+  <option value="178">Sao Tome and Principe</option>
+
+  <option value="179">Saudi Arabia</option>
+
+  <option value="180">Senegal</option>
+
+  <option value="181">Serbia</option>
+
+  <option value="182">Seychelles</option>
+
+  <option value="183">Sierra Leone</option>
+
+  <option value="184">Singapore</option>
+
+  <option value="185">Sint Maarten (Dutch part)</option>
+
+  <option value="186">Slovakia</option>
+
+  <option value="187">Slovenia</option>
+
+  <option value="188">Solomon Islands</option>
+
+  <option value="189">Somalia</option>
+
+  <option value="190">South Africa</option>
+
+  <option value="191">South Georgia and the South Sandwich Islands</option>
+
+  <option value="192">South Sudan</option>
+
+  <option value="193">Spain</option>
+
+  <option value="194">Sri Lanka</option>
+
+  <option value="195">Sudan</option>
+
+  <option value="196">Suriname</option>
+
+  <option value="197">Svalbard and Jan Mayen</option>
+
+  <option value="198">Swaziland</option>
+
+  <option value="199">Sweden</option>
+
+  <option value="200">Switzerland</option>
+
+  <option value="201">Syrian Arab Republic</option>
+
+  <option value="202">Tajikistan</option>
+
+  <option value="203">Thailand</option>
+
+  <option value="204">Timor-Leste</option>
+
+  <option value="205">Togo</option>
+
+  <option value="206">Tokelau</option>
+
+  <option value="207">Tonga</option>
+
+  <option value="208">Trinidad and Tobago</option>
+
+  <option value="209">Tunisia</option>
+
+  <option value="210">Turkey</option>
+
+  <option value="211">Turkmenistan</option>
+
+  <option value="212">Turks and Caicos Islands</option>
+
+  <option value="213">Tuvalu</option>
+
+  <option value="214">Uganda</option>
+
+  <option value="215">Ukraine</option>
+
+  <option value="216">United Arab Emirates</option>
+
+  <option value="217">United Kingdom</option>
+
+  <option value="218">United States</option>
+
+  <option value="219">United States Minor Outlying Islands</option>
+
+  <option value="220">Uruguay</option>
+
+  <option value="221">Uzbekistan</option>
+
+  <option value="222">Vanuatu</option>
+
+  <option value="223">Viet Nam</option>
+
+  <option value="224">Wallis and Futuna</option>
+
+  <option value="225">Western Sahara</option>
+
+  <option value="226">Yemen</option>
+
+  <option value="227">Zambia</option>
+
+  <option value="228">Zimbabwe</option>
+
+</select>
+
+
+
+
+  </p>
+                <div class="button_align-center">
+                 <input type="submit" name="bform_pre" value="Submit" class="submit__form" />
+                </div>
+            </div>
+        </div>
+
+        <div id="register_3" class="form__additional">
+            <p>
+    <label for="id_cform_pre-subscription">Subscription:</label>
+    <select name="cform_pre-subscription" required id="id_cform_pre-subscription">
+  <option value="" selected>---------</option>
+
+  <option value="1">Year</option>
+
+  <option value="2">Month</option>
+
+  <option value="3">Week</option>
+
+</select>
+
+
+  </p>
+            <div class="button_align-center">
+                <input type="submit" name="cform_pre" value="Submit" class="submit__form" />
+            </div>
+        </div>
+    </form>
+        </div>
+    </div>
+</section>
+
+<footer></footer>
+   <script src="js/base_script.js" ></script>
+    <script src="js/register.js" ></script>
+   <script src="js/script.js" ></script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+.div__main-content{
+    background: rgba(0,0,0, 0.95);
+    color: white;
+}
+.div__container-header{
+    height: 2rem;
+    padding: 1rem 5rem 1rem 1rem;
+}
+.div__container-header__name{
+    float: left;
+    color: white;
+    text-align: justify;
+    font-family: Verdana;
+    text-shadow:0 0 15px blue;
+}
+.div__container-header__name:hover{
+    animation: glowh1 1.5s linear;
+    -webkit-animation: glowh1 1.5s linear;
+}
+@keyframes glowh1 {
+  0%{text-shadow: 0 0 0.7rem #e8549c;}
+  50%{text-shadow: 0 0 1rem #f1107d;}
+  100%{text-shadow: 0 0 0.7rem #e8549c;}
+}
+
+@-webkit-keyframes glowh1 {
+  0%{text-shadow: 0 0 0.7rem #e8549c;}
+  50%{text-shadow: 0 0 1rem #f1107d;}
+  100%{text-shadow: 0 0 0.7rem #e8549c;}
+}
+
+.div__container-header__info{
+    float: right;
+    text-align: justify;
+    font-family: Verdana;
+}
+.div__container-header__link:hover{
+     animation: glowh1 1.5s linear;
+    -webkit-animation: glowh1 1.5s linear;
+}
+.div__container-header__link{
+    text-decoration: none;
+    color: white;
+}
+.div__container-header__link:hover{
+    cursor: pointer;
+}
+.div__container-body{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 2rem;
+    height: 15rem;
+    overflow: hidden;
+}
+.div__track-item{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 9.5rem;
+    height: 12rem;
+    background: rgba(49, 48, 48, 0.2);
+    border-radius: 0.3rem;
+    padding: 1rem;
+    transition: background-color 0.5s ease-out;
+    margin: 0.7rem;
+    box-shadow: 0.1rem 0.1rem 0.1rem blueviolet, 0 0 1rem blue, 0 0 0.2rem blue;
+}
+.div__track-item:hover{
+    background: rgba(49, 48, 48, 0.63);
+}
+.div__track-cover{
+    display: block;
+    position: relative;
+    width: inherit;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.item-link{
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-family: Verdana;
+    color: blue;
+}
+.div__track-cover-img{
+    display: block;
+    height: 9rem;
+    width: 8rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0.24rem;
+    padding-bottom: 0.6rem;
+}
+.play__icon-hidden{
+    position: absolute;
+    height: 3.4rem;
+    width: 3.4rem;
+    border-radius: 5rem;
+    display:none;
+    top: 6rem;
+    left: 7rem;
+    cursor: pointer;
+    filter: drop-shadow(0px 0px 3px #fa007a);
+}
+.play__icon-hidden:hover{
+    transform: scale(1.03);
+    transition: transform 0.5s;
+}
+.div__track-cover:hover .play__icon-hidden{
+    display: block;
+}
+.track-link{
+    color: blue;
+    letter-spacing: 0.05rem;
+}
+.img__track-icon{
+    height: 2rem;
+    width: 2rem;
+}
+.div__container-body__picture{
+    height: 5rem;
+
+}
+.div__container-body__name{
+
+}
+input[name="name"]{
+    margin: 1rem;
+    width:15rem;
+    height:3rem;
+    border-radius: 1rem;
+    background: transparent;
+}
+/*!* The side navigation menu *!*/
+/*.sidenav {*/
+/*  height: 100%; !* 100% Full-height *!*/
+/*  width: 0; !* 0 width - change this with JavaScript *!*/
+/*  width: 0; !* 0 width - change this with JavaScript *!*/
+/*  position: fixed; !* Stay in place *!*/
+/*  z-index: 5; !* Stay on top *!*/
+/*  top: 0; !* Stay at the top *!*/
+/*  right: 0;*/
+/*  background: black; !* Black*!*/
+/*  overflow-x: hidden; !* Disable horizontal scroll *!*/
+/*  !*padding-top: 3rem; !* Place content 60px from the top *!*!*/
+/*  transition: 0.5s; !* 0.5 second transition effect to slide in the sidenav *!*/
+/*}*/
+
+/*!* The navigation menu links *!*/
+/*.sidenav a {*/
+/*  padding: 1rem 1rem 1rem 4rem;*/
+/*  text-decoration: none;*/
+/*  font-size: 3rem;*/
+/*  color:rebeccapurple;*/
+/*  text-shadow: 1px 1px 1px red, 0 0 1em blue, 0 0 0.2em blue;*/
+/*  display: block;*/
+/*  transition: 0.3s;*/
+/*}*/
+
+/*!* When you mouse over the navigation links, change their color *!*/
+/*.sidenav a:hover {*/
+/*  color: #f1f1f1;*/
+/*}*/
+
+/*!* Position and style the close button (top right corner) *!*/
+/*.sidenav .closebtn {*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  right: 2rem;*/
+/*  font-size: 3rem;*/
+/*  margin-left: 5rem;*/
+/*}*/
+
+/*!* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) *!*/
+/*@media screen and (max-height: 450px) {*/
+/*  .sidenav {padding-top: 2rem;}*/
+/*  .sidenav a {font-size: 3em;}*/
+/*}*/
+
+/*!*!* Style page content - use this if you want to push the page content to the right when you open the side navigation *!*!*/
+/*#main {*/
+/*  transition: margin-right .5s;*/
+/*  padding: 3rem;*/
+/*}*/
+
+/*#menu{*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  !* Border is the new background *!*/
+/*  background: black;*/
+/*  color:rebeccapurple;*/
+/*  height:100%;*/
+/*}*/
+
+/*li::marker {*/
+/*    content: '';*/
+/*}*/
+
+/*#menu li{*/
+/*  margin-top:1rem;*/
+/*  margin-bottom:1rem;*/
+/*  padding-top: 2rem;*/
+/*  font-size:1.5rem;*/
+/*   !*Rotate from top left corner (not default)*!*/
+/*  transform: rotate(270deg);*/
+/*  letter-spacing: 0.1rem;*/
+/*}*/
+/*#menu li:hover{*/
+/*  color: #d59ee0;*/
+/*  cursor: pointer;*/
+/*  text-shadow: 1px 1px 1px #5b3c3c, 0 0 1em blue, 0 0 0.2em blue;*/
+/*}*/
+/*img{*/
+/*  margin-top:0.3em;*/
+/*  height:4em;*/
+/*  width:6em;*/
+/*  border-radius: 5em;*/
+/*}*/
+/*hr{*/
+/*  margin: 0.5rem;*/
+/*  color:rebeccapurple;*/
+/*  text-shadow: 0.1rem 0.1rem 0.1rem red, 0 0 1rem blue, 0 0 2rem blue;*/
+/*}*/
+
+/*.login{*/
+/*  margin-left:0.75rem;*/
+/*  margin-top:0.25rem;*/
+/*  height:4rem;*/
+/*  width:4rem;*/
+/*  border-radius: 5rem;*/
+/*}*/
+
+/*#content{*/
+/*  margin-left: 7em;*/
+/*  color: white;*/
+/*}*/
+/*.album_container{*/
+/*  padding: 5px;*/
+/*  margin: 2em;*/
+/*  border-color: rebeccapurple;*/
+/*  box-shadow: 1px 1px 1px red, 0 0 1em blue, 0 0 0.2em blue;*/
+/*}*/
+/*.track_container{*/
+/*  padding: 5px;*/
+/*  margin: 2em;*/
+/*  border-color: rebeccapurple;*/
+/*  box-shadow: 1px 1px 1px red, 0 0 1em blue, 0 0 0.2em blue;*/
+/*}*/
+/*.text_container_span{*/
+/*    height: 2em;*/
+/*    width: 2em;*/
+/*  padding-top: 1em;*/
+/*}*/
+
+/*.small_icon{*/
+/*  position: relative;*/
+/*vertical-align: middle;*/
+/*  height: 2em;*/
+/*  width: 2em;*/
+/*  border-radius: 5em;*/
+/*}*/
+/*.site{*/
+/*  color: ghostwhite;*/
+/*}*/
+/*.container_playlists {*/
+/*  display: grid;*/
+/*  grid-template-columns: 1fr 1fr 1fr 1fr;*/
+/*  grid-gap: 5px;*/
+/*  margin: 1em;*/
+/*}*/
+/*.container_playlists div {*/
+/*  padding:1em;*/
+/*  color: whitesmoke;*/
+/*  border-color: rebeccapurple;*/
+/*  box-shadow: 1px 1px 1px red, 0 0 1em blue, 0 0 0.2em blue;*/
+/*  aspect-ratio: 3;*/
+/*  margin:1em;*/
+/*  font-size: 14px;*/
+/*}*/
+/*.playlist_title{*/
+/*  color: #5d26c7;*/
+/*  text-shadow: 1px 1px 1px red, 0 0 1em blue, 0 0 0.2em blue;*/
+/*  letter-spacing: 0.3em;*/
+/*   font-size: 20px;*/
+/*}*/
+/*a{*/
+/*  color: blue;*/
+/*}*/
+/*.artist{*/
+/*   color: #c6b8e0;*/
+/*  text-shadow: 1px 1px 1px red, 0 0 1em blue, 0 0 0.2em blue;*/
+/*  letter-spacing: 0.15em;*/
+/*   font-size: 20px;*/
+/*}*/
+/*.container {*/
+/*    height:2em;*/
+/*}*/
+
+/*.container ul li {*/
+/*    margin-left:20px;*/
+/*    float: left;*/
+/*}*/
+
+/*.container ul {*/
+/*    display: block;*/
+/*}*/
+/*.track_container_item{*/
+/*  width:20em;*/
+/*  height:20em;*/
+/*  padding: 5px;*/
+/*  margin-left: 30%;*/
+/*  margin-top: 10%;*/
+/*  border-color: rebeccapurple;*/
+/*  box-shadow: 1px 1px 1px red, 0 0 1em blue, 0 0 0.2em blue;*/
+/*}*/
+/*.track_photo{*/
+/*  width:7em;*/
+/*  height:7em;*/
+/*}*/
+/*.play_icon{*/
+/*    width:10em;*/
+/*    height:10em;*/
+/*}*/
+/*.container_playlist{*/
+/*  width:20em;*/
+/*  height:20em;*/
+/*  overflow: hidden;*/
+
+/*}*/
+/*.delete{*/
+/*  text-align:center;*/
+/*  padding: 5px;*/
+/*  margin: 5em;*/
+/*  border-color: rebeccapurple;*/
+/*  box-shadow: 1px 1px 1px red, 0 0 1em blue, 0 0 0.2em blue;*/
+/*}*/
+/*.delete p{*/
+/*  font-size:18px;*/
+/*}*/
+
+/*.button-63 {*/
+/*  align-items: center;*/
+/*  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);*/
+/*  border: 0;*/
+/*  border-radius: 8px;*/
+/*  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;*/
+/*  box-sizing: border-box;*/
+/*  color: #FFFFFF;*/
+/*  font-family: Phantomsans, sans-serif;*/
+/*  font-size: 18px;*/
+/*  line-height: 1em;*/
+/*  max-width: 7em;*/
+/*  min-width: 3em;*/
+/*  padding: 0.5em;*/
+/*  text-decoration: none;*/
+/*  user-select: none;*/
+/*  -webkit-user-select: none;*/
+/*  touch-action: manipulation;*/
+/*  white-space: nowrap;*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*.button-63:active,*/
+/*.button-63:hover {*/
+/*  outline: 0;*/
+/*}*/
+
+/*@media (min-width: 3em) {*/
+/*  .button-63 {*/
+/*    font-size: 18px;*/
+/*    min-width: 3em;*/
+/*  }*/
+/*}*/
