@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Streaming</title>
     <link type="text/css" href="css/styles.css" rel="stylesheet"/>
-    <link type="text/css" href="css/track_styles.css" rel="stylesheet"/>
+    <link type="text/css" href="css/playlists_styles.css" rel="stylesheet"/>
     <link type="text/css" href="css/base_styles.css" rel="stylesheet"/>
     <meta name="viewport" content="width=device-width">
 </head>
@@ -66,37 +66,28 @@
 <!--    {% endif %}-->
   <a href="#" class="sidenav-link">Contact</a>
 </aside>
-<main>
-<section class="div__content">
-    <div class="div__main-content">
-         <div class="div__container-header">
-             <h2 class="div__container-header__name"><a href="#" class="div__container-header__link">Popular</a></h2>
-             <span class="div__container-header__info"><a href="#" class="div__container-header__link">Show all...</a></span>
-        </div>
+<div class="div__container-playlists">
+<div class="div__container-playlists-item">
 
-        <div class="div__container-body" id="popular"></div>
+
+
+    <div class="div__item-cover">
+        <img alt="" src="https://ichef.bbci.co.uk/news/999/cpsprodpb/15951/production/_117310488_16.jpg" class="div__playlist-cover__img"/>
+                <h2 class="div__container-header__name">Favourites</h2>
+    </div>
+    <div class="playlist__container-item__body">
+                 <span class="span__headline">Songs:</span>
+                        <ul class="playlist__ul">
+                    <li class="playlist__li playlist__li-green">Pillowtalk</li>
+                     <li class="playlist__li playlist__li-green">Beliver</li>
+                     <li class="playlist__li playlist__li-green">Bad lier</li>
+                     <li class="playlist__li playlist__li-green">Rise up</li>
+                </ul>
+             </div>
     </div>
 
-     <div class="div__main-content">
-         <div class="div__container-header">
-             <h2 class="div__container-header__name"><a href="#" class="div__container-header__link">Albums</a></h2>
-             <span class="div__container-header__info"><a href="#" class="div__container-header__link">Show all...</a></span>
-        </div>
-
-    <div class="div__container-body" id="albums"> </div>
-    </div>
-
-    <div class="div__main-content">
-         <div class="div__container-header">
-             <h2 class="div__container-header__name"><a href="#" class="div__container-header__link">Playlists</a></h2>
-             <span class="div__container-header__info"><a href="#" class="div__container-header__link">Show all...</a></span>
-        </div>
-
-    <div class="div__container-body" id="playlists"></div>
-    </div>
-
-</section>
-</main>
+</div>
+<footer></footer>
    <script src="js/base_script.js" ></script>
    <script src="js/script.js" ></script>
     <script src="js/template.js" ></script>

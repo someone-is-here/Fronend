@@ -1,0 +1,102 @@
+
+.div__container-playlists{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 3.5rem;
+    margin-left: 3.5rem;
+    background: rgba(0,0,0, 0.95);
+    padding: 1.5rem 2rem 1.5rem 1.5rem;
+}
+
+.div__container-playlists-item{
+    position: relative;
+    background: greenyellow;
+    margin: 1rem;
+    padding: 1rem;
+    background: rgba(49, 48, 48, 0.2);
+    transition: background-color 1s linear;
+    box-shadow: 0.1rem 0.1rem 0.1rem blueviolet, 0 0 1rem blue, 0 0 0.2rem blue;
+}
+
+.playlist__item:hover{
+    background: rgba(49, 48, 48, 0.63);
+}
+.playlist__description {
+    position: absolute;
+    margin: 0.5rem;
+    height: 10rem;
+    width: 10rem;
+    background: rgba(21, 54, 79, 0.72);
+    color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    text-align: center;
+    padding: 0.5rem;
+    overflow: hidden;
+  /* transition effect. not necessary */
+    transition: opacity .2s, visibility .2s;
+}
+.ul__track-name{
+    list-style: none;
+}
+.li__track-link{
+    text-decoration: none;
+    color: white;
+}
+
+.playlist__item:hover .playlist__description {
+  visibility: visible;
+  opacity: 1;
+}
+
+.playlist__title{
+    font-size: 0.85rem;
+    font-family: Verdana;
+    color: #ffffff;
+    text-align: center;
+    filter: drop-shadow(0.01rem 0.03rem 0.07rem #0023ff);
+}
+.span__headline{
+    margin-left: 0.2rem;
+    color: white;
+    float: right;
+}
+
+.playlist__container-item__body{
+    /*height: 1.5rem;*/
+    width: 100%;
+    display: inline-block;
+}
+.playlist__ul{
+    text-decoration: none;
+    color: white;
+}
+.playlist__li{
+    list-style-type: none;
+    float: left;
+    margin-left: 1rem;
+}
+.playlist__li-green:before{
+    color: yellowgreen;
+}
+.playlist__li:before{
+    content: ' *  ';
+}
+
+.div__playlist-cover__img{
+    float: left;
+    height: 6rem;
+    width: 6rem;
+}
+.div__item-cover{
+    animation: glowh1 1.5s linear;
+    -webkit-animation: glowh1 1.5s linear;
+}
+.div__item-cover{
+    text-decoration: none;
+    color: white;
+}
+.div__item-cover:hover{
+    cursor: pointer;
+}

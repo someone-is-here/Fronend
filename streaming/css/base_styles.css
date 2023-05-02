@@ -4,6 +4,11 @@
 }
 html, body{
     height: 100%;
+    background-color: black;
+    -ms-overflow-style: none;
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar{
+    display: none;
 }
 
 .navbar{
@@ -34,6 +39,15 @@ html, body{
     padding: 1.5rem 1.5rem 1.5rem 0;
     text-decoration: none;
     /*transition: color 2ms linear;*/
+}
+@media (max-width: 600px) {
+    .navbar__list-item-link{
+        font-size: 1.5rem;
+        letter-spacing: 0.1rem;
+    }
+    .navbar__list-item-link:first-of-type{
+        margin-top: 2rem;
+    }
 }
 .navbar__list-item:nth-child(1) > .navbar__list-item-link:hover{
     color: yellowgreen;
@@ -126,6 +140,15 @@ html, body{
     list-style: none;
     margin: 1rem;
 }
+@media (max-width: 600px) {
+    .menu-additional__list-item{
+        font-size: 1.5rem;
+        letter-spacing: 0.1rem;
+    }
+    .menu-additional-link:first-of-type{
+        margin-top: 2rem;
+    }
+}
 .menu-additional-link{
     text-decoration: none;
     color: white;
@@ -147,8 +170,6 @@ html, body{
     font-style: oblique;
 }
 .div__content{
-    height: 100%;
-    width: 100%;
     margin-top: 3rem;
     margin-left: 3.5rem;
 }

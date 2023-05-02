@@ -1,6 +1,13 @@
-const container = document.getElementById("popular");
 const items = [{
-    image: 'url',
+    image: 	'https://i.scdn.co/image/ab67616d00001e0228ccaf8cb23d857cb9361ec4',
+    name: 'Name',
+    trackId: 2
+},{
+    image: 	'https://i.scdn.co/image/ab67616d00001e0228ccaf8cb23d857cb9361ec4',
+    name: 'Name',
+    trackId: 2
+},{
+    image: 	'https://i.scdn.co/image/ab67616d00001e0228ccaf8cb23d857cb9361ec4',
     name: 'Name',
     trackId: 2
 }];
@@ -14,8 +21,24 @@ function getItemTemplate(item){
     </div>
 </div>`
 }
-container.innerHTML = ''
+
+const containerPopular = document.getElementById("popular");
+containerPopular.innerHTML = '';
 
 for(let item of items){
-    container.insertAdjacentHTML("beforeend", getItemTemplate(item));
+    containerPopular.insertAdjacentHTML("beforeend", getItemTemplate(item));
 }
+const containerAlbums = document.getElementById("albums");
+containerAlbums.innerHTML = '';
+
+for(let item of items){
+    containerAlbums.insertAdjacentHTML("beforeend", getItemTemplate(item));
+}
+
+const containerPlaylists = document.getElementById("playlists");
+containerPlaylists.innerHTML = '';
+
+for(let item of items){
+    containerPlaylists.insertAdjacentHTML("beforeend", getItemTemplate(item));
+}
+

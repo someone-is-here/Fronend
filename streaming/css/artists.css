@@ -1,20 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
-.artist__container{
-    height: 100%;
-    width: 100%;
-    background: greenyellow;
-    margin: 3.5rem;
+.section__artist-container{
+    background: black;
+    margin-top: 3.5rem;
+    margin-left: 3.8rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 2rem;
+    align-items: center;
+    padding: 0.3rem;
 }
-.artist__container-item{
-    height: 9rem;
+.div__artist-container{
+
+}
+.div__artist__container-item{
     width: 70%;
     background: black;
     background: rgba(0, 0, 0, 0.95);
+    margin: 1rem;
     border-top-left-radius: 2rem;
     -moz-border-radius-topleft: 2rem;
     border-bottom-right-radius: 2rem;
@@ -22,8 +25,35 @@
     padding: 1rem;
     box-shadow: 0.1rem 0.1rem 0.1rem #c503f1, 0 0 1rem blue, 0 0 0.2rem #0cd9a7;
 }
+@media (max-width: 600px) {
+    .section__artist-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: black;
+        height: 70%;
+        flex-direction: unset;
+    }
+    .div__artist-container::-webkit-scrollbar{
+        display: none;
+    }
+    .div__artist-container{
+        display: flex;
+        overflow-x: auto;
+        justify-content: stretch;
+        align-items: center;
+    }
+    .div__artist__container-item {
+        margin-right: 3rem;
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 80%; /* width/height  - initial value: auto */
+
+    }
+}
+
 .artist__container-item__header{
-    height: 50%;
+    display: inline-block;
     width: 100%;
 }
 .artist__name{
@@ -61,8 +91,9 @@
     transition: transform linear 500ms;
 }
 .artist__container-item__body{
-    height: 1.5rem;
+    /*height: 1.5rem;*/
     width: 100%;
+    display: inline-block;
 }
 .a__link__no-style{
     text-decoration: none;

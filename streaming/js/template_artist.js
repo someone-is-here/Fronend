@@ -15,7 +15,7 @@ const items = [{
 //         <h3><a href="${item.trackId}" class="item-link">${item.name}</a></h3>
 //     </div>
 // </div>`
-//}
+// }
 container.innerHTML = ''
 
 for(let item of items){
