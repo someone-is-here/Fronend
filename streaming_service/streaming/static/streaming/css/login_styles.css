@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
-.section__login{
+.section__login {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,7 +24,7 @@
     padding: 2rem;
 }
 
-form{
+.form__login{
     position: relative;
     color: white;
     padding: 1rem;

@@ -5,7 +5,7 @@
 html, body{
     height: 100%;
 }
-/* main menu */
+
 .navbar{
     height: 100%;
     width: 3.5rem;
@@ -23,13 +23,6 @@ html, body{
     height: 3rem;
     width: 3rem;
     border-radius: 3rem;
-}
-
-.navbar__list{
-}
-
-.navbar__list-item{
-
 }
 
 .navbar__list-item-link{
@@ -155,4 +148,6 @@ html, body{
 .div__content{
     height: 100%;
     width: 100%;
+    margin-top: 3rem;
+    margin-left: 3.5rem;
 }

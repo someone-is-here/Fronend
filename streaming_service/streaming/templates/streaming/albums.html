@@ -1,10 +1,21 @@
 {% extends 'streaming/base.html' %}
+{% load static %}
 
 {% block content %}
-{% for item in albums %}
-    <div class="album_container">
-        <h3><a href="{% url 'detail_album' item.pk%}">{{item.name}}</a></h3>
-        <h5>{{item.release_date}}</h5>
+        <div class="div__container-albums">
+        {% for item in albums %}
+            <div class="div__track-item">
+                <div class="div__track-cover">
+                    <img src="{% static 'streaming/images/play_button.png'%}" class="play__icon-hidden"/>
+                    {% if item.icon %}
+                        <img alt="" src="{{item.icon.url}}" class="div__track-cover-img"/>
+                    {% endif %}
+                    <h3><a href="{% url 'detail_album' item.pk %}" class="item-link">{{item.name|lower|capfirst }}</a></h3>
+                    <h5>{{ item.release_date }}</h5>
+                </div>
+            </div>
+        {% endfor %}
+
     </div>
-{% endfor %}
+
 {% endblock %}

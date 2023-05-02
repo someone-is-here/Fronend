@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+.section__register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'poppins', sans-serif;
+    width: 100%;
+    height: 100%;
+    background: url("../images/background.jpg") no-repeat center;
+    background-size: cover;
+    color: white;
+    text-align: center;
+}
+
+.div__register{
+    display: flex;
+    justify-content: stretch;
+    align-items: center;
+    background: transparent;
+    border: 0.1rem solid rgba(255,255,255,0.5);
+    border-radius: 2rem;
+    backdrop-filter: blur(0.1rem);
+    padding: 1rem;
+}
+@media (max-width: 600px) {
+    .section__register{
+        margin-left: 1.2rem;
+    }
+    .div__register {
+        padding: 0.5rem;
+    }
+    .form__register{
+        padding: 0.2rem;
+    }
+    .register__title {
+        font-size: 1rem;
+    }
+    .button_align-center {
+        padding-top: 0.5rem;
+    }
+    input[name="aform_pre-login"], input[name="aform_pre-email"], select[name="aform_pre-role"],
+    input[name="aform_pre-password1"], input[name="aform_pre-password2"], select[name="cform_pre-subscription"],
+    input[name="bform_pre-name"], input[name="bform_pre-website"], select[name="bform_pre-country"],
+    input[name="bform_pre-tour_dates"] {
+    position: relative;
+    margin: 0.5rem 0;
+    width: 6rem;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 0.05rem solid #fff;
+    color: white;
+    letter-spacing: 0.15rem;
+}
+}
+
+.form__register{
+    position: relative;
+    color: white;
+    padding: 1rem;
+    text-align: left;
+}
+.form__additional{
+    /*position: absolute;*/
+    visibility: hidden;
+}
+.form__additional-absolute{
+    position: absolute;
+}
+.register__title{
+    font-size: 2em;
+    color: white;
+    text-align: center;
+    filter: drop-shadow(0.1rem 0.1rem 0.5rem #e00b55);
+}
+.button_align-center{
+    padding-top: 1rem;
+    text-align: center;
+}
+input[name="aform_pre-login"], input[name="aform_pre-email"], select[name="aform_pre-role"],
+input[name="aform_pre-password1"], input[name="aform_pre-password2"], select[name="cform_pre-subscription"],
+input[name="bform_pre-name"], input[name="bform_pre-website"], select[name="bform_pre-country"],
+input[name="bform_pre-tour_dates"] {
+    position: relative;
+    margin: 0.5rem 0;
+    width: 10rem;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 0.05rem solid #fff;
+    color: white;
+    letter-spacing: 0.15rem;
+}
+select[name="aform_pre-role"],
+select[name="cform_pre-subscription"],
+select[name="bform_pre-country"]{
+    color: black;
+    outline: none;
+    border:none;
+    background: transparent;
+}
+
+/*.register__link{*/
+/*    text-decoration: none;*/
+/*    color: white;*/
+/*    letter-spacing: 0.2rem;*/
+/*    transition: color 1s linear, font-size 1s linear;*/
+/*}*/
+/*.register__link:hover{*/
+/*    color: purple;*/
+/*    font-size: 1.1em;*/
+/*}*/
+/*.span__no-account{*/
+/*    display: inline-block;*/
+/*    margin: 1rem 0.7rem 0.7rem;*/
+/*}*/

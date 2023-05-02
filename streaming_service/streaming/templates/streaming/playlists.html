@@ -2,24 +2,23 @@
 {% load static %}
 
 {% block content %}
-<div class="container_playlists">
+<div class="div__playlists">
 {% for item in playlists %}
-    <div>
-        <div>
-        <h3 class="playlist_title">{{item.name}}</h3>
-               <a href="{% url 'add_track_to_playlist' item.id %}">
-            <img src="{% static 'streaming/images/add.jpg'%}" style="height:3.5em;width:3.5em;float:right;"/></a>
-        </div>
+    <div class="playlist__item">
 
-        <a href="{% url 'selected_playlist' item.id %}">
-            <img src="{% static 'streaming/images/playlist.jpg'%}" class="play_icon"  style="float:right;"/></a>
-
-        <ul>
-        {% for track in item.tracks%}
-            <a href="{% url 'remove_track_from_playlist' item.id track.id%}"><li>{{track.name}}</li></a>
+            <h3 class="playlist__title">{{item.name}}</h3>
+{#            <a href="{% url 'add_track_to_playlist' item.id %}">#}
+{#            <img src="{% static 'streaming/images/add.jpg'%}" style="height:3.5em;width:3.5em;float:right;"/></a>#}
+{##}
+{#        <a href="{% url 'selected_playlist' item.id %}">#}
+{#            <img src="{% static 'streaming/images/playlist.jpg'%}" class="play_icon"  style="float:right;"/></a>#}
+    <div class="playlist__description">
+        <ul class="ul__track-name">
+        {% for track in item.tracks %}
+            <li class="li__track-name"><a href="{% url 'remove_track_from_playlist' item.id track.id%}" class="li__track-link">{{track.name|lower|capfirst}}</a></li>
          {% endfor %}
         </ul>
-
+    </div>
     </div>
 {% endfor %}
 </div>

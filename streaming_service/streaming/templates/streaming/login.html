@@ -5,7 +5,7 @@
 <section class="section__login">
     <div class="div__login">
         <div>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data" class="form__login">
             <h2 class="login__title">Login</h2>
             {% csrf_token %}
             {{ form.as_p }}
