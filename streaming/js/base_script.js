@@ -27,3 +27,14 @@ for (let el of elArr){
         el.classList.add('selected');
     }
 }
+
+const elAll = document.getElementsByClassName("small__heart");
+for (let el of elAll){
+    el.addEventListener('click',function(event){
+        if(event.currentTarget.classList.contains("small__heart-red")){
+            event.currentTarget.classList.remove("small__heart-red");
+        } else {
+            event.currentTarget.classList.add("small__heart-red");
+        }
+    });
+}

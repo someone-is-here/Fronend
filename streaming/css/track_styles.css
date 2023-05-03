@@ -103,19 +103,10 @@ audio:hover, audio:focus, audio:active {
     transform: scale(1.05);
 }
 
-audio::-webkit-media-controls-panel{
-    background: #c503f1;
-}
-
-audio::-webkit-media-controls-play-button{
-    color: #1146f3;
-}
-
 .heart {
     height:5rem;
     width: 5rem;
-    background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
-    background-position: 0 0;
+    background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat 0 0;
     cursor: pointer;
     transition: background-position 1s steps(28);
     transition-duration: 0s;

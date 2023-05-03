@@ -61,7 +61,7 @@
     border-radius: 0.3rem;
     padding: 1rem;
     transition: background-color 0.5s ease-out;
-    margin: 1rem 1rem 1rem 2rem;
+    margin: 1rem;
     box-shadow: 0.1rem 0.1rem 0.1rem blueviolet, 0 0 1rem blue, 0 0 0.2rem blue;
 }
 .div__track-item:hover{
@@ -99,10 +99,9 @@
     top: 6rem;
     left: 7rem;
     cursor: pointer;
-    filter: drop-shadow(0px 0px 3px #fa007a);
+    filter: drop-shadow(0px 0px 3px #a64fda);
 }
 .play__icon-hidden:hover{
-    transform: scale(1.03);
     transition: transform 0.5s;
 }
 .div__track-cover:hover .play__icon-hidden{
@@ -129,4 +128,36 @@ input[name="name"]{
     height:3rem;
     border-radius: 1rem;
     background: transparent;
+}
+
+.glightbox_video {
+     height: 2rem;
+    width: 2rem;
+  transform: translate(-50%, -50%);
+}
+
+.outer_circle {
+    stroke-width: 3;
+    stroke-dasharray: 410;
+    stroke-dashoffset: 0;
+    stroke-linecap: square;
+    transition: all .4s ease-out;
+}
+
+.glightbox_video:hover .outer_circle {
+    stroke-dashoffset: 410;
+    transition: stroke .7s .4s ease-out, stroke-dashoffset .4s ease-out;
+}
+.play{
+    fill: #6a00ff;
+}
+.glightbox_video:hover .inner-circle {
+    fill: #6a00ff;
+    border-color: #6a00ff;
+    transition:fill .4s .3s ease-out;
+
+}
+.glightbox_video:hover .play{
+    fill: white !important;
+    transition:fill .4s .3s ease-out;
 }

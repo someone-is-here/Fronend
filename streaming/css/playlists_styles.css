@@ -1,102 +1,273 @@
-
 .div__container-playlists{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     margin-top: 3.5rem;
     margin-left: 3.5rem;
-    background: rgba(0,0,0, 0.95);
-    padding: 1.5rem 2rem 1.5rem 1.5rem;
 }
 
-.div__container-playlists-item{
-    position: relative;
-    background: greenyellow;
-    margin: 1rem;
-    padding: 1rem;
-    background: rgba(49, 48, 48, 0.2);
-    transition: background-color 1s linear;
-    box-shadow: 0.1rem 0.1rem 0.1rem blueviolet, 0 0 1rem blue, 0 0 0.2rem blue;
+.section__main-info{
+    background: rgba(16, 16, 16, 0.8);
+    background: #1146f3;
 }
-
-.playlist__item:hover{
-    background: rgba(49, 48, 48, 0.63);
+.div__container-header{
+    height: 100%;
+    display: flex;
+    /*overflow-x: auto;*/
+    justify-content: stretch;
+    align-items: center;
 }
-.playlist__description {
-    position: absolute;
-    margin: 0.5rem;
-    height: 10rem;
-    width: 10rem;
-    background: rgba(21, 54, 79, 0.72);
-    color: #fff;
-    visibility: hidden;
-    opacity: 0;
-    text-align: center;
-    padding: 0.5rem;
-    overflow: hidden;
-  /* transition effect. not necessary */
-    transition: opacity .2s, visibility .2s;
+.div__playlist-info{
+    margin: 3rem;
 }
-.ul__track-name{
-    list-style: none;
+.h1__playlist-title{
+    font-style: italic;
+    font-family: "Franklin Gothic Medium";
+    font-size: 2rem;
+    letter-spacing: 0.2rem;
+    color: white;
+    -webkit-font-smoothing: antialiased;
 }
-.li__track-link{
+.a__playlist-link{
     text-decoration: none;
     color: white;
 }
-
-.playlist__item:hover .playlist__description {
-  visibility: visible;
-  opacity: 1;
+.img__playlist-icon{
+    height: 13rem;
+    width: 10rem;
 }
-
-.playlist__title{
-    font-size: 0.85rem;
-    font-family: Verdana;
-    color: #ffffff;
-    text-align: center;
-    filter: drop-shadow(0.01rem 0.03rem 0.07rem #0023ff);
+.img__playlist-small-icon{
+    height: 2rem;
+    width: 2rem;
+    border-radius: 2rem;
 }
-.span__headline{
-    margin-left: 0.2rem;
-    color: white;
-    float: right;
+.span__additional-info{
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #e0d2d2;
+    font-style: italic;
+    font-family: "Franklin Gothic Medium";
 }
-
-.playlist__container-item__body{
-    /*height: 1.5rem;*/
+.span__additional-info__grey{
+    color: #a49c9c;
+}
+.section__playlist-control{
+    background: rgb(31, 31, 31);
+    display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    align-items: center;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+.img__playlist-play{
+    height: 3.4rem;
+    width: 3.4rem;
+    border-radius: 5rem;
+    cursor: pointer;
+    filter: drop-shadow(0px 0px 3px #fa007a);
+}
+.heart {
+    height: 5rem;
+    width: 5rem;
+    background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat 0 0;
+    cursor: pointer;
+    transition: background-position 1s steps(28);
+    transition-duration: 0s;
+}
+.is-active{
+    transition-duration: 1s;
+    background-position: -2800px 0;
+}
+.stage {
+    float: left;
+    transform: translate(-50%, -50%);
+}
+.div__button-box{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.button__playlist-create::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    border-top-width: 0.1rem;
+    border-bottom-width: 0.1rem;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-top-color: rgba(255,255,255,0.5);
+    border-bottom-color: rgba(255,255,255,0.5);
+}
+.button__playlist-create:hover::before {
+    opacity: 1;
+    transition: all 1s;
+}
+
+.button__playlist-create::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.35);
+    transition: all 1s;
+}
+.button__playlist-create:hover::after {
+  opacity: 0;
+  transform: scale(0.1, 1);
+}
+
+.additional__menu{
+    fill: white !important;
+}
+.dropbtn {
+    background: black;
+    color: white;
+    font-style: italic;
+    font-family: "Franklin Gothic Medium";
+    padding: 2rem;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
     display: inline-block;
 }
-.playlist__ul{
-    text-decoration: none;
+
+.dropdown-content {
+    padding: 1rem;
+    display: none;
+    position: absolute;
+    top: 1rem;
+    left: 5rem;
+    background-color: black;
+    z-index: 1;
+}
+@media (max-width: 400px) {
+    .dropdown-content{
+        position: absolute;
+        left:-5rem;
+        top: 5rem;
+    }
+    .img__playlist-icon{
+        height: 10rem;
+        width: 9rem;
+    }
+}
+.dropdown-content a {
     color: white;
-}
-.playlist__li{
-    list-style-type: none;
-    float: left;
-    margin-left: 1rem;
-}
-.playlist__li-green:before{
-    color: yellowgreen;
-}
-.playlist__li:before{
-    content: ' *  ';
+    letter-spacing: 0.3rem;
+    text-decoration: none;
+    display: block;
 }
 
-.div__playlist-cover__img{
-    float: left;
-    height: 6rem;
-    width: 6rem;
-}
-.div__item-cover{
-    animation: glowh1 1.5s linear;
-    -webkit-animation: glowh1 1.5s linear;
-}
-.div__item-cover{
-    text-decoration: none;
-    color: white;
-}
-.div__item-cover:hover{
+.dropdown:hover .dropdown-content {
+    display: block;
     cursor: pointer;
+    transition: all .3s ease .15s;
+}
+
+.button__remove-background{
+    background: transparent;
+    border: none;
+}
+.section__main-data{
+    background: rgb(31, 31, 31);
+}
+
+.ul__header-item{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    color: #868383;
+    font-style: italic;
+    letter-spacing: 0.5rem;
+}
+.ul__header-item li:nth-of-type(2){
+    flex: 1;
+}
+.ul__data-item{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    color: #868383;
+    font-style: italic;
+    letter-spacing: 0.5rem;
+}
+.ul__data-item li:nth-of-type(2){
+    flex: 1;
+}
+.ul__header-item:first-child{
+    margin-left: 2rem;
+}
+.ul__header-item:last-child{
+    margin-right: 2rem;
+}
+.svg__icon-time{
+    fill: #868383 !important;
+
+}
+.li__full-list:first-of-type{
+    border-bottom: #a1a0a0 0.05rem solid;
+}
+.li__data{
+    margin-left: 2rem;
+    font-style: initial;
+    font-size: 1rem;
+    font-family: "Franklin Gothic Medium";
+}
+.div__align-items{
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.a__remove-style{
+    color: #868383;
+    text-decoration: none;
+    letter-spacing: 0.25rem;
+    font-size: 1.1rem;
+}
+.small__heart {
+    fill: white !important;
+    cursor: pointer;
+}
+.ul__data-item:first-child:hover .button__play-small{
+    visibility: visible;
+}
+.button__play-small{
+    position: absolute;
+    fill: white !important;
+    cursor: pointer;
+    margin-top:-0.9rem;
+    margin-left: -0.5rem;
+    visibility: hidden;
+}
+.ul__data-item:first-child:hover .span__text{
+    visibility: hidden;
+}
+
+.small__heart-red {
+     fill: red !important;
+}
+
+
+.small__heart:hover{
+    fill: red !important;
+}
+.span__additional-tools{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.span__heart{
+    margin-right: 2rem;
 }
