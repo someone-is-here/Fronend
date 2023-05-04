@@ -3,7 +3,8 @@
     width: 3rem;
 }
 .ul__full-list{
-    padding: 2rem;
+    padding-top: 2rem;
+    margin-left: 3.5rem;
 }
 .div__align-items{
     padding: 1rem;
@@ -23,7 +24,7 @@
     margin-left: 1rem;
 }
 .li__full-list:first-of-type {
-    padding-left: 2.5rem;
+    /*padding-left: 2.5rem;*/
 }
 .ul__data-item li:nth-of-type(3){
     flex: 1;
@@ -46,12 +47,25 @@
 .a__remove-style{
     color: white;
 }
+.span__hearts-amount{
+    display: inline-block;
+    margin-left: 1rem;
+}
+.div__plays-amount{
+    letter-spacing: 0.1rem;
+    font-size: 0.8rem;
+    color: #e0d2d2;
+    visibility: hidden;
+}
+li:hover .div__plays-amount{
+    visibility: visible;
+}
 @media (max-width: 600px) {
     .div__align-items{
         padding: 1rem 0 0;
     }
     .ul__full-list{
-        padding: 0.5rem;
+        padding: 2rem 0.5rem 0.5rem;
     }
     .li__data{
         margin-left: 0.1rem;
@@ -68,5 +82,7 @@
     .ul__header-item:last-child {
         margin-right: 0.5rem;
     }
-
+    .div__container-playlists {
+        margin-left: 0;
+    }
 }
