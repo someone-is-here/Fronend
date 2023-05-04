@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+/* Google Fonts - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+.section__login {
+    background: url("https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=1600") no-repeat center;
+    color: black;
+}
+.div__container-selection{
+    position: relative;
+    width: 100%;
+    margin-top:2rem;
+    margin-bottom: 2rem;
+    height: 11.5rem;
+    overflow:scroll;
+    font-family: 'Poppins', sans-serif;
+}
+.div__container-selection::-webkit-scrollbar{
+    display: none;
+}
+.select-btn{
+    display: flex;
+    height: 3rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color: #fff;
+    box-shadow: 0 0.3rem 0.7rem rgba(0, 0, 0, 0.1);
+}
+.select-btn .btn-text{
+    /*font-size:;*/
+    /*font-weight: 400;*/
+    color: #333;
+}
+.select-btn .arrow-dwn{
+    display: flex;
+    height: 2rem;
+    width: 2rem;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 50%;
+    background: #6e93f7;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+.select-btn.open .arrow-dwn{
+    transform: rotate(90deg);
+}
+.list-items{
+    position: relative;
+    margin-top: 1rem;
+    border-radius: 0.7rem;
+    padding: 1rem;
+    background-color: #fff;
+    box-shadow: 0 0.2rem 0.7rem rgba(0, 0, 0, 0.1);
+    display: none;
+}
+.select-btn.open ~ .list-items{
+    display: block;
+}
+.list-items .item{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    height: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 0 15px;
+    border-radius: 8px;
+}
+.list-items .item:hover{
+    background-color: #e7edfe;
+}
+.item .item-text{
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+}
+.item .checkbox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 16px;
+    width: 16px;
+    border-radius: 4px;
+    margin-right: 12px;
+    border: 1.5px solid #c0c0c0;
+    transition: all 0.3s ease-in-out;
+}
+.item.checked .checkbox{
+    background-color: #4070f4;
+    border-color: #4070f4;
+}
+.checkbox .check-icon{
+    color: #fff;
+    font-size: 11px;
+    transform: scale(0);
+    transition: all 0.2s ease-in-out;
+}
+.item.checked .check-icon{
+    transform: scale(1);
+}
