@@ -25,7 +25,6 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 }
 
 document.getElementById("submit__login-form").addEventListener("click",function (event){
-
     const emailField =  document.getElementById("id_email").value;
     const pssw1 = document.getElementById('id_password').value;
 
