@@ -31,7 +31,7 @@ function logout(){
 function menuTemplateLogin(res) {
   return `
     <a class="sidenav-link">${res}</a>
-    <a href="login.html" class="sidenav-link" onclick="logout">Logout</a>`;
+    <a href="login.html" class="sidenav-link" onclick="logout()">Logout</a>`;
 }
 function menuBaseTemplate(){
   return `
