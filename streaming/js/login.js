@@ -62,8 +62,7 @@ signInWithPopup(auth, GoogleProvider)
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
-    alert(user.displayName);
-    // ...
+    window.location.replace("index.html");
   })
     .catch((error) => {
     // Handle Errors here.
@@ -73,6 +72,7 @@ signInWithPopup(auth, GoogleProvider)
     const email = error.email;
     // The AuthCredential type that was used.
     const credential = GoogleAuthProvider.credentialFromError(error);
+        alert(errorMessage);
   });
  });
 
@@ -81,13 +81,10 @@ signInWithPopup(auth, FacebookProvider)
   .then((result) => {
     // The signed-in user info.
     const user = result.user;
-
     // This gives you a Facebook Access Token. You can use it to access the Facebook API.
     const credential = FacebookAuthProvider.credentialFromResult(result);
     const accessToken = credential.accessToken;
-
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
+ window.location.replace("index.html");
   })
   .catch((error) => {
     // Handle Errors here.
@@ -97,6 +94,7 @@ signInWithPopup(auth, FacebookProvider)
     const email = error.customData.email;
     // The AuthCredential type that was used.
     const credential = FacebookAuthProvider.credentialFromError(error);
+        alert(errorMessage);
   });
  });
 
@@ -111,8 +109,7 @@ signInWithPopup(auth, TwitterProvider)
 
     // The signed-in user info.
     const user = result.user;
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
+    window.location.replace("index.html");
   }).catch((error) => {
     // Handle Errors here.
     const errorCode = error.code;
@@ -121,5 +118,6 @@ signInWithPopup(auth, TwitterProvider)
     const email = error.customData.email;
     // The AuthCredential type that was used.
     const credential = TwitterAuthProvider.credentialFromError(error);
+    alert(errorMessage);
   });
  });
