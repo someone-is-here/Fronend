@@ -1,3 +1,9 @@
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+  import { getDatabase, ref, set, update } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+
+
 document.addEventListener("DOMContentLoaded", function (){
     document.getElementById("register_3").style.visibility='visible';
     document.getElementById("register_3").style.position='static';
@@ -24,11 +30,6 @@ document.getElementById("id_aform_pre-role").addEventListener("change", (event) 
         document.getElementById("register_3").style.visibility='visible';
     }
 });
-
-
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
-  import { getDatabase, ref, set, update } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
 
 
   const firebaseConfig = {
