@@ -17,17 +17,13 @@ import { getAuth, createUserWithEmailAndPassword,
   const app = initializeApp(firebaseConfig);
   const database = getDatabase(app);
   const auth = getAuth();
-window.signOut = function signOut(e) {
-  auth().signOut().then(function() {
-    // Sign-out successful.
-  }).catch(function(error) {
-    // An error happened.
-  });
+window.userSignOut = function userSignOut(e) {
+  signOut(auth).then(() => {});
 }
 function menuTemplateLogin(res) {
   return `                <li class="menu-additional__list-item menu-additional-email">${res}</li>
                 <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">Subscription</a></li>
-                <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link" onclick="signOut()">Logout</a></li>`;
+                <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link" onclick="userSignOut()">Logout</a></li>`;
 }
 function menuBaseTemplate(){
   return `

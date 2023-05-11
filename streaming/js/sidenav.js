@@ -2,6 +2,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebas
 import { getDatabase, ref, set, update, get, child } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
 
+window.userSignOut = function userSignOut(e) {
+  signOut(auth).then(() => {});
+}
 
   const firebaseConfig = {
     apiKey: "AIzaSyDd2TdBKvjDRzfaScSO5GZJOnJCQAIt9nA",
@@ -20,7 +23,7 @@ import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/fi
 function menuTemplateLogin(res) {
   return `
     <a class="sidenav-link">${res}</a>
-    <a href="login.html" class="sidenav-link" id="logout">Logout</a>`;
+    <a href="login.html" class="sidenav-link" id="userSignOut()g">Logout</a>`;
 }
 function menuBaseTemplate(){
   return `
@@ -62,10 +65,4 @@ onAuthStateChanged(auth, (user) => {
   } else {
     document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += menuBaseTemplate();
   }
-});
-
-document.addEventListener(" DOMContentLoaded", function (e){
-  document.getElementById("logout").addEventListener("click",function(e){
-      signOut(auth).then(() => {});
-  });
 });
