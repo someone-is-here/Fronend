@@ -156,17 +156,30 @@ html::-webkit-scrollbar, body::-webkit-scrollbar{
     text-decoration: none;
     color: white;
 }
+.menu-additional-email{
+    text-decoration: none;
+    color: white;
+}
+.menu-additional-email:hover{
+    color: #f66d0a;
+}
 .menu-additional__list-item:nth-child(1) > .menu-additional-link:hover{
     color: springgreen;
 }
 .menu-additional__list-item:nth-child(2) > .menu-additional-link:hover{
     color: darkorchid;
 }
+.menu-additional__list-item:nth-child(3) > .menu-additional-link:hover{
+    color: springgreen;
+}
 .menu-additional__list-item:nth-child(1) > .selected{
     color: springgreen;
 }
 .menu-additional__list-item:nth-child(2) > .selected{
     color: darkorchid;
+}
+.menu-additional__list-item:nth-child(3) > .selected{
+     color: springgreen;
 }
 .navbar-line{
     color:white;
@@ -187,6 +200,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar{
     font-size: 1em;
     font-weight: 600;
     transition: transform 1s linear;
+    color: black;
 }
 .submit__form:hover{
     transform: scale(1.1);
