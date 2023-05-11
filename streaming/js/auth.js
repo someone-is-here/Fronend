@@ -36,6 +36,8 @@ onAuthStateChanged(auth, (user) => {
     document.getElementById("menu__additional").innerHTML = menuBaseTemplate();
   }
 });
+
+window.location.reload();
 document.getElementById("logout").addEventListener('click',(e)=>{
    signOut(auth).then(() => {
        window.location.replace("login.html");
