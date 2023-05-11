@@ -24,13 +24,6 @@
         <li class="navbar__list-item">
             <a href="tracks.html" class="navbar__list-item-link">Tracks</a>
          </li>
-
-<!--        {% for item in menu %}-->
-<!--        <li class="navbar__list-item">-->
-<!--            <a href="#" class="navbar__list-item-link">{{item.title}}</a>-->
-<!--        </li>-->
-<!--            <br>-->
-<!--        {% endfor %}-->
     </ul>
     <hr class="navbar-line">
      <span onclick="openNav()"><img src="images/login.png" class="js-login__img"></span>
@@ -45,18 +38,6 @@
     <ul class="ul__sidenav-list">
         <li><a href="#" class="sidenav-link">Contact</a></li>
     </ul>
-<!--    {%  if request.user.is_authenticated %}-->
-<!--      <a href="{% url 'update_user' user.id %}" class="sidenav-link">{{user.login}}</a>-->
-<!--            {% if user.role.id == 3 %}-->
-<!--                <a href="{% url 'change_subscription' auth_user %}" class="sidenav-link">Subscription</a>-->
-<!--        {% endif %}-->
-<!--        <a href="{% url 'create_playlist' %}" class="sidenav-link">Create playlist</a>-->
-<!--     {% if user.role.id == 2 %}-->
-
-<!--        {% endif %}-->
-
-<!--    {% endif %}-->
-
 </aside>
 <main>
 <section class="div__content">
@@ -93,6 +74,7 @@
    <script src="js/base_script.js" ></script>
    <script src="js/script.js" ></script>
    <script src="js/template.js" ></script>
-      <script type="module" src="js/auth.js"></script>
+   <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/sidenav.js"></script>
 </body>
 </html>

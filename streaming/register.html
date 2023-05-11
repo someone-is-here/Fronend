@@ -35,24 +35,9 @@
     </menu>
 <aside id="sidenav" class="sidenav">
   <a href="javascript:void(0)" class="sidenav-button__close" onclick="closeNav()">&times;</a>
-<!--    {%  if request.user.is_authenticated %}-->
-<!--      <a href="{% url 'update_user' user.id %}" class="sidenav-link">{{user.login}}</a>-->
-<!--            {% if user.role.id == 3 %}-->
-<!--                <a href="{% url 'change_subscription' auth_user %}" class="sidenav-link">Subscription</a>-->
-<!--        {% endif %}-->
-<!--        <a href="{% url 'create_playlist' %}" class="sidenav-link">Create playlist</a>-->
-<!--     {% if user.role.id == 2 %}-->
-<!--                <a href="{% url 'add_instrument' user.id %}" class="sidenav-link">Add instrument</a>-->
-<!--                <a href="{% url 'create_track' %}" class="sidenav-link">Add track</a>-->
-<!--                <a href="{% url 'add_genre' user.id %}" class="sidenav-link">Add genre</a>-->
-<!--                <a href="{% url 'add_label' user.id %}" class="sidenav-link">Add label</a>-->
-<!--        {% endif %}-->
-<!--{#  <a href="{% url 'logout' %}" class="sidenav-link">Logout</a>#}-->
-<!--{#    {% else %}#}-->
-<!--{#  <a href="{% url 'login' %}" class="sidenav-link">Login</a>#}-->
-<!--{#  <a href="{% url 'register' %}" class="sidenav-link">Register</a>#}-->
-<!--    {% endif %}-->
-  <a href="#" class="sidenav-link">Contact</a>
+    <ul class="ul__sidenav-list">
+        <li><a href="#" class="sidenav-link">Contact</a></li>
+    </ul>
 </aside>
 
 <section class="section__register">
@@ -619,9 +604,9 @@
 
 <footer></footer>
    <script src="js/base_script.js" ></script>
-    <script src="js/register.js" type="module"></script>
    <script src="js/script.js" ></script>
-
+   <script src="js/register.js" type="module"></script>
+  <script type="module" src="js/sidenav.js"></script>
 
 </body>
 </html>
