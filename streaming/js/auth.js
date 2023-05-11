@@ -31,7 +31,7 @@ function logout(){
 function menuTemplateLogin(res) {
   return `                <li class="menu-additional__list-item menu-additional-email">${res}</li>
                 <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">Subscription</a></li>
-                <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link" onclick="logout">Logout</a></li>`;
+                <li class="menu-additional__list-item"><a href="#" class="menu-additional-link" onclick="logout">Logout</a></li>`;
 }
 function menuBaseTemplate(){
   return `
