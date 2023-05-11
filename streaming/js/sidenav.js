@@ -52,7 +52,7 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
     console.log(user.email)
-    document.getElementById("ul__sidenav-list").innerHTML += menuTemplateLogin(user.email);
+    document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += menuTemplateLogin(user.email);
 
     const dbRef = ref(getDatabase());
     get(child(dbRef, `users/${uid}`)).then((snapshot) => {
@@ -66,11 +66,11 @@ onAuthStateChanged(auth, (user) => {
 });
 
     if (user.role === "2"){
-        document.getElementById("ul__sidenav-list").innerHTML += generateArtistFunctionality();
+        document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += generateArtistFunctionality();
     }else if(user.role === "3"){
-document.getElementById("ul__sidenav-list").innerHTML += generateUserFunctionality();
+document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += generateUserFunctionality();
     }
   } else {
-    document.getElementById("ul__sidenav-list").innerHTML += menuBaseTemplate();
+    document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += menuBaseTemplate();
   }
 });
