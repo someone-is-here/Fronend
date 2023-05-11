@@ -42,6 +42,9 @@
     </menu>
 <aside id="sidenav" class="sidenav">
   <a href="javascript:void(0)" class="sidenav-button__close" onclick="closeNav()">&times;</a>
+    <ul class="ul__sidenav-list">
+        <li><a href="#" class="sidenav-link">Contact</a></li>
+    </ul>
 <!--    {%  if request.user.is_authenticated %}-->
 <!--      <a href="{% url 'update_user' user.id %}" class="sidenav-link">{{user.login}}</a>-->
 <!--            {% if user.role.id == 3 %}-->
@@ -54,12 +57,9 @@
 <!--                <a href="{% url 'add_genre' user.id %}" class="sidenav-link">Add genre</a>-->
 <!--                <a href="{% url 'add_label' user.id %}" class="sidenav-link">Add label</a>-->
 <!--        {% endif %}-->
-<!--{#  <a href="{% url 'logout' %}" class="sidenav-link">Logout</a>#}-->
-<!--{#    {% else %}#}-->
-<!--{#  <a href="{% url 'login' %}" class="sidenav-link">Login</a>#}-->
-<!--{#  <a href="{% url 'register' %}" class="sidenav-link">Register</a>#}-->
+
 <!--    {% endif %}-->
-  <a href="#" class="sidenav-link">Contact</a>
+
 </aside>
 <main>
 <section class="div__content">
