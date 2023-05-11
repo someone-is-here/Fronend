@@ -17,21 +17,10 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
   const database = getDatabase(app);
   const auth = getAuth();
 
-function logout(){
-   signOut(auth).then(() => {
-       console.log("sign gout");
-   }).catch((error) => {
-
-     const errorCode = error.code;
-     const errorMessage = error.message;
-        alert(errorMessage);
-   });
-
-}
 function menuTemplateLogin(res) {
   return `
     <a class="sidenav-link">${res}</a>
-    <a href="login.html" class="sidenav-link" onclick="logout()">Logout</a>`;
+    <a href="login.html" class="sidenav-link" onclick="signOut(auth).then(() => {});">Logout</a>`;
 }
 function menuBaseTemplate(){
   return `

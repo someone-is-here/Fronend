@@ -17,21 +17,10 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
   const database = getDatabase(app);
   const auth = getAuth();
 
-function logout(){
-   signOut(auth).then(() => {
-     console.log("sign out");
-   }).catch((error) => {
-
-     const errorCode = error.code;
-     const errorMessage = error.message;
-        alert(errorMessage);
-   });
-
-}
 function menuTemplateLogin(res) {
   return `                <li class="menu-additional__list-item menu-additional-email">${res}</li>
                 <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">Subscription</a></li>
-                <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link" onclick="logout()">Logout</a></li>`;
+                <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link" onclick="signOut(auth).then(() => {});">Logout</a></li>`;
 }
 function menuBaseTemplate(){
   return `

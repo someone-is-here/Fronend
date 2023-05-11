@@ -73,3 +73,40 @@ input[name="email"], input[name="password"], input[name="title"]{
         padding: 0;
     }
 }
+button.social-signin {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 2rem;
+  color: #FFF;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+button.social-signin:hover,
+button.social-signin:focus {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: 0.2s ease;
+}
+.loginwith{
+    font-size: 1.3rem;
+    font-style: italic;
+}
+button.social-signin:active {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: 0.2s ease;
+}
+
+button.social-signin.facebook {
+  background: #32508E;
+}
+
+button.social-signin.twitter {
+  background: #55ACEE;
+}
+
+button.social-signin.google {
+  background: #DD4B39;
+}
