@@ -73,8 +73,6 @@ document.getElementById("submit__c-form").addEventListener("click", function(eve
     .then((userCredential) => {
      // Signed in
       const user = userCredential.user;
-        alert("user!");
-
              const selectSubscription = document.getElementById("id_cform_pre-subscription");
              set(ref(database, 'users/' + user.uid), {
                 login: document.getElementById("id_aform_pre-login").value,
@@ -129,8 +127,6 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
     .then((userCredential) => {
      // Signed in
       const user = userCredential.user;
-      alert("created");
-
             const selectCountry = document.getElementById("id_bform_pre-country");
             set(ref(database, 'users/' + user.uid), {
                 login: document.getElementById("id_aform_pre-login").value,
