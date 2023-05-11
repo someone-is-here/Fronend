@@ -19,7 +19,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
 
 function logout(){
    signOut(auth).then(() => {
-       window.location.replace("login.html");
+       console.log("sign gout");
    }).catch((error) => {
 
      const errorCode = error.code;
@@ -31,7 +31,7 @@ function logout(){
 function menuTemplateLogin(res) {
   return `
     <a class="sidenav-link">${res}</a>
-    <a href="#" class="sidenav-link" onclick="logout">Logout</a>`;
+    <a href="login.html" class="sidenav-link" onclick="logout">Logout</a>`;
 }
 function menuBaseTemplate(){
   return `
