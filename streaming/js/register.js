@@ -1,10 +1,12 @@
-let res = document.getElementById("id_aform_pre-role");
-res.remove(1);
+// let res = document.getElementById("id_aform_pre-role");
+// res.remove(1);
 document.addEventListener("DOMContentLoaded", function (){
     document.getElementById("register_3").style.visibility='visible';
     document.getElementById("register_3").style.position='static';
+    document.getElementById("id_aform_pre-role").selectedItem = 3;
 });
 document.getElementById("id_aform_pre-role").addEventListener("change", (event) => {
+    event.preventDefault();
     let role_id = event.target.options[event.target.selectedIndex].value;
     if (role_id == 2){
         document.getElementById("register_3").style.visibility='hidden';
@@ -23,4 +25,5 @@ document.getElementById("id_aform_pre-role").addEventListener("change", (event) 
         document.getElementById("register_3").style.position='static';
         document.getElementById("register_3").style.visibility='visible';
     }
-})
+});
+

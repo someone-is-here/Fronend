@@ -70,7 +70,7 @@
 <section class="section__register">
     <div class="div__register">
         <div>
-    <form action="" method="post" enctype="multipart/form-data" class="form__register">
+    <form action="" method="post" enctype="multipart/form-data" class="form__register" novalidate>
         <h2 class="register__title">Register</h2>
         <input type="hidden" >
 
@@ -78,42 +78,30 @@
           <label for="id_aform_pre-login">Login:</label>
           <input type="text" name="aform_pre-login" maxlength="100" required id="id_aform_pre-login">
         </p>
-
-
-  <p>
+        <p>
     <label for="id_aform_pre-email">Email:</label>
     <input type="email" name="aform_pre-email" required id="id_aform_pre-email">
 
 
   </p>
-
-
-  <p>
+        <p>
     <label for="id_aform_pre-role">Role:</label>
     <select name="aform_pre-role" required id="id_aform_pre-role">
   <option value="" selected>---------</option>
-
-  <option value="1">admin</option>
-
   <option value="2">artist</option>
-
-  <option value="3">user</option>
+  <option value="3" selected>user</option>
 
 </select>
 
 
   </p>
-
-
-  <p>
+        <p>
     <label for="id_aform_pre-password1">Password1:</label>
     <input type="password" name="aform_pre-password1" required id="id_aform_pre-password1">
 
 
   </p>
-
-
-  <p>
+        <p>
     <label for="id_aform_pre-password2">Password2:</label>
     <input type="password" name="aform_pre-password2" required id="id_aform_pre-password2">
 
@@ -131,25 +119,19 @@
 
 
   </p>
-
-
-  <p>
+                <p>
     <label for="id_bform_pre-website">Website:</label>
     <input type="text" name="bform_pre-website" maxlength="256" required id="id_bform_pre-website">
 
 
   </p>
-
-
-  <p>
+                <p>
     <label for="id_bform_pre-tour_dates">Tour dates:</label>
     <input type="number" name="bform_pre-tour_dates" required id="id_bform_pre-tour_dates">
 
 
   </p>
-
-
-  <p>
+                <p>
     <label for="id_bform_pre-country">Country:</label>
     <select name="bform_pre-country" required id="id_bform_pre-country">
   <option value="" selected>---------</option>
@@ -617,7 +599,7 @@
 
   </p>
                 <div class="button_align-center">
-                 <input type="submit" name="bform_pre" value="Submit" class="submit__form" />
+                 <input type="submit" name="bform_pre" value="submit" class="submit__form" id="submit__b-form"/>
                 </div>
             </div>
         </div>
@@ -639,7 +621,7 @@
 
   </p>
             <div class="button_align-center">
-                <input type="submit" name="cform_pre" value="Submit" class="submit__form" />
+                <input type="submit" name="cform_pre" value="submit" class="submit__form" id="submit__c-form"/>
             </div>
         </div>
     </form>
@@ -651,5 +633,116 @@
    <script src="js/base_script.js" ></script>
     <script src="js/register.js" ></script>
    <script src="js/script.js" ></script>
+<script type="module">
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+  import { getDatabase, ref, set, update } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDd2TdBKvjDRzfaScSO5GZJOnJCQAIt9nA",
+    authDomain: "streaming-service-a0d17.firebaseapp.com",
+    projectId: "streaming-service-a0d17",
+    storageBucket: "streaming-service-a0d17.appspot.com",
+    messagingSenderId: "970367674144",
+    appId: "1:970367674144:web:de960ab528bbca0c83d945",
+    measurementId: "G-EZE9Q32626"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+  const auth = getAuth();
+
+  function unsetFields(hiddenFields){
+    for(let el of hiddenFields){
+        console.log(el);
+        el.setAttribute("disabled", true);
+    }
+}
+
+document.getElementById("submit__c-form").addEventListener("submit", function(event){
+    // event.preventDefault();
+    console.log("click_c");
+    const hiddenFields = document.getElementById("register_2");
+
+    console.log(hiddenFields.getElementsByTagName("input"));
+    console.log(hiddenFields.getElementsByTagName("select"));
+    unsetFields(hiddenFields.getElementsByTagName("input"));
+    unsetFields(hiddenFields.getElementsByTagName("select"));
+
+    const el = document.getElementById("id_aform_pre-role");
+    const role = el.options[el.selectedIndex].value;
+
+    const pssw1 = document.getElementById('id_aform_pre-password1');
+    const pssw2 = document.getElementById('id_aform_pre-password2');
+
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+     // Signed in
+      const user = userCredential.user;
+        alert("user!");
+       if(pssw1 == pssw2){
+             const selectSubscription = document.getElementById("id_cform_pre-subscription");
+             set(ref(database, 'users/' + user.uid), {
+                login: document.getElementById("id_aform_pre-login").value,
+                email: document.getElementById("id_aform_pre-login").value,
+                role_id: role,
+                subscription: selectSubscription.options[selectSubscription.selectedIndex].text
+            });
+        }
+      alert('user created!');
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+
+      alert(errorMessage);
+    });
+});
+
+document.getElementById("submit__b-form").addEventListener("submit", function(event){
+    // event.preventDefault();
+    console.log("click_b");
+    const hiddenFields = document.getElementById("register_3");
+    console.log(hiddenFields.getElementsByTagName("input"));
+    console.log(hiddenFields.getElementsByTagName("select"));
+    unsetFields(hiddenFields.getElementsByTagName("input"));
+    unsetFields(hiddenFields.getElementsByTagName("select"));
+
+    const el = document.getElementById("id_aform_pre-role");
+    const role = el.options[el.selectedIndex].value;
+
+    const pssw1 = document.getElementById('id_aform_pre-password1');
+    const pssw2 = document.getElementById('id_aform_pre-password2');
+
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+     // Signed in
+      const user = userCredential.user;
+      alert("created");
+        if(pssw1 == pssw2) {
+            const selectCountry = document.getElementById("id_bform_pre-country");
+            set(ref(database, 'users/' + user.uid), {
+                login: document.getElementById("id_aform_pre-login").value,
+                email: document.getElementById("id_aform_pre-login").value,
+                role_id: role,
+                name: document.getElementById("id_bform_pre-name").value,
+                website: document.getElementById("id_bform_pre-website").value,
+                tour_dates: document.getElementById("id_bform_pre-tour_dates").value,
+                country: selectCountry.options[selectCountry.selectedIndex].text,
+            });
+        }
+      alert('user created!');
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+
+      alert(errorMessage);
+    });
+});
+
+</script>
 </body>
 </html>
