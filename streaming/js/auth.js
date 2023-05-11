@@ -17,7 +17,7 @@ import { getAuth, createUserWithEmailAndPassword,
   const app = initializeApp(firebaseConfig);
   const database = getDatabase(app);
   const auth = getAuth();
-window.signOut = function signOut(_e) {
+window.signOut = function signOut(e) {
   auth().signOut().then(function() {
     // Sign-out successful.
   }).catch(function(error) {
@@ -27,7 +27,7 @@ window.signOut = function signOut(_e) {
 function menuTemplateLogin(res) {
   return `                <li class="menu-additional__list-item menu-additional-email">${res}</li>
                 <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">Subscription</a></li>
-                <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link" id="logout">Logout</a></li>`;
+                <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link" onclick="signOut()">Logout</a></li>`;
 }
 function menuBaseTemplate(){
   return `
