@@ -46,3 +46,8 @@ document.getElementById("submit__login-form").addEventListener("click",function 
         alert(errorMessage);
   });
 });
+
+document.getElementById("button__google").addEventListener("click", function(ev){
+
+
+});
