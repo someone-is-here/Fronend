@@ -73,9 +73,6 @@ signInWithPopup(auth, GoogleProvider)
     const email = error.email;
     // The AuthCredential type that was used.
     const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-
-    alert(errorMessage);
   });
  });
 
@@ -100,7 +97,6 @@ signInWithPopup(auth, FacebookProvider)
     const email = error.customData.email;
     // The AuthCredential type that was used.
     const credential = FacebookAuthProvider.credentialFromError(error);
-    alert(errorMessage);
   });
  });
 
@@ -125,6 +121,5 @@ signInWithPopup(auth, TwitterProvider)
     const email = error.customData.email;
     // The AuthCredential type that was used.
     const credential = TwitterAuthProvider.credentialFromError(error);
-    alert(errorMessage);
   });
  });
