@@ -20,7 +20,7 @@ import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/fi
 function menuTemplateLogin(res) {
   return `
     <a class="sidenav-link">${res}</a>
-    <a href="login.html" class="sidenav-link" onclick="signOut(auth).then(() => {});">Logout</a>`;
+    <a href="login.html" class="sidenav-link" id="logout">Logout</a>`;
 }
 function menuBaseTemplate(){
   return `
@@ -62,4 +62,10 @@ onAuthStateChanged(auth, (user) => {
   } else {
     document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += menuBaseTemplate();
   }
+});
+
+document.addEventListener(" DOMContentLoaded", function (e){
+  document.getElementById("logout").addEventListener("click",function(e){
+      signOut(auth).then(() => {});
+  });
 });

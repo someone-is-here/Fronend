@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
 import { getDatabase, ref, set, update } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
 
 
   const firebaseConfig = {
@@ -20,13 +20,14 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
 function menuTemplateLogin(res) {
   return `                <li class="menu-additional__list-item menu-additional-email">${res}</li>
                 <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">Subscription</a></li>
-                <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link" onclick="signOut(auth).then(() => {});">Logout</a></li>`;
+                <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link" id="logout">Logout</a></li>`;
 }
 function menuBaseTemplate(){
   return `
                 <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link">Login</a></li>
                 <li class="menu-additional__list-item"><a href="register.html" class="menu-additional-link">Register</a></li>`;
 }
+
 const user = auth.currentUser;
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -36,4 +37,10 @@ onAuthStateChanged(auth, (user) => {
   } else {
     document.getElementById("menu__additional").innerHTML = menuBaseTemplate();
   }
+});
+
+document.addEventListener(" DOMContentLoaded", function (e){
+  document.getElementById("logout").addEventListener("click",function(e){
+      signOut(auth).then(() => {});
+  });
 });
