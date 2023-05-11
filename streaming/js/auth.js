@@ -17,7 +17,13 @@ import { getAuth, createUserWithEmailAndPassword,
   const app = initializeApp(firebaseConfig);
   const database = getDatabase(app);
   const auth = getAuth();
-
+window.signOut = function signOut(_e) {
+  auth().signOut().then(function() {
+    // Sign-out successful.
+  }).catch(function(error) {
+    // An error happened.
+  });
+}
 function menuTemplateLogin(res) {
   return `                <li class="menu-additional__list-item menu-additional-email">${res}</li>
                 <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">Subscription</a></li>
@@ -41,6 +47,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 document.addEventListener(" DOMContentLoaded", function (e){
+  console.log(document);
   document.getElementById("logout").addEventListener("click",function(e){
       signOut(auth).then(() => {});
   });
