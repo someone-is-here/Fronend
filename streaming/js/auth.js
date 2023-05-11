@@ -16,10 +16,22 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
   const app = initializeApp(firebaseConfig);
   const database = getDatabase(app);
   const auth = getAuth();
+
+function logout(){
+   signOut(auth).then(() => {
+       window.location.replace("login.html");
+   }).catch((error) => {
+
+     const errorCode = error.code;
+     const errorMessage = error.message;
+        alert(errorMessage);
+   });
+
+}g
 function menuTemplateLogin(res) {
   return `                <li class="menu-additional__list-item menu-additional-email">${res}</li>
                 <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">Subscription</a></li>
-                <li class="menu-additional__list-item"><a href="logout.html" class="menu-additional-link" id="logout">Logout</a></li>`;
+                <li class="menu-additional__list-item"><a href="logout.html" class="menu-additional-link" onclick="logout">Logout</a></li>`;
 }
 function menuBaseTemplate(){
   return `
@@ -35,17 +47,4 @@ onAuthStateChanged(auth, (user) => {
   } else {
     document.getElementById("menu__additional").innerHTML = menuBaseTemplate();
   }
-});
-
-window.location.reload();
-document.getElementById("logout").addEventListener('click',(e)=>{
-   signOut(auth).then(() => {
-       window.location.replace("login.html");
-   }).catch((error) => {
-
-     const errorCode = error.code;
-     const errorMessage = error.message;
-        alert(errorMessage);
-   });
-
 });
