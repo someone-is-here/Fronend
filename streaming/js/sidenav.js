@@ -54,10 +54,10 @@ onAuthStateChanged(auth, (user) => {
   console.error(error);
 });
 
-    if (user.role === "2"){
+    if (user.role_id === "2"){
         document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += generateArtistFunctionality();
-    }else if(user.role === "3"){
-document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += generateUserFunctionality();
+    }else if(user.role_id === "3"){
+        document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += generateUserFunctionality();
     }
   } else {
     document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += menuBaseTemplate();
