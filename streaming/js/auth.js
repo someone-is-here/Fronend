@@ -17,9 +17,11 @@ import { getAuth, createUserWithEmailAndPassword,
   const app = initializeApp(firebaseConfig);
   const database = getDatabase(app);
   const auth = getAuth();
+
 window.userSignOut = function userSignOut(e) {
   signOut(auth).then(() => {});
 }
+
 function menuTemplateLogin(res) {
   return `                <li class="menu-additional__list-item menu-additional-email">${res}</li>
                 <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">Subscription</a></li>
@@ -40,11 +42,4 @@ onAuthStateChanged(auth, (user) => {
   } else {
     document.getElementById("menu__additional").innerHTML = menuBaseTemplate();
   }
-});
-
-document.addEventListener(" DOMContentLoaded", function (e){
-  console.log(document);
-  document.getElementById("logout").addEventListener("click",function(e){
-      signOut(auth).then(() => {});
-  });
-});
+});;
