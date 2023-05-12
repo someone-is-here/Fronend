@@ -32,10 +32,12 @@ function getLabelTemplate(item, link){
   if (snapshot.exists()) {
     const listWIthLabels = snapshot.val();
     let listWithLi = "";
-for (var i = 0; i < listWIthLabels.length; i++) {
-  console.log(listWIthLabels[i]);
-  console.log(Object.keys(listWIthLabels[i]))
-   console.log(Object.values(listWIthLabels[i]))
+for (var i = 1; i < listWIthLabels.length; i++) {
+  if(listWIthLabels[i] !== undefined){
+    console.log(listWIthLabels[i]);
+    console.log(Object.keys(listWIthLabels[i]))
+    console.log(Object.values(listWIthLabels[i]))
+  }
 }
 
     // for(let el of listWIthLabels){
