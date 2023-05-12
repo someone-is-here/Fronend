@@ -32,19 +32,16 @@ function getLabelTemplate(item, link){
   if (snapshot.exists()) {
     const listWIthLabels = snapshot.val();
     let listWithLi = "";
-for (var i = 1; i < listWIthLabels.length; i++) {
+for (var i = 0; i < listWIthLabels.length; i++) {
   if(listWIthLabels[i] !== undefined){
     console.log(listWIthLabels[i]);
     console.log(Object.keys(listWIthLabels[i]))
     console.log(Object.values(listWIthLabels[i]))
+    listWithLi += getLabelTemplate(Object.keys(listWIthLabels[i])[0], Object.values(listWIthLabels[i])[0]);
   }
 }
 
-    // for(let el of listWIthLabels){
-    //
-    //    listWithLi += getLabelTemplate(Object.keys(el), Object.values(el));
-    // }
-    // document.getElementById("labels__list").innerHTML += listWithLi;
+    document.getElementById("labels__list").innerHTML += listWithLi;
   } else {
     console.log("No data available");
   }
