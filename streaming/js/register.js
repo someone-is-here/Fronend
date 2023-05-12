@@ -140,6 +140,8 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
 
             const inputNode = document.getElementById('id_bform_pre-picture');
             const file = inputNode.files[0];
+
+        console.log(file);
             const fileReader = new FileReader();
             var imageData = undefined;
             if(fileReader && file){
@@ -148,7 +150,7 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
                     imageData = fileReader.result;
                 };
             }
-
+        console.log(imageData);
         uploadBytes(storageRef, imageData).then((snapshot) => {
                 console.log('Uploaded a blob or file!');
                 getDownloadURL(storageRef).then((url)=>{
