@@ -118,7 +118,7 @@ document.getElementById("id_bform_pre-picture").onchange = function(e) {
   var file = document.getElementById("id_bform_pre-picture").files[0];
   var reader = new FileReader();
   reader.onload = function() {
-    console.log(reader.result);t;
+    console.log(reader.result);
     window.blob = window.dataURLtoBlob(reader.result);
     console.log(blob, new File([blob], "image.png", {
       type: "image/png"
