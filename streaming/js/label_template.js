@@ -36,3 +36,6 @@ leadsRef.on('value', function(snapshot) {
     });
 });
 //document.getElementById("labels__list").innerHTML
+document.getElementById("button_submit").addEventListener("click", function(event){
+
+});

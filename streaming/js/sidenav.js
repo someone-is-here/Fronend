@@ -51,9 +51,10 @@ onAuthStateChanged(auth, (user) => {
     get(child(dbRef, `users/${uid}`)).then((snapshot) => {
   if (snapshot.exists()) {
     console.log(snapshot.val());
-    if (user.role_id === "2"){
+    let role = snapshot.val().role_id;
+    if (role === "2"){
         document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += generateArtistFunctionality();
-    }else if(user.role_id === "3"){
+    }else if(role === "3"){
         document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += generateUserFunctionality();
     }
   } else {
