@@ -32,11 +32,17 @@ function getLabelTemplate(item, link){
   if (snapshot.exists()) {
     const listWIthLabels = snapshot.val();
     let listWithLi = "";
+for (var i = 0; i < listWIthLabels.length; i++) {
+  console.log(listWIthLabels[i]);
+  console.log(Object.keys(listWIthLabels[i]))
+   console.log(Object.values(listWIthLabels[i]))
+}
 
-    for(let el of listWIthLabels){
-       listWithLi += getLabelTemplate(Object.keys(el), Object.values(el));
-    }
-    document.getElementById("labels__list").innerHTML += listWithLi;
+    // for(let el of listWIthLabels){
+    //
+    //    listWithLi += getLabelTemplate(Object.keys(el), Object.values(el));
+    // }
+    // document.getElementById("labels__list").innerHTML += listWithLi;
   } else {
     console.log("No data available");
   }
