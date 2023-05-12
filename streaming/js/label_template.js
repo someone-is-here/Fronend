@@ -19,18 +19,23 @@ import { getAuth, createUserWithEmailAndPassword,
   const auth = getAuth();
 
 
-function getLabelTemplate(item){
+function getLabelTemplate(item, link){
     return `<li class="item">
                     <span class="checkbox">
                         <i class="fa-solid fa-check check-icon"></i>
                     </span>
-                    <span class="item-text">${item}</span>
+                    <span class="item-text"><a href="${link}">${item}</a></span>
                 </li>`;
 }
  const dbRef = ref(getDatabase());
     get(child(dbRef, `labels/`)).then((snapshot) => {
   if (snapshot.exists()) {
-    console.log(snapshot.val());
+    const listWIthLabels = snapshot.val();
+    let listWithLi = "";
+    for(let el of listWIthLabels){
+      listWithLi += getLabelTemplate(el.key, el.value)
+    }
+    document.getElementById("labels__list").innerHTML += listWithLi;
   } else {
     console.log("No data available");
   }
