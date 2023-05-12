@@ -146,7 +146,7 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
      // Signed in
       const user = userCredential.user;
             const selectCountry = document.getElementById("id_bform_pre-country");
-            const storageRef = ref_(storage, 'image');
+            const storageRef = ref_(storage, 'image/');
             let pictureUrl = undefined;
 
 /*            const inputNode = document.getElementById('id_bform_pre-picture');
