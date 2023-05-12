@@ -47,6 +47,7 @@ onAuthStateChanged(auth, (user) => {
     document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += menuTemplateLogin(user.email);
 
     const dbRef = ref(getDatabase());
+    console.log(`users/${uid}`);
     get(child(dbRef, `users/${uid}`)).then((snapshot) => {
   if (snapshot.exists()) {
     console.log(snapshot.val());
