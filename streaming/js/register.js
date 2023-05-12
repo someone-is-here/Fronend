@@ -186,14 +186,14 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
         const errorCode = error.code;
         const errorMessage = error.message;
 
-        alert(errorMessage);
+        //alert(errorMessage);
   });
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
 
-      alert(errorMessage);
+      //alert(errorMessage);
     });
   }
 });
