@@ -34,7 +34,7 @@ function getLabelTemplate(item, link){
     let listWithLi = "";
 
     for(let el of listWIthLabels){
-       listWithLi += getLabelTemplate(Object.keys(el)[0], Object.values(el)[0]);
+       listWithLi += getLabelTemplate(Object.keys(el), Object.values(el));
     }
     document.getElementById("labels__list").innerHTML += listWithLi;
   } else {
