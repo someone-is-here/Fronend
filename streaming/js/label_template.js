@@ -27,13 +27,15 @@ function getLabelTemplate(item){
                     <span class="item-text">${item}</span>
                 </li>`;
 }
-var leadsRef = database.ref('labels');
-leadsRef.on('value', function(snapshot) {
-  console.log(snapshot);
-    snapshot.forEach(function(childSnapshot) {
-      var childData = childSnapshot.val();
-      console.log(childData);
-    });
+ const dbRef = ref(getDatabase());
+    get(child(dbRef, `labels/`)).then((snapshot) => {
+  if (snapshot.exists()) {
+    console.log(snapshot.val());
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
 });
 //document.getElementById("labels__list").innerHTML
 document.getElementById("button_submit").addEventListener("click", function(event){
