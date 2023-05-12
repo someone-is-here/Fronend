@@ -145,23 +145,23 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
     createUserWithEmailAndPassword(auth, emailField, pssw1)
     .then((userCredential) => {
      // Signed in
-      const user = userCredential.user;
+     const user = userCredential.user;
             const selectCountry = document.getElementById("id_bform_pre-country");
-            const storageRef = ref_(storage, 'image/');
+           /*  const storageRef = ref_(storage, 'image/');
             let pictureUrl = undefined;
              const file = document.getElementById("id_bform_pre-picture").files[0];
              const name = +new Date() + "-" + file.name;
              const metadata = {
                 contentType: file.type
             };
-            const task = ref_.child(name).put(file, metadata);task
+            const task = ref.child(name).put(file, metadata);task
       .then(snapshot => snapshot.ref_.getDownloadURL())
       .then(url => {
       console.log(url);
       alert('image uploaded successfully');
       document.getElementById("id_bform_pre-country").src = url;
    })
-   .catch(console.error);
+   .catch(console.error);*/
 
         // uploadBytes(storageRef, window.blob).then((snapshot) => {
         //         console.log('Uploaded a blob or file!');

@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
-import { getDatabase, ref, set, update, child } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
+import { getDatabase, ref, set, update, child, val } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
 import { getAuth, createUserWithEmailAndPassword,
   signInWithEmailAndPassword, onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
 
@@ -27,5 +27,12 @@ function getLabelTemplate(item){
                     <span class="item-text">${item}</span>
                 </li>`;
 }
-
+var leadsRef = database.ref('labels');
+leadsRef.on('value', function(snapshot) {
+  console.log(snapshot);
+    snapshot.forEach(function(childSnapshot) {
+      var childData = childSnapshot.val();
+      console.log(childData);
+    });
+});
 //document.getElementById("labels__list").innerHTML
