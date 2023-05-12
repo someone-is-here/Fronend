@@ -2,8 +2,8 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
   import { getDatabase, ref, set, update } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-      onAuthStateChanged, signOut, getStorage, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
-
+      onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+  import { getStorage, ref_, getDownloadURL, uploadBytes } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
 
 document.addEventListener("DOMContentLoaded", function (){
     document.getElementById("register_3").style.visibility='visible';
@@ -132,7 +132,7 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
      // Signed in
       const user = userCredential.user;
             const selectCountry = document.getElementById("id_bform_pre-country");
-            const storageRef = ref(storage, 'image');
+            const storageRef = ref_(storage, 'image');
             let pictureUrl = undefined;
             uploadBytes(storageRef, document.getElementById("id_bform_pre-picture").value).then((snapshot) => {
                 console.log('Uploaded a blob or file!');
