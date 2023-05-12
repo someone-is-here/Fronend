@@ -137,7 +137,19 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
             const selectCountry = document.getElementById("id_bform_pre-country");
             const storageRef = ref_(storage, 'image');
             let pictureUrl = undefined;
-            uploadBytes(storageRef, document.getElementById("id_bform_pre-picture").value).then((snapshot) => {
+
+            const inputNode = document.getElementById('id_bform_pre-picture');
+            const file = inputNode.files[0];
+            const fileReader = new FileReader();
+            var imageData = undefined;
+            if(fileReader && file){
+                fileReader.readAsArrayBuffer(file);
+                fileReader.onload = function (){
+                    imageData = fileReader.result;
+                };
+            }
+
+        uploadBytes(storageRef, imageData).then((snapshot) => {
                 console.log('Uploaded a blob or file!');
                 getDownloadURL(storageRef).then((url)=>{
                     pictureUrl=url;
