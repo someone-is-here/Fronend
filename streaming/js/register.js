@@ -4,6 +4,9 @@
   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
       onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
   import { getStorage, ref_, getDownloadURL, uploadBytes } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
+window.userSignOut = function userSignOut(e) {
+  signOut(auth).then(() => {});
+}
 
 document.addEventListener("DOMContentLoaded", function (){
     document.getElementById("register_3").style.visibility='visible';
@@ -184,7 +187,7 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
 function menuTemplateLogin(res) {
   return `                <li class="menu-additional__list-item menu-additional-email">${res}</li>
                 <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">Subscription</a></li>
-                <li class="menu-additional__list-item"><a href="logout.html" class="menu-additional-link" id="logout">Logout</a></li>`;
+                <li class="menu-additional__list-item"><a href="logout.html" class="menu-additional-link" onclick="userSignOut()">Logout</a></li>`;
 }
 function menuBaseTemplate(){
   return `

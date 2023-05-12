@@ -23,7 +23,7 @@ window.userSignOut = function userSignOut(e) {
 function menuTemplateLogin(res) {
   return `
     <a class="sidenav-link">${res}</a>
-    <a href="login.html" class="sidenav-link" id="userSignOut()">Logout</a>`;
+    <a href="login.html" class="sidenav-link" onclick="userSignOut()">Logout</a>`;
 }
 function menuBaseTemplate(){
   return `
