@@ -3,7 +3,7 @@
   import { getDatabase, ref, set, update } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
       onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
-  import { getStorage, ref as ref_, getDownloadURL, uploadBytes } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
+  import { getStorage, ref as ref_, child, getDownloadURL, uploadBytes} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
 window.userSignOut = function userSignOut(e) {
   signOut(auth).then(() => {});
 }
@@ -114,18 +114,19 @@ document.getElementById("submit__c-form").addEventListener("click", function(eve
     });
  }
 });
-document.getElementById("id_bform_pre-picture").onchange = function(e) {
-  var file = document.getElementById("id_bform_pre-picture").files[0];
-  var reader = new FileReader();
-  reader.onload = function() {
-    console.log(reader.result);
-    window.blob = window.dataURLtoBlob(reader.result);
-    console.log(blob, new File([blob], "image.png", {
-      type: "image/png"
-    }));
-  };
-  reader.readAsDataURL(file);
-};
+// document.getElementById("id_bform_pre-picture").onchange = function(e) {
+//   var file = document.getElementById("id_bform_pre-picture").files[0];
+//   var reader = new FileReader();
+//   reader.onload = function() {
+//     console.log(reader.result);
+//     window.blob = window.dataURLtoBlob(reader.result);
+//     console.log(blob, new File([blob], "image.png", {
+//       type: "image/png"
+//     }));
+//   };
+//   reader.readAsDataURL(file);
+// };
+
 document.getElementById("submit__b-form").addEventListener("click", function(event){
     event.preventDefault();
     const hiddenFields = document.getElementById("register_3");
@@ -148,28 +149,28 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
             const selectCountry = document.getElementById("id_bform_pre-country");
             const storageRef = ref_(storage, 'image/');
             let pictureUrl = undefined;
+             const file = document.getElementById("id_bform_pre-picture").files[0];
+             const name = +new Date() + "-" + file.name;
+             const metadata = {
+                contentType: file.type
+            };
+            const task = ref_.child(name).put(file, metadata);task
+      .then(snapshot => snapshot.ref_.getDownloadURL())
+      .then(url => {
+      console.log(url);
+      alert('image uploaded successfully');
+      document.getElementById("id_bform_pre-country").src = url;
+   })
+   .catch(console.error);
 
-/*            const inputNode = document.getElementById('id_bform_pre-picture');
-            const file = inputNode.files[0];
-
-        console.log(file);
-            const fileReader = new FileReader();
-            var imageData = undefined;
-            if(fileReader && file){
-                fileReader.readAsArrayBuffer(file);
-                fileReader.onload = function (){
-                    imageData = fileReader.result;
-                };
-            }
-        console.log(imageData);*/
-        uploadBytes(storageRef, window.blob).then((snapshot) => {
-                console.log('Uploaded a blob or file!');
-                getDownloadURL(storageRef).then((url)=>{
-                    pictureUrl=url;
-                }).catch((error)=>{
-                    console.log(error.message)
-                });
-            });
+        // uploadBytes(storageRef, window.blob).then((snapshot) => {
+        //         console.log('Uploaded a blob or file!');
+        //         getDownloadURL(storageRef).then((url)=>{
+        //             pictureUrl=url;
+        //         }).catch((error)=>{
+        //             console.log(error.message)
+        //         });
+        //     });
             set(ref(database, 'users/' + user.uid), {
                 login: document.getElementById("id_aform_pre-login").value,
                 email: emailField,
