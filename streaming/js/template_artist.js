@@ -23,7 +23,7 @@ for(let item of items){
 }
 /*
  // Select your input type file and store it in a variable
-const input =document.getElementById("id_bform_pre-picture");
+const input = document.getElementById("id_bform_pre-picture");
 
 // This will upload the file after having read it
 const upload = (file) => {

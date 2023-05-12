@@ -1,9 +1,9 @@
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
-  import { getDatabase, ref, set, update } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
+  import { getDatabase, ref, set, update, child } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
       onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
-  import { getStorage, ref as ref_, child, getDownloadURL, uploadBytes} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
+  import { getStorage, ref as ref_, getDownloadURL, uploadBytes} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
 window.userSignOut = function userSignOut(e) {
   signOut(auth).then(() => {});
 }
