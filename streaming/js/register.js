@@ -114,7 +114,18 @@ document.getElementById("submit__c-form").addEventListener("click", function(eve
     });
  }
 });
-
+document.getElementById("id_bform_pre-picture").onchange = function(e) {
+  var file = document.getElementById("id_bform_pre-picture").files[0];
+  var reader = new FileReader();
+  reader.onload = function() {
+    console.log(reader.result);t;
+    window.blob = window.dataURLtoBlob(reader.result);
+    console.log(blob, new File([blob], "image.png", {
+      type: "image/png"
+    }));
+  };
+  reader.readAsDataURL(file);
+};
 document.getElementById("submit__b-form").addEventListener("click", function(event){
     event.preventDefault();
     const hiddenFields = document.getElementById("register_3");
@@ -138,7 +149,7 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
             const storageRef = ref_(storage, 'image');
             let pictureUrl = undefined;
 
-            const inputNode = document.getElementById('id_bform_pre-picture');
+/*            const inputNode = document.getElementById('id_bform_pre-picture');
             const file = inputNode.files[0];
 
         console.log(file);
@@ -150,8 +161,8 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
                     imageData = fileReader.result;
                 };
             }
-        console.log(imageData);
-        uploadBytes(storageRef, imageData).then((snapshot) => {
+        console.log(imageData);*/
+        uploadBytes(storageRef, blob).then((snapshot) => {
                 console.log('Uploaded a blob or file!');
                 getDownloadURL(storageRef).then((url)=>{
                     pictureUrl=url;
