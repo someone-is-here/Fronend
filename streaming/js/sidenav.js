@@ -23,7 +23,7 @@ window.userSignOut = function userSignOut(e) {
 function menuTemplateLogin(res) {
   return `
     <a class="sidenav-link">${res}</a>
-    <a href="login.html" class="sidenav-link" id="userSignOut()g">Logout</a>`;
+    <a href="login.html" class="sidenav-link" id="userSignOut()">Logout</a>`;
 }
 function menuBaseTemplate(){
   return `
@@ -50,6 +50,11 @@ onAuthStateChanged(auth, (user) => {
     get(child(dbRef, `users/${uid}`)).then((snapshot) => {
   if (snapshot.exists()) {
     console.log(snapshot.val());
+    if (user.role_id === "2"){
+        document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += generateArtistFunctionality();
+    }else if(user.role_id === "3"){
+        document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += generateUserFunctionality();
+    }
   } else {
     console.log("No data available");
   }
@@ -57,11 +62,6 @@ onAuthStateChanged(auth, (user) => {
   console.error(error);
 });
 
-    if (user.role_id === "2"){
-        document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += generateArtistFunctionality();
-    }else if(user.role_id === "3"){
-        document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += generateUserFunctionality();
-    }
   } else {
     document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += menuBaseTemplate();
   }
