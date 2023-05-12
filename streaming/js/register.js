@@ -1,7 +1,8 @@
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
   import { getDatabase, ref, set, update } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+      onAuthStateChanged, signOut, getStorage, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
 
 
 document.addEventListener("DOMContentLoaded", function (){
@@ -26,6 +27,7 @@ document.getElementById("id_aform_pre-role").addEventListener("change", (event) 
         document.getElementById("id_bform_pre-website").value = '';
         document.getElementById("id_bform_pre-tour_dates").value = '';
         document.getElementById("id_bform_pre-country").value = 0;
+        document.getElementById("id_bform_pre-picture").value = '';
         document.getElementById("register_3").style.position='static';
         document.getElementById("register_3").style.visibility='visible';
     }
@@ -45,7 +47,9 @@ document.getElementById("id_aform_pre-role").addEventListener("change", (event) 
   const app = initializeApp(firebaseConfig);
   const database = getDatabase(app);
   const auth = getAuth();
-    function unsetFields(hiddenFields){
+  const storage = getStorage(app);
+
+  function unsetFields(hiddenFields){
     for(let el of hiddenFields){
         console.log(el);
         el.setAttribute("disabled", true);
@@ -128,6 +132,16 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
      // Signed in
       const user = userCredential.user;
             const selectCountry = document.getElementById("id_bform_pre-country");
+            const storageRef = ref(storage, 'image');
+            let pictureUrl = undefined;
+            uploadBytes(storageRef, document.getElementById("id_bform_pre-picture").value).then((snapshot) => {
+                console.log('Uploaded a blob or file!');
+                getDownloadURL(storageRef).then((url)=>{
+                    pictureUrl=url;
+                }).catch((error)=>{
+                    console.log(error.message)
+                });
+            });
             set(ref(database, 'users/' + user.uid), {
                 login: document.getElementById("id_aform_pre-login").value,
                 email: emailField,
@@ -136,7 +150,9 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
                 website: document.getElementById("id_bform_pre-website").value,
                 tour_dates: document.getElementById("id_bform_pre-tour_dates").value,
                 country: selectCountry.options[selectCountry.selectedIndex].text,
+                profile_picture:  pictureUrl
             });
+
 
      signInWithEmailAndPassword(auth, emailField, pssw1)
       .then((userCredential) => {
