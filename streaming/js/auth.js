@@ -42,4 +42,4 @@ onAuthStateChanged(auth, (user) => {
   } else {
     document.getElementById("menu__additional").innerHTML = menuBaseTemplate();
   }
-});;
+});

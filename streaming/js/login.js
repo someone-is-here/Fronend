@@ -110,5 +110,14 @@ signInWithPopup(auth, TwitterProvider)
     // The signed-in user info.
     const user = result.user;
     window.location.replace("index.html");
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = TwitterAuthProvider.credentialFromError(error);
+    alert(errorMessage);
   });
  });

@@ -98,7 +98,19 @@ document.getElementById("submit__c-form").addEventListener("click", function(eve
           last_login: dt,
         })
         window.location.replace("index.html");
-      });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        alert(errorMessage);
+  });
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+
+      alert(errorMessage);
     });
  }
 });
@@ -180,7 +192,19 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
           last_login: dt,
         })
         window.location.replace("index.html");
-      });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        alert(errorMessage);
+  });
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+
+      alert(errorMessage);
     });
   }
 });
