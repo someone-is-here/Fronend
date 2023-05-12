@@ -32,8 +32,10 @@ function getLabelTemplate(item, link){
   if (snapshot.exists()) {
     const listWIthLabels = snapshot.val();
     let listWithLi = "";
+
     for(let el of listWIthLabels){
-      listWithLi += getLabelTemplate(el.key, el.value)
+      console.log(el);
+      // listWithLi += getLabelTemplate(el.key, el.value)
     }
     document.getElementById("labels__list").innerHTML += listWithLi;
   } else {
