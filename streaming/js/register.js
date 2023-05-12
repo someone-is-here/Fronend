@@ -147,7 +147,7 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
      // Signed in
      const user = userCredential.user;
             const selectCountry = document.getElementById("id_bform_pre-country");
-           /*  const storageRef = ref_(storage, 'image/');
+/*             const storageRef = ref_(storage, 'image/');
             let pictureUrl = undefined;
              const file = document.getElementById("id_bform_pre-picture").files[0];
              const name = +new Date() + "-" + file.name;
@@ -179,7 +179,6 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
                 website: document.getElementById("id_bform_pre-website").value,
                 tour_dates: document.getElementById("id_bform_pre-tour_dates").value,
                 country: selectCountry.options[selectCountry.selectedIndex].text,
-                profile_picture:  pictureUrl
             });
 
 
