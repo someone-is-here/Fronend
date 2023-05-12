@@ -162,7 +162,7 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
                 };
             }
         console.log(imageData);*/
-        uploadBytes(storageRef, blob).then((snapshot) => {
+        uploadBytes(storageRef, window.blob).then((snapshot) => {
                 console.log('Uploaded a blob or file!');
                 getDownloadURL(storageRef).then((url)=>{
                     pictureUrl=url;
