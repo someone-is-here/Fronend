@@ -23,7 +23,7 @@ selectBtn.addEventListener("click", () => {
 
 let files =[];
 let reader = new FileReader();
-let pictureInput = document.getElementById("id_picture");
+let pictureInput = document.getElementById("id_track");
 
 pictureInput.onchange = event => {
     files = event.target.files;
@@ -42,14 +42,14 @@ async function uploadProcess(){
   const metaData = {
     contentType: imageToUpload.type
   }
-  const storageRef = sRef(storage, "images/" + filename);
+  const storageRef = sRef(storage, "songs/" + filename);
   const uploadTask = uploadBytesResumable(storageRef, imageToUpload, metaData);
 
   uploadTask.on('state-changed', (snapshot)=>{
     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
     uploadedProgress.innerHTML = "Uploaded " + progress + "%";
   }, (error) => {
-    alert("Error! Image not uploaded!");
+    alert("Error! Song not uploaded!");
   },() => {
     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
       console.log(downloadURL);
