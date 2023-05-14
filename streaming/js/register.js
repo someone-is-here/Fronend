@@ -182,8 +182,7 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
      // Signed in
      const user = userCredential.user;
             const selectCountry = document.getElementById("id_bform_pre-country");
-            let res = uploadProcess().then((result)=>{
-                console.log(result);
+            uploadProcess().then((result)=>{
                 set(ref(database, 'users/' + user.uid), {
                 login: document.getElementById("id_aform_pre-login").value,
                 email: emailField,

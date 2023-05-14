@@ -13,14 +13,6 @@ import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "h
   const app = initializeApp(firebaseConfig);
   const storage = getStorage();
 
-
-const selectBtn = document.querySelector(".select-btn"),
-      items = document.querySelectorAll(".item");
-
-selectBtn.addEventListener("click", () => {
-    selectBtn.classList.toggle("open");
-});
-
 let files =[];
 let reader = new FileReader();
 let pictureInput = document.getElementById("id_track");
