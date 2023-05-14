@@ -182,19 +182,19 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
      // Signed in
      const user = userCredential.user;
             const selectCountry = document.getElementById("id_bform_pre-country");
-            let res = uploadProcess;
-            set(ref(database, 'users/' + user.uid), {
-                login: document.getElementById("id_aform_pre-login").value,
-                email: emailField,
-                role_id: role,
-                name: document.getElementById("id_bform_pre-name").value,
-                website: document.getElementById("id_bform_pre-website").value,
-                tour_dates: document.getElementById("id_bform_pre-tour_dates").value,
-                country: selectCountry.options[selectCountry.selectedIndex].text,
-                picture: window.pictureURL
-            });
-
-     signInWithEmailAndPassword(auth, emailField, pssw1)
+            let res = uploadProcess.then((result)=>{
+                console.log(result);
+                 set(ref(database, 'users/' + user.uid), {
+                    login: document.getElementById("id_aform_pre-login").value,
+                    email: emailField,
+                    role_id: role,
+                    name: document.getElementById("id_bform_pre-name").value,
+                    website: document.getElementById("id_bform_pre-website").value,
+                    tour_dates: document.getElementById("id_bform_pre-tour_dates").value,
+                    country: selectCountry.options[selectCountry.selectedIndex].text,
+                    picture: window.pictureURL
+                });
+                 signInWithEmailAndPassword(auth, emailField, pssw1)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
@@ -211,6 +211,7 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
 
         alert(errorMessage);
   });
+            });
     })
     .catch((error) => {
       const errorCode = error.code;
