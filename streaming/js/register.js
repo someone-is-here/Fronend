@@ -1,13 +1,85 @@
-
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
-  import { getDatabase, ref, set, update, child } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+import { getDatabase, ref, set, update, child } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
       onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
-  import { getStorage, ref as ref_, getDownloadURL, uploadBytes} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
+import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDd2TdBKvjDRzfaScSO5GZJOnJCQAIt9nA",
+    authDomain: "streaming-service-a0d17.firebaseapp.com",
+    projectId: "streaming-service-a0d17",
+    storageBucket: "streaming-service-a0d17.appspot.com",
+    messagingSenderId: "970367674144",
+    appId: "1:970367674144:web:de960ab528bbca0c83d945",
+    measurementId: "G-EZE9Q32626"
+};
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const storage = getStorage();
+
+const auth = getAuth();
+const user = auth.currentUser;
+
+let files =[];
+let reader = new FileReader();
+let pictureInput = document.getElementById("id_bform_pre-picture");
+
+pictureInput.onchange = event => {
+    files = event.target.files;
+    reader.readAsDataURL(files[0]);
+};
+
+let uploadedProgress = document.getElementById("uploadProgress");
+
 window.userSignOut = function userSignOut(e) {
   signOut(auth).then(() => {});
 }
+function menuTemplateLogin(res) {
+  return `                <li class="menu-additional__list-item menu-additional-email">${res}</li>
+                <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">Subscription</a></li>
+                <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link" onclick="userSignOut()">Logout</a></li>`;
+}
+function menuBaseTemplate(){
+  return `
+                <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link">Login</a></li>
+                <li class="menu-additional__list-item"><a href="register.html" class="menu-additional-link">Register</a></li>`;
+}
+function unsetFields(hiddenFields){
+    for(let el of hiddenFields){
+        console.log(el);
+        el.setAttribute("disabled", true);
+    }
+}
+async function uploadProcess(){
+  const imageToUpload = files[0];
+  const filename = imageToUpload.name;
+  const metaData = {
+    contentType: imageToUpload.type
+  }
+  const storageRef = sRef(storage, "images/" + filename);
+  const uploadTask = uploadBytesResumable(storageRef, imageToUpload, metaData);
 
+  uploadTask.on('state-changed', (snapshot)=>{
+    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    uploadedProgress.innerHTML = "Uploaded " + progress + "%";
+  }, (error) => {
+    alert("Error! Image not uploaded!");
+  },() => {
+    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
+        window.pictureURL = downloadURL;
+    });
+  });
+}
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const uid = user.uid;
+    console.log(user.email)
+    document.getElementById("menu__additional").innerHTML = menuTemplateLogin(user.email);
+  } else {
+    document.getElementById("menu__additional").innerHTML = menuBaseTemplate();
+  }
+});
 document.addEventListener("DOMContentLoaded", function (){
     document.getElementById("register_3").style.visibility='visible';
     document.getElementById("register_3").style.position='static';
@@ -35,30 +107,6 @@ document.getElementById("id_aform_pre-role").addEventListener("change", (event) 
         document.getElementById("register_3").style.visibility='visible';
     }
 });
-
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDd2TdBKvjDRzfaScSO5GZJOnJCQAIt9nA",
-    authDomain: "streaming-service-a0d17.firebaseapp.com",
-    projectId: "streaming-service-a0d17",
-    storageBucket: "streaming-service-a0d17.appspot.com",
-    messagingSenderId: "970367674144",
-    appId: "1:970367674144:web:de960ab528bbca0c83d945",
-    measurementId: "G-EZE9Q32626"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
-  const auth = getAuth();
-  const storage = getStorage(app);
-
-  function unsetFields(hiddenFields){
-    for(let el of hiddenFields){
-        console.log(el);
-        el.setAttribute("disabled", true);
-    }
-}
-
 document.getElementById("submit__c-form").addEventListener("click", function(event){
     event.preventDefault();
 
@@ -114,19 +162,6 @@ document.getElementById("submit__c-form").addEventListener("click", function(eve
     });
  }
 });
-// document.getElementById("id_bform_pre-picture").onchange = function(e) {
-//   var file = document.getElementById("id_bform_pre-picture").files[0];
-//   var reader = new FileReader();
-//   reader.onload = function() {
-//     console.log(reader.result);
-//     window.blob = window.dataURLtoBlob(reader.result);
-//     console.log(blob, new File([blob], "image.png", {
-//       type: "image/png"
-//     }));
-//   };
-//   reader.readAsDataURL(file);
-// };
-
 document.getElementById("submit__b-form").addEventListener("click", function(event){
     event.preventDefault();
     const hiddenFields = document.getElementById("register_3");
@@ -147,30 +182,7 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
      // Signed in
      const user = userCredential.user;
             const selectCountry = document.getElementById("id_bform_pre-country");
-/*             const storageRef = ref_(storage, 'image/');
-            let pictureUrl = undefined;
-             const file = document.getElementById("id_bform_pre-picture").files[0];
-             const name = +new Date() + "-" + file.name;
-             const metadata = {
-                contentType: file.type
-            };
-            const task = ref.child(name).put(file, metadata);task
-      .then(snapshot => snapshot.ref_.getDownloadURL())
-      .then(url => {
-      console.log(url);
-      alert('image uploaded successfully');
-      document.getElementById("id_bform_pre-country").src = url;
-   })
-   .catch(console.error);*/
-
-        // uploadBytes(storageRef, window.blob).then((snapshot) => {
-        //         console.log('Uploaded a blob or file!');
-        //         getDownloadURL(storageRef).then((url)=>{
-        //             pictureUrl=url;
-        //         }).catch((error)=>{
-        //             console.log(error.message)
-        //         });
-        //     });
+            let res = uploadProcess;
             set(ref(database, 'users/' + user.uid), {
                 login: document.getElementById("id_aform_pre-login").value,
                 email: emailField,
@@ -179,8 +191,8 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
                 website: document.getElementById("id_bform_pre-website").value,
                 tour_dates: document.getElementById("id_bform_pre-tour_dates").value,
                 country: selectCountry.options[selectCountry.selectedIndex].text,
+                picture: window.pictureURL
             });
-
 
      signInWithEmailAndPassword(auth, emailField, pssw1)
       .then((userCredential) => {
@@ -206,26 +218,5 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
 
       alert(errorMessage);
     });
-  }
-});
-
-function menuTemplateLogin(res) {
-  return `                <li class="menu-additional__list-item menu-additional-email">${res}</li>
-                <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">Subscription</a></li>
-                <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link" onclick="userSignOut()">Logout</a></li>`;
-}
-function menuBaseTemplate(){
-  return `
-                <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link">Login</a></li>
-                <li class="menu-additional__list-item"><a href="register.html" class="menu-additional-link">Register</a></li>`;
-}
-const user = auth.currentUser;
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    const uid = user.uid;
-    console.log(user.email)
-    document.getElementById("menu__additional").innerHTML = menuTemplateLogin(user.email);
-  } else {
-    document.getElementById("menu__additional").innerHTML = menuBaseTemplate();
   }
 });
