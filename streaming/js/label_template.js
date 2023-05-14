@@ -18,9 +18,19 @@ import { getAuth, createUserWithEmailAndPassword,
   const database = getDatabase(app);
   const auth = getAuth();
 
+window.createClickListener = function (el) {
+    el.classList.toggle("checked");
+     let checked = document.querySelectorAll(".checked"),
+            btnText = document.querySelector(".btn-text");
+            if(checked && checked.length > 0){
+                btnText.innerText = `${checked.length} Selected`;
+            }else{
+                btnText.innerText = "Select label";
+            }
+}
 
 function getLabelTemplate(item, link){
-    return `<li class="item">
+    return `<li class="item" onclick="createClickListener(this)">
                     <span class="checkbox">
                         <i class="fa-solid fa-check check-icon"></i>
                     </span>
@@ -49,25 +59,13 @@ document.getElementById("labels__list").innerHTML += listWithLi;
   console.error(error);
 });
 
-const selectBtn = document.querySelector(".select-btn"),
-      items = document.querySelectorAll(".item");
+const selectBtn = document.querySelector(".select-btn");
 
 selectBtn.addEventListener("click", () => {
     selectBtn.classList.toggle("open");
 });
 
-items.forEach(item => {
-    item.addEventListener("click", () => {
-        item.classList.toggle("checked");
-        let checked = document.querySelectorAll(".checked"),
-            btnText = document.querySelector(".btn-text");
-            if(checked && checked.length > 0){
-                btnText.innerText = `${checked.length} Selected`;
-            }else{
-                btnText.innerText = "Select label";
-            }
-    });
-});
+
 
 //document.getElementById("labels__list").innerHTML
 document.getElementById("button_submit").addEventListener("click", function(event){
