@@ -1,67 +1,60 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
 
-  // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
-  // import { getDatabase, ref, set, update, child } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
-  // import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-  //     onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
-  // import { getStorage, ref as ref_, getDownloadURL, uploadBytes} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyDd2TdBKvjDRzfaScSO5GZJOnJCQAIt9nA",
+    authDomain: "streaming-service-a0d17.firebaseapp.com",
+    projectId: "streaming-service-a0d17",
+    storageBucket: "streaming-service-a0d17.appspot.com",
+    messagingSenderId: "970367674144",
+    appId: "1:970367674144:web:de960ab528bbca0c83d945",
+    measurementId: "G-EZE9Q32626"
+  };
+  const app = initializeApp(firebaseConfig);
+  const storage = getStorage();
 
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
+const selectBtn = document.querySelector(".select-btn"),
+      items = document.querySelectorAll(".item");
 
-// Create the file metadata
+selectBtn.addEventListener("click", () => {
+    selectBtn.classList.toggle("open");
+});
 
-const metadata = {
-  contentType: 'image/jpeg'
+let files =[];
+let reader = new FileReader();
+let pictureInput = document.getElementById("id_picture");
+
+pictureInput.onchange = event => {
+    files = event.target.files;
+    reader.readAsDataURL(files[0]);
 };
 
-// Upload file and metadata to the object 'images/mountains.jpg'
-var file = document.getElementById("id_picture");
-const storage = getStorage();
-const storageRef = ref(storage, 'images/' + file.name);
-const uploadTask = uploadBytesResumable(storageRef, file, metadata);
+reader.onload = function() {
+  console.log(reader.result); //img.src
+};
 
-// Listen for state changes, errors, and completion of the upload.
-uploadTask.on('state_changed',
-  (snapshot) => {
-    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    console.log('Upload is ' + progress + '% done');
-    switch (snapshot.state) {
-      case 'paused':
-        console.log('Upload is paused');
-        break;
-      case 'running':
-        console.log('Upload is running');
-        break;
-    }
-  },
-  (error) => {
-    // A full list of error codes is available at
-    // https://firebase.google.com/docs/storage/web/handle-errors
-    switch (error.code) {
-      case 'storage/unauthorized':
-        // User doesn't have permission to access the object
-        break;
-      case 'storage/canceled':
-        // User canceled the upload
-        break;
+let uploadedProgress = document.getElementById("uploadProgress");
 
-      // ...
-
-      case 'storage/unknown':
-        // Unknown error occurred, inspect error.serverResponse
-        break;
-    }
-  },
-  () => {
-    // Upload completed successfully, now we can get the download URL
-    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-      console.log('File available at', downloadURL);
-    });
+async function uploadProcess(){
+  const imageToUpload = files[0];
+  const filename = imageToUpload.name;
+  const metaData = {
+    contentType: imageToUpload.type
   }
-);
+  const storageRef = sRef(storage, "images/" + filename);
+  const uploadTask = uploadBytesResumable(storageRef, imageToUpload, metaData);
 
+  uploadTask.on('state-changed', (snapshot)=>{
+    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    uploadedProgress.innerHTML = "Uploaded " + progress + "%";
+  }, (error) => {
+    alert("Error! Image not uploaded!");
+  },() => {
+    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
+      console.log(downloadURL);
+    });
+  });
+}
 
-document.getElementById("submit__form").addEventListener("click",function(event){
-
-});
+document.getElementById("submit__form").onclick = uploadProcess;
