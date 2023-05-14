@@ -59,11 +59,11 @@ document.getElementById("labels__list").innerHTML += listWithLi;
   console.error(error);
 });
 
-const selectBtn = document.querySelector(".select-btn");
-
-selectBtn.addEventListener("click", () => {
-    selectBtn.classList.toggle("open");
-});
+// const selectBtn = document.querySelector(".select-btn");
+//
+// selectBtn.addEventListener("click", () => {
+//     selectBtn.classList.toggle("open");
+// });
 
 
 
