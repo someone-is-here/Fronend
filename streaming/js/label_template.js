@@ -41,13 +41,34 @@ for (var i = 0; i < listWIthLabels.length; i++) {
   }
 }
 
-    document.getElementById("labels__list").innerHTML += listWithLi;
+document.getElementById("labels__list").innerHTML += listWithLi;
   } else {
     console.log("No data available");
   }
 }).catch((error) => {
   console.error(error);
 });
+
+const selectBtn = document.querySelector(".select-btn"),
+      items = document.querySelectorAll(".item");
+
+selectBtn.addEventListener("click", () => {
+    selectBtn.classList.toggle("open");
+});
+
+items.forEach(item => {
+    item.addEventListener("click", () => {
+        item.classList.toggle("checked");
+        let checked = document.querySelectorAll(".checked"),
+            btnText = document.querySelector(".btn-text");
+            if(checked && checked.length > 0){
+                btnText.innerText = `${checked.length} Selected`;
+            }else{
+                btnText.innerText = "Select label";
+            }
+    });
+});
+
 //document.getElementById("labels__list").innerHTML
 document.getElementById("button_submit").addEventListener("click", function(event){
 

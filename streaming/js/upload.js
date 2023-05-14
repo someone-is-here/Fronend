@@ -14,13 +14,6 @@ import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "h
   const storage = getStorage();
 
 
-const selectBtn = document.querySelector(".select-btn"),
-      items = document.querySelectorAll(".item");
-
-selectBtn.addEventListener("click", () => {
-    selectBtn.classList.toggle("open");
-});
-
 let files =[];
 let reader = new FileReader();
 let pictureInput = document.getElementById("id_picture");
@@ -28,10 +21,6 @@ let pictureInput = document.getElementById("id_picture");
 pictureInput.onchange = event => {
     files = event.target.files;
     reader.readAsDataURL(files[0]);
-};
-
-reader.onload = function() {
-  console.log(reader.result); //img.src
 };
 
 let uploadedProgress = document.getElementById("uploadProgress");
