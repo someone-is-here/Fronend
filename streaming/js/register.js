@@ -68,6 +68,7 @@ async function uploadProcess(){
   },() => {
     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
         window.pictureURL = downloadURL;
+        console.log(window.pictureURL);
     });
   });
 }
