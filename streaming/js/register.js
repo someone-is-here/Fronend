@@ -51,7 +51,7 @@ function unsetFields(hiddenFields){
         el.setAttribute("disabled", true);
     }
 }
-function uploadProcess(){
+async function uploadProcess(){
   const imageToUpload = files[0];
   const filename = imageToUpload.name;
   const metaData = {
@@ -60,17 +60,17 @@ function uploadProcess(){
   const storageRef = sRef(storage, "images/" + filename);
   const uploadTask = uploadBytesResumable(storageRef, imageToUpload, metaData);
 
-  uploadTask.on('state-changed', (snapshot)=>{
+  await uploadTask.on('state-changed', (snapshot)=>{
     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
     uploadedProgress.innerHTML = "Uploaded " + progress + "%";
   }, (error) => {
     alert("Error! Image not uploaded!");
-  },() => {
-    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
-        console.log("file uploaded");
-        window.pictureURL = downloadURL;
-        console.log("URL: " + window.pictureURL);
-    });
+  }, async () => {
+      await getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log("file uploaded");
+          window.pictureURL = downloadURL;
+          console.log("URL: " + window.pictureURL);
+      });
   });
 }
 onAuthStateChanged(auth, (user) => {
@@ -180,38 +180,38 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
 
   if(pssw1 === pssw2) {
     createUserWithEmailAndPassword(auth, emailField, pssw1)
-    .then((userCredential) => {
-     // Signed in
-     const user = userCredential.user;
-            const selectCountry = document.getElementById("id_bform_pre-country");
-            uploadProcess();
-            console.log("Set user into db");
-            set(ref(database, 'users/' + user.uid), {
-                login: document.getElementById("id_aform_pre-login").value,
-                email: emailField,
-                role_id: role,
-                name: document.getElementById("id_bform_pre-name").value,
-                website: document.getElementById("id_bform_pre-website").value,
-                tour_dates: document.getElementById("id_bform_pre-tour_dates").value,
-                country: selectCountry.options[selectCountry.selectedIndex].text,
-                picture: window.pictureURL
-            });
-            signInWithEmailAndPassword(auth, emailField, pssw1)
-                .then((userCredential) => {
+    .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
+        const selectCountry = document.getElementById("id_bform_pre-country");
+        await uploadProcess();
+        console.log("Set user into db");
+        set(ref(database, 'users/' + user.uid), {
+            login: document.getElementById("id_aform_pre-login").value,
+            email: emailField,
+            role_id: role,
+            name: document.getElementById("id_bform_pre-name").value,
+            website: document.getElementById("id_bform_pre-website").value,
+            tour_dates: document.getElementById("id_bform_pre-tour_dates").value,
+            country: selectCountry.options[selectCountry.selectedIndex].text,
+            picture: window.pictureURL
+        });
+        signInWithEmailAndPassword(auth, emailField, pssw1)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
 
-        const dt = new Date();
-         update(ref(database, 'users/' + user.uid),{
-          last_login: dt,
-        })
-        window.location.replace("index.html");
-      })
-                    .catch((error) => {
-                        const errorCode = error.code;
-                        const errorMessage = error.message;
-                        alert(errorMessage);
-                    });
+                const dt = new Date();
+                update(ref(database, 'users/' + user.uid), {
+                    last_login: dt,
+                })
+                window.location.replace("index.html");
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorMessage);
+            });
     }).catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
