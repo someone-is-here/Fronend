@@ -58,7 +58,7 @@ async function uploadProcess(){
     contentType: imageToUpload.type
   }
   const storageRef = sRef(storage, "images/" + filename);
-  const uploadTask = uploadBytesResumable(storageRef, imageToUpload, metaData);
+  const uploadTask = await uploadBytesResumable(storageRef, imageToUpload, metaData);
 
   await uploadTask.on('state-changed', (snapshot)=>{
     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -67,9 +67,7 @@ async function uploadProcess(){
     alert("Error! Image not uploaded!");
   }, async () => {
       await getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log("file uploaded");
           window.pictureURL = downloadURL;
-          console.log("URL: " + window.pictureURL);
       });
   });
 }
