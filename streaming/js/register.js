@@ -60,7 +60,7 @@ async function uploadProcess(){
   const storageRef = sRef(storage, "images/" + filename);
   const uploadTask = await uploadBytesResumable(storageRef, imageToUpload, metaData);
 
-  await uploadTask.on('state-changed', (snapshot)=>{
+  uploadTask.on('state-changed', (snapshot)=>{
     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
     uploadedProgress.innerHTML = "Uploaded " + progress + "%";
   }, (error) => {
