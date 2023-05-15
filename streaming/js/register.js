@@ -67,8 +67,9 @@ async function uploadProcess(){
     alert("Error! Image not uploaded!");
   },() => {
     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
+        console.log("file uploaded");
         window.pictureURL = downloadURL;
-        console.log(window.pictureURL);
+        console.log("URL: " + window.pictureURL);
     });
   });
 }
@@ -184,6 +185,7 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
      const user = userCredential.user;
             const selectCountry = document.getElementById("id_bform_pre-country");
             uploadProcess().then((result)=>{
+                console.log("Set user into db");
                 set(ref(database, 'users/' + user.uid), {
                 login: document.getElementById("id_aform_pre-login").value,
                 email: emailField,
