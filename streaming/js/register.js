@@ -185,8 +185,8 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
      const user = userCredential.user;
             const selectCountry = document.getElementById("id_bform_pre-country");
             uploadProcess();
-                console.log("Set user into db");
-                set(ref(database, 'users/' + user.uid), {
+            console.log("Set user into db");
+            set(ref(database, 'users/' + user.uid), {
                 login: document.getElementById("id_aform_pre-login").value,
                 email: emailField,
                 role_id: role,
@@ -196,8 +196,8 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
                 country: selectCountry.options[selectCountry.selectedIndex].text,
                 picture: window.pictureURL
             });
-                signInWithEmailAndPassword(auth, emailField, pssw1)
-                    .then((userCredential) => {
+            signInWithEmailAndPassword(auth, emailField, pssw1)
+                .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
 
@@ -212,13 +212,11 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
                         const errorMessage = error.message;
                         alert(errorMessage);
                     });
-                 });
-    })
-    .catch((error) => {
+    }).catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
 
       alert(errorMessage);
     });
-  }
+}
 });
