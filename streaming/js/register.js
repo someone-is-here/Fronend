@@ -51,7 +51,7 @@ function unsetFields(hiddenFields){
         el.setAttribute("disabled", true);
     }
 }
-async function uploadProcess(){
+function uploadProcess(){
   const imageToUpload = files[0];
   const filename = imageToUpload.name;
   const metaData = {
@@ -60,7 +60,7 @@ async function uploadProcess(){
   const storageRef = sRef(storage, "images/" + filename);
   const uploadTask = uploadBytesResumable(storageRef, imageToUpload, metaData);
 
-  await uploadTask.on('state-changed', (snapshot)=>{
+  uploadTask.on('state-changed', (snapshot)=>{
     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
     uploadedProgress.innerHTML = "Uploaded " + progress + "%";
   }, (error) => {
@@ -184,7 +184,7 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
      // Signed in
      const user = userCredential.user;
             const selectCountry = document.getElementById("id_bform_pre-country");
-            uploadProcess().then((result)=>{
+            uploadProcess();
                 console.log("Set user into db");
                 set(ref(database, 'users/' + user.uid), {
                 login: document.getElementById("id_aform_pre-login").value,
