@@ -103,3 +103,7 @@
 .item.checked .check-icon{
     transform: scale(1);
 }
+.a__link__no-style{
+    text-decoration: none;
+    color: black;
+}
