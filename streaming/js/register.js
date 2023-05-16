@@ -27,6 +27,8 @@ let pictureInput = document.getElementById("id_bform_pre-picture");
 
 window.showCost = function(el){
     document.getElementById("id_cost").innerHTML = el.value;
+    console.log(el);
+    console.log(document.getElementById("id_cost"));
 }
 
 function getSubscriptionTemplate(name, cost){
