@@ -40,8 +40,9 @@ console.log(dbRef + `subscriptions/`);
             const listWithSubscriptions = snapshot.val();
             console.log(snapshot.val());
             let listWithSubsc = "";
+            let i=0;
             for (let key in listWithSubscriptions) {
-                listWithSubsc += getSubscriptionTemplate(key, listWithSubscriptions[key])
+                listWithSubsc += getSubscriptionTemplate(key, i++);
             }
             document.getElementById("id_cform_pre-subscription").innerHTML += listWithSubscriptions;
         } else {
