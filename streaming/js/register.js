@@ -26,7 +26,9 @@ let reader = new FileReader();
 let pictureInput = document.getElementById("id_bform_pre-picture");
 
 function getSubscriptionTemplate(name, cost){
-    return `<option value="${cost}" class="option__box">${name}</option>`;
+    return `<li class="item">
+                  <span class="item-text"><option value="${cost}" class="option__box">${name}</option></span>
+                </li>`;
 }
 
 const dbRef = ref(getDatabase());
