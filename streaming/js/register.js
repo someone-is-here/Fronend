@@ -51,26 +51,7 @@ function unsetFields(hiddenFields){
         el.setAttribute("disabled", true);
     }
 }
-function uploadProcess(){
-  const imageToUpload = files[0];
-  const filename = imageToUpload.name;
-  const metaData = {
-    contentType: imageToUpload.type
-  }
-  const storageRef = sRef(storage, "images/" + filename);
-  const uploadTask = uploadBytesResumable(storageRef, imageToUpload, metaData);
 
-  uploadTask.on('state-changed', (snapshot)=>{
-    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    uploadedProgress.innerHTML = "Uploaded " + progress + "%";
-  }, (error) => {
-    alert("Error! Image not uploaded!");
-  }, () => {
-      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          window.pictureURL = downloadURL;
-      });
-  });
-}
 onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
@@ -182,8 +163,22 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
         // Signed in
         const user = userCredential.user;
         const selectCountry = document.getElementById("id_bform_pre-country");
-        await uploadProcess();
-        console.log("Set user into db");
+        const imageToUpload = files[0];
+  const filename = imageToUpload.name;
+  const metaData = {
+    contentType: imageToUpload.type
+  }
+  const storageRef = sRef(storage, "images/" + user.uid + filename);
+  const uploadTask = uploadBytesResumable(storageRef, imageToUpload, metaData);
+
+  uploadTask.on('state-changed', (snapshot)=>{
+    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    uploadedProgress.innerHTML = "Uploaded " + progress + "%";
+  }, (error) => {
+    alert("Error! Image not uploaded!");
+  }, () => {
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+           console.log("Set user into db");
         set(ref(database, 'users/' + user.uid), {
             login: document.getElementById("id_aform_pre-login").value,
             email: emailField,
@@ -192,7 +187,7 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
             website: document.getElementById("id_bform_pre-website").value,
             tour_dates: document.getElementById("id_bform_pre-tour_dates").value,
             country: selectCountry.options[selectCountry.selectedIndex].text,
-            picture: window.pictureURL
+            picture: downloadURL
         });
         signInWithEmailAndPassword(auth, emailField, pssw1)
             .then((userCredential) => {
@@ -210,6 +205,9 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
                 const errorMessage = error.message;
                 alert(errorMessage);
             });
+      });
+  });
+
     }).catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
