@@ -73,7 +73,17 @@ get(child(dbRef, `labels/`)).then((snapshot) => {
   console.error(error);
 });
 
-//document.getElementById("labels__list").innerHTML
+const user = auth.currentUser;
+
 document.getElementById("button_submit").addEventListener("click", function(event) {
+  get(child(dbRef, `users/` + user.id + `/labels/`)).then((snapshot) => {
+  if (snapshot.exists()) {
+
+  } else {
+    console.log("No label exists");
+  }
+}).catch((error) => {
+  console.error(error);
+});
 
 });

@@ -34,9 +34,11 @@ function getSubscriptionTemplate(name, cost){
 }
 
 const dbRef = ref(getDatabase());
+console.log(dbRef + `subscriptions/`);
     get(child(dbRef, `subscriptions/`)).then((snapshot) => {
         if (snapshot.exists()) {
             const listWithSubscriptions = snapshot.val();
+            console.log(snapshot.val());
             let listWithSubsc = "";
             for (var i = 0; i < listWithSubscriptions.length; i++) {
                 if (listWithSubscriptions[i] !== undefined) {
@@ -45,6 +47,8 @@ const dbRef = ref(getDatabase());
                 }
             }
             document.getElementById("id_cform_pre-subscription").innerHTML += listWithSubscriptions;
+        } else {
+          console.log("no subscriptions");
         }
     });
 
