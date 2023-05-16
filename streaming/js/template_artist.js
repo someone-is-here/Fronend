@@ -91,15 +91,17 @@ function getItemTemplate(name, picture, tour_dates, instruments, genres, labels)
              `
 }
 
+
 const container = document.getElementById("artists");
-const items = [{
-    photo: 'url',
-    name: 'Niall Horan',
-    tour_dates: 2,
-    labels: ['Syco', 'Columbia'],
-    instruments: ['vocals', 'guitar'],
-    genres: ['pop', 'soul', 'soft-rock', 'folk-pop', 'pop rock']
-}];
+console.log(container);
+// const items = [{
+//     photo: 'url',
+//     name: 'Niall Horan',
+//     tour_dates: 2,
+//     labels: ['Syco', 'Columbia'],
+//     instruments: ['vocals', 'guitar'],
+//     genres: ['pop', 'soul', 'soft-rock', 'folk-pop', 'pop rock']
+// }];
 
 const dbRef = ref(getDatabase());
 const user = auth.currentUser;
@@ -116,9 +118,9 @@ get(child(dbRef, `users/`)).then((snapshot) => {
 });
 
 
-
-container.innerHTML = ''
-
-for(let item of items){
-    container.insertAdjacentHTML("beforeend", getItemTemplate(item));
-}
+//
+// container.innerHTML = ''
+//
+// for(let item of items){
+//     container.insertAdjacentHTML("beforeend", getItemTemplate(item));
+// }
