@@ -37,9 +37,13 @@ function genreTemplateItem(genre){
 function labelTemplateItem(name, link){
     return `<li class="li__artist li__artist-blue"><a href="${link}" class="a__link__no-style">${name}</a></li>`;
 }
-function getItemTemplate(name, picture, tour_dates, instruments, genres, labels){
+function getItemTemplate(name, link, country, picture, tour_dates, instruments, genres, labels){
+    console.log(instruments);
+    console.log(genres);
+    console.log(labels);
     const main = ` <div class="div__artist-item__header">
-                 <li><h1 class="li_artist-name"><a href="index.html" class="a__link__no-style">${name}</a></h1></li>
+                 <li><h1 class="li_artist-name"><a href="${link}" class="a__link__no-style">${name}</a></h1></li>
+                 <h3 class="li_artist-name">${country}</h3>
                 <img src="${picture}"class="img__artist"/>
                 <span class="span__artist-tour">Tour dates: </span><span class="span__artist-tour-number">  ${tour_dates}</span>
              </div>`;
@@ -94,36 +98,28 @@ function getItemTemplate(name, picture, tour_dates, instruments, genres, labels)
 
 const container = document.getElementById("artists");
 console.log(container);
-// const items = [{
-//     photo: 'url',
-//     name: 'Niall Horan',
-//     tour_dates: 2,
-//     labels: ['Syco', 'Columbia'],
-//     instruments: ['vocals', 'guitar'],
-//     genres: ['pop', 'soul', 'soft-rock', 'folk-pop', 'pop rock']
-// }];
 
 const dbRef = ref(getDatabase());
 const user = auth.currentUser;
 get(child(dbRef, `users/`)).then((snapshot) => {
   if (snapshot.exists()) {
     const usersList = snapshot.val();
-    console.log(usersList);
-    //  for (let i = 0; i < usersList.length; i++) {
-    //   if (usersList[i] !== undefined) {
-    //     console.log(usersList[i]);
-    //     console.log(Object.keys(usersList[i]));
-    //     console.log(Object.values(usersList[i]));
-    //   }
-    // }
+    let itemsList = "";
     for(let item in usersList){
         console.log(item);
         console.log(usersList[item]);
         console.log(usersList[item].role_id);
-        // console.log(Object.keys(item));
-        // console.log(item.role_id);
+        if(usersList[item].role_id === 2){
+                container.insertAdjacentHTML("beforeend", getItemTemplate(usersList[item].name,
+                                         usersList[item].website,
+                                         usersList[item].country,
+                                         usersList[item].picture,
+                                         usersList[item].tour_dates,
+                                         usersList[item].instruments,
+                                         usersList[item].genres,
+                                         usersList[item].labels));
+        }
     }
-    // document.getElementById("labels__list").innerHTML += listWithLi;
   } else {
     console.log("No data available");
   }
@@ -131,10 +127,3 @@ get(child(dbRef, `users/`)).then((snapshot) => {
   console.error(error);
 });
 
-
-//
-// container.innerHTML = ''
-//
-// for(let item of items){
-//     container.insertAdjacentHTML("beforeend", getItemTemplate(item));
-// }
