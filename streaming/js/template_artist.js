@@ -109,17 +109,20 @@ get(child(dbRef, `users/`)).then((snapshot) => {
   if (snapshot.exists()) {
     const usersList = snapshot.val();
     console.log(usersList);
-     for (let i = 0; i < usersList.length; i++) {
-      if (usersList[i] !== undefined) {
-        console.log(usersList[i]);
-        console.log(Object.keys(usersList[i]));
-        console.log(Object.values(usersList[i]));
-      }
-    }
-    // for(let item in usersList){
-    //     console.log(Object.keys(item));
-    //     console.log(item.role_id);
+    //  for (let i = 0; i < usersList.length; i++) {
+    //   if (usersList[i] !== undefined) {
+    //     console.log(usersList[i]);
+    //     console.log(Object.keys(usersList[i]));
+    //     console.log(Object.values(usersList[i]));
+    //   }
     // }
+    for(let item in usersList){
+        console.log(item);
+        console.log(usersList[item]);
+        console.log(usersList[item].role_id);
+        // console.log(Object.keys(item));
+        // console.log(item.role_id);
+    }
     // document.getElementById("labels__list").innerHTML += listWithLi;
   } else {
     console.log("No data available");
