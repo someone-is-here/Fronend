@@ -68,13 +68,15 @@ function getItemTemplate(name, link, country, picture, tour_dates, instruments, 
                 </ul>
              </div>`;
     let labelsList = "";
-    for (var i = 0; i < labels.length; i++) {
-      if (labels[i] !== undefined) {
-        console.log(labels[i]);
-        console.log(Object.keys(labels[i]));
-        console.log(Object.values(labels[i]));
-        labelsList += labelTemplateItem(Object.keys(labels[i])[0],Object.values(labels[i])[0]);
-      }
+    if(labels !== undefined) {
+        for (var i = 0; i < labels.length; i++) {
+            if (labels[i] !== undefined) {
+                console.log(labels[i]);
+                console.log(Object.keys(labels[i]));
+                console.log(Object.values(labels[i]));
+                labelsList += labelTemplateItem(Object.keys(labels[i])[0], Object.values(labels[i])[0]);
+            }
+        }
     }
 
     let labelsTemplate = `<div class="div__container-item__body">
@@ -103,12 +105,7 @@ const user = auth.currentUser;
 get(child(dbRef, `users/`)).then((snapshot) => {
   if (snapshot.exists()) {
     const usersList = snapshot.val();
-    let itemsList = "";
     for(let item in usersList){
-        console.log(item);
-        console.log(usersList[item]);
-        console.log(usersList[item].role_id===2);
-        console.log(usersList[item].role_id==="2");
         if(usersList[item].role_id === "2"){
                 container.innerHTML += getItemTemplate(usersList[item].name,
                                          usersList[item].website,

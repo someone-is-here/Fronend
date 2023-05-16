@@ -38,10 +38,11 @@ console.log(dbRef + `subscriptions/`);
             let listWithSubsc = "";
             for (let key in listWithSubscriptions) {
                 listWithSubsc += getSubscriptionTemplate(key, listWithSubscriptions[key]);
+                 document.getElementById("id_cost").innerHTML = listWithSubscriptions[key];
             }
             const el = document.getElementById("id_cform_pre-subscription");
             el.onclick = function(ev){
-                document.getElementById("id_cost").innerHTML = ev.target.value
+                document.getElementById("id_cost").innerHTML = ev.target.value;
             };
             el.innerHTML += listWithSubsc;
         } else {
