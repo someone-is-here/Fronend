@@ -42,7 +42,7 @@ console.log(dbRef + `subscriptions/`);
             let listWithSubsc = "";
             for (let key in listWithSubscriptions) {
                 listWithSubsc += getSubscriptionTemplate(key, listWithSubscriptions[key])
-            }g
+            }
             document.getElementById("id_cform_pre-subscription").innerHTML += listWithSubscriptions;
         } else {
           console.log("no subscriptions");
