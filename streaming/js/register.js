@@ -25,6 +25,24 @@ let files =[];
 let reader = new FileReader();
 let pictureInput = document.getElementById("id_bform_pre-picture");
 
+function getSubscriptionTemplate(name, cost){
+    return `<option value="${cost}">${name}</option>`;
+}
+
+const dbRef = ref(getDatabase());
+    get(child(dbRef, `subscriptions/`)).then((snapshot) => {
+        if (snapshot.exists()) {
+            const listWithSubscriptions = snapshot.val();
+            let listWithSubsc = "";
+            for (var i = 0; i < listWithSubscriptions.length; i++) {
+                if (listWithSubscriptions[i] !== undefined) {
+                    listWithSubsc += getSubscriptionTemplate(Object.keys(listWithSubscriptions[i])[0], Object.values(listWithSubscriptions[i])[0]);
+                }
+            }
+            document.getElementById("id_cform_pre-subscription").innerHTML += listWithSubscriptions;
+        }
+    });
+
 pictureInput.onchange = event => {
     files = event.target.files;
     reader.readAsDataURL(files[0]);

@@ -59,14 +59,6 @@ document.getElementById("labels__list").innerHTML += listWithLi;
   console.error(error);
 });
 
-// const selectBtn = document.querySelector(".select-btn");
-//
-// selectBtn.addEventListener("click", () => {
-//     selectBtn.classList.toggle("open");
-// });
-
-
-
 //document.getElementById("labels__list").innerHTML
 document.getElementById("button_submit").addEventListener("click", function(event){
 
