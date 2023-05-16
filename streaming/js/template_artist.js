@@ -109,6 +109,10 @@ get(child(dbRef, `users/`)).then((snapshot) => {
   if (snapshot.exists()) {
     const usersList = snapshot.val();
     console.log(usersList);
+    for(let item in usersList){
+        console.log(Object.keys(item));
+        console.log(item.role_id);
+    }
     // document.getElementById("labels__list").innerHTML += listWithLi;
   } else {
     console.log("No data available");
