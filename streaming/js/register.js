@@ -40,12 +40,9 @@ console.log(dbRef + `subscriptions/`);
             const listWithSubscriptions = snapshot.val();
             console.log(snapshot.val());
             let listWithSubsc = "";
-            for (var i = 0; i < listWithSubscriptions.length; i++) {
-                if (listWithSubscriptions[i] !== undefined) {
-                    console.log(listWithSubsc[i]);
-                    listWithSubsc += getSubscriptionTemplate(Object.keys(listWithSubscriptions[i])[0], Object.values(listWithSubscriptions[i])[0]);
-                }
-            }
+            for (let key in listWithSubscriptions) {
+                listWithSubsc += getSubscriptionTemplate(key, listWithSubscriptions[key])
+            }g
             document.getElementById("id_cform_pre-subscription").innerHTML += listWithSubscriptions;
         } else {
           console.log("no subscriptions");
