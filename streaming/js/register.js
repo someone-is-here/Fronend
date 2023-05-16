@@ -25,14 +25,12 @@ let files =[];
 let reader = new FileReader();
 let pictureInput = document.getElementById("id_bform_pre-picture");
 
-window.showCost = function(el){
-    document.getElementById("id_cost").innerHTML = el.value;
-    console.log(el);
-    console.log(document.getElementById("id_cost"));
+function showCost(el){
+    document.getElementById("id_cost").innerHTML = el.selectedItem.value;
 }
 
 function getSubscriptionTemplate(name, cost){
-    return `<option value="${cost}" onclick="showCost(this)">${name}</option>`;
+    return `<option value="${cost}">${name}</option>`;
 }
 
 const dbRef = ref(getDatabase());
@@ -45,7 +43,9 @@ console.log(dbRef + `subscriptions/`);
             for (let key in listWithSubscriptions) {
                 listWithSubsc += getSubscriptionTemplate(key, listWithSubscriptions[key]);
             }
-            document.getElementById("id_cform_pre-subscription").innerHTML += listWithSubsc;
+            const el = document.getElementById("id_cform_pre-subscription");
+            el.onclick = showCost;
+            el.innerHTML += listWithSubsc;
         } else {
           console.log("no subscriptions");
         }
