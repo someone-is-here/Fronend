@@ -13,7 +13,12 @@ ul{
 html::-webkit-scrollbar, body::-webkit-scrollbar{
     display: none;
 }
-
+select{
+    color: white;
+}
+option {
+    color: black;
+}
 .navbar{
     height: 100%;
     width: 3.5rem;
@@ -204,4 +209,9 @@ html::-webkit-scrollbar, body::-webkit-scrollbar{
 }
 .submit__form:hover{
     transform: scale(1.1);
+}
+.option__box{
+    height: 2rem;
+    padding: 0.5rem;
+    letter-spacing: 0.1rem;
 }
