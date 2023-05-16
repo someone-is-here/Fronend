@@ -83,7 +83,7 @@ function getItemTemplate(name, link, country, picture, tour_dates, instruments, 
                             <li class="li__artist li__artist-blue"><a href="#" class="a__link__no-style">Syco</a></li>
                      
                 </ul>
-             </div>`
+             </div>`;
 
     return `      
          <div class="div__artist__container-item">
@@ -91,8 +91,7 @@ function getItemTemplate(name, link, country, picture, tour_dates, instruments, 
             ${instrTemplate}
             ${genreTemplate}       
             ${labelsTemplate}     
-        </div>
-             `
+        </div>`;
 }
 
 
@@ -108,16 +107,17 @@ get(child(dbRef, `users/`)).then((snapshot) => {
     for(let item in usersList){
         console.log(item);
         console.log(usersList[item]);
-        console.log(usersList[item].role_id);
-        if(usersList[item].role_id === 2){
-                container.insertAdjacentHTML("beforeend", getItemTemplate(usersList[item].name,
+        console.log(usersList[item].role_id===2);
+        console.log(usersList[item].role_id==="2");
+        if(usersList[item].role_id === "2"){
+                container.innerHTML += getItemTemplate(usersList[item].name,
                                          usersList[item].website,
                                          usersList[item].country,
                                          usersList[item].picture,
                                          usersList[item].tour_dates,
                                          usersList[item].instruments,
                                          usersList[item].genres,
-                                         usersList[item].labels));
+                                         usersList[item].labels);
         }
     }
   } else {
@@ -126,4 +126,3 @@ get(child(dbRef, `users/`)).then((snapshot) => {
 }).catch((error) => {
   console.error(error);
 });
-
