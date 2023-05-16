@@ -63,7 +63,6 @@ input[name="bform_pre-tour_dates"] {
 select[name="aform_pre-role"],
 select[name="cform_pre-subscription"],
 select[name="bform_pre-country"]{
-    color: black;
     outline: none;
     border:none;
     background: transparent;
