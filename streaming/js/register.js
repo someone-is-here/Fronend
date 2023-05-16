@@ -25,8 +25,12 @@ let files =[];
 let reader = new FileReader();
 let pictureInput = document.getElementById("id_bform_pre-picture");
 
+window.showCost = function(el){
+    document.getElementById("id_cost").innerHTML = el.value;
+}
+
 function getSubscriptionTemplate(name, cost){
-    return `<option value="${cost}">${name}</option>`;
+    return `<option value="${cost}" onclick="showCost(this)">${name}</option>`;
 }
 
 const dbRef = ref(getDatabase());
