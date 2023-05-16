@@ -73,6 +73,7 @@
     list-style-type: none;
     float: left;
     margin-left: 1rem;
+    color: white;
 }
 .li__artist:before{
     content: ' *  ';
@@ -123,3 +124,4 @@
     color: white;
     margin-left: 0.7rem;
 }
+

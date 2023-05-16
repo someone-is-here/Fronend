@@ -43,7 +43,7 @@ function getItemTemplate(name, link, country, picture, tour_dates, instruments, 
     console.log(labels);
     const main = ` <div class="div__artist-item__header">
                  <li><h1 class="li_artist-name"><a href="${link}" class="a__link__no-style">${name}</a></h1></li>
-                 <h3 class="li_artist-name">${country}</h3>
+                 <span class="span__artist-tour">${country}</span>
                 <img src="${picture}"class="img__artist"/>
                 <span class="span__artist-tour">Tour dates: </span><span class="span__artist-tour-number">  ${tour_dates}</span>
              </div>`;
@@ -82,8 +82,7 @@ function getItemTemplate(name, link, country, picture, tour_dates, instruments, 
     let labelsTemplate = `<div class="div__container-item__body">
                  <span class="span__headline">Labels:</span>
                         <ul class="ul__artist">
-                            <li class="li__artist li__artist-blue"><a href="#" class="a__link__no-style">Syco</a></li>
-                     
+                        ${labelsList}                     
                 </ul>
              </div>`;
 
@@ -107,14 +106,14 @@ get(child(dbRef, `users/`)).then((snapshot) => {
     const usersList = snapshot.val();
     for(let item in usersList){
         if(usersList[item].role_id === "2"){
-                container.innerHTML += getItemTemplate(usersList[item].name,
+                container.insertAdjacentHTML("beforeend", getItemTemplate(usersList[item].name,
                                          usersList[item].website,
                                          usersList[item].country,
                                          usersList[item].picture,
                                          usersList[item].tour_dates,
                                          usersList[item].instruments,
                                          usersList[item].genres,
-                                         usersList[item].labels);
+                                         usersList[item].labels));
         }
     }
   } else {
