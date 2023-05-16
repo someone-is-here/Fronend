@@ -18,6 +18,7 @@ select{
 }
 option {
     color: black;
+    height: 3rem;
 }
 .navbar{
     height: 100%;
@@ -211,7 +212,7 @@ option {
     transform: scale(1.1);
 }
 .option__box{
-    height: 3rem;
-    padding: 1rem;
+    height: 2rem;
+    padding: 0.5rem;
     letter-spacing: 0.1rem;
 }
