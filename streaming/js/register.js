@@ -40,6 +40,7 @@ const dbRef = ref(getDatabase());
             let listWithSubsc = "";
             for (var i = 0; i < listWithSubscriptions.length; i++) {
                 if (listWithSubscriptions[i] !== undefined) {
+                    console.log(listWithSubsc[i]);
                     listWithSubsc += getSubscriptionTemplate(Object.keys(listWithSubscriptions[i])[0], Object.values(listWithSubscriptions[i])[0]);
                 }
             }
