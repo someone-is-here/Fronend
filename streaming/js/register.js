@@ -36,10 +36,14 @@ console.log(dbRef + `subscriptions/`);
             const listWithSubscriptions = snapshot.val();
             console.log(snapshot.val());
             let listWithSubsc = "";
+            let value = undefined;
             for (let key in listWithSubscriptions) {
+                if(value === undefined){
+                    value = listWithSubscriptions[key];
+                }
                 listWithSubsc += getSubscriptionTemplate(key, listWithSubscriptions[key]);
-                 document.getElementById("id_cost").innerHTML = listWithSubscriptions[key];
             }
+             document.getElementById("id_cost").innerHTML = value;
             const el = document.getElementById("id_cform_pre-subscription");
             el.onclick = function(ev){
                 document.getElementById("id_cost").innerHTML = ev.target.value;
