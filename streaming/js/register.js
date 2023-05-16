@@ -51,22 +51,22 @@ function unsetFields(hiddenFields){
         el.setAttribute("disabled", true);
     }
 }
-async function uploadProcess(){
+function uploadProcess(){
   const imageToUpload = files[0];
   const filename = imageToUpload.name;
   const metaData = {
     contentType: imageToUpload.type
   }
   const storageRef = sRef(storage, "images/" + filename);
-  const uploadTask = await uploadBytesResumable(storageRef, imageToUpload, metaData);
+  const uploadTask = uploadBytesResumable(storageRef, imageToUpload, metaData);
 
   uploadTask.on('state-changed', (snapshot)=>{
     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
     uploadedProgress.innerHTML = "Uploaded " + progress + "%";
   }, (error) => {
     alert("Error! Image not uploaded!");
-  }, async () => {
-      await getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+  }, () => {
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           window.pictureURL = downloadURL;
       });
   });
