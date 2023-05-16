@@ -43,6 +43,7 @@ function getItemTemplate(name, link, country, picture, tour_dates, instruments, 
     console.log(labels);
     const main = ` <div class="div__artist-item__header">
                  <li><h1 class="li_artist-name"><a href="${link}" class="a__link__no-style">${name}</a></h1></li>
+                 <br>
                  <span class="span__artist-tour">${country}</span>
                 <img src="${picture}"class="img__artist"/>
                 <span class="span__artist-tour">Tour dates: </span><span class="span__artist-tour-number">  ${tour_dates}</span>
