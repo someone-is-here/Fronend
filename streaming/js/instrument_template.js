@@ -76,7 +76,7 @@ onAuthStateChanged(auth, (user) => {
         let instrumentsObj = {};
         checked_arr.forEach(item => {
           console.log(item);
-          let span_tag = item.querySelector('span');
+          let span_tag = item.querySelector('.item-text');
           let value = span_tag.innerHTML;
           instrumentsObj[value] = value;
           console.log(instrumentsObj);

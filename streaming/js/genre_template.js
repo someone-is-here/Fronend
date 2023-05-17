@@ -76,7 +76,7 @@ onAuthStateChanged(auth, (user) => {
         let genreObj = {};
         checked_arr.forEach(item => {
           console.log(item);
-          let span_tag = item.querySelector('span');
+          let span_tag = item.querySelector('.item-text');
           let value = span_tag.innerHTML;
           genreObj[value] = value;
           console.log(genreObj);
