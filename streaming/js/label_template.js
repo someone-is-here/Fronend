@@ -69,28 +69,30 @@ get(child(dbRef, `labels/`)).then((snapshot) => {
 onAuthStateChanged(auth, (user) => {
   if (user) {
     document.getElementById("button_submit").addEventListener("click", function(event) {
-      let setLabel = function (){
+      let setLabel = function (isUpdate){
       let checked = document.querySelectorAll(".checked");
         console.log(checked);
         let checked_arr = [...checked]; // converts NodeList to Array
+        let labelObj = {};
         checked_arr.forEach(item => {
           console.log(item);
           let a_tag = item.querySelector('a');
            let nameLabel = a_tag.innerHTML;
-          let link = a_tag.dataset.href;
-          console.log(nameLabel, link);
-          let labelObj = {
-            [nameLabel]: link
-          }
+          let link = a_tag.dataset.href;g
+          labelObj[nameLabel] = link;
           console.log(labelObj);
-          set(ref(database, 'users/' + user.uid + `/labels/`), labelObj);
       });
+        if(isUpdate) {
+          update(ref(database, 'users/' + user.uid + `/labels/`), labelObj);
+        }else{
+          set(ref(database, 'users/' + user.uid + `/labels/`), labelObj);
+        }
 
 }
 try {get(child(dbRef, `users/` + user.uid + `/labels/`)).then((snapshot) => {
       if (snapshot.exists()) {
         console.log(snapshot.val());
-        setLabel();
+        setLabel(true);
       } else {
         console.log("No label exists");
         setLabel();
