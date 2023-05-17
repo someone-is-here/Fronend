@@ -72,7 +72,7 @@ function getItemTemplate(name, link, country, picture, tour_dates, instruments, 
     let labelsList = "";
 
      for (let l in labels){
-        labelsList +=  labelsList += labelTemplateItem(l, labels[item]);
+        labelsList +=  labelsList += labelTemplateItem(l, labels[l]);
     }
     // if(labels !== undefined) {
     //     for (var i = 0; i < labels.length; i++) {
