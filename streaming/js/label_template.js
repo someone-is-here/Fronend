@@ -66,25 +66,33 @@ get(child(dbRef, `labels/`)).then((snapshot) => {
 });
 
 const user = auth.currentUser;
+function setLabel(){
+      let checked = document.querySelectorAll(".checked");
+        console.log(checked);
+        let linkWithInfo = document.getElementsByClassName("a");
+        console.log(linkWithInfo);
+        let nameLabel = linkWithInfo.innerHTML;
+        let link = linkWithInfo.href;
+        console.log(nameLabel, link);
 
-document.getElementById("button_submit").addEventListener("click", function(event) {
-  get(child(dbRef, `users/` + user.id + `/labels/`)).then((snapshot) => {
-  if (snapshot.exists()) {
-    let checked = document.querySelectorAll(".checked");
-    console.log(checked);
-    let linkWithInfo = document.getElementsByClassName("a");
-    console.log(linkWithInfo);
-    let nameLabel = linkWithInfo.innerHTML;
-    let link = linkWithInfo.href;
-    console.log(nameLabel, link);
     set(ref(database, `users/` + user.id + `/labels/`), {
-         nameLabel: link
+          nameLabel: link
+        });
+}
+document.getElementById("button_submit").addEventListener("click", function(event) {
+  try {
+    get(child(dbRef, `users/` + user.id + `/labels/`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.val());
+        setLabel();
+      } else {
+        console.log("No label exists");
+      }
+    }).catch((error) => {
+      console.error(error);
     });
-  } else {
-    console.log("No label exists");
+  } catch (e){
+    console.log(e);
+    setLabel();
   }
-}).catch((error) => {
-  console.error(error);
-});
-
 });
