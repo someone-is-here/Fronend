@@ -22,23 +22,24 @@ window.userSignOut = function userSignOut(e) {
 
 function menuTemplateLogout() {
   return `
-    <a href="login.html" class="sidenav-link" onclick="userSignOut()">Logout</a>`;
+    <li><a href="login.html" class="sidenav-link" onclick="userSignOut()">Logout</a></li>
+    <li><a href="#" class="sidenav-link">Contact</a></</li>`;
 }
 function menuBaseTemplate(){
   return `
-  <a href="login.html" class="sidenav-link">Login</a>
-  <a href="register.html" class="sidenav-link">Register</a>`;
+  <li><a href="login.html" class="sidenav-link">Login</a></li>
+  <li><a href="register.html" class="sidenav-link">Register</a></li>`;
 }
 function generateArtistFunctionality(login) {
-  return `      <a class="sidenav-link">${login}</a>
-                <a href="add_instrument.html" class="sidenav-link">Add instrument</a>
-                <a href="create_track.html" class="sidenav-link">Add track</a>
-                <a href="add_genre.html" class="sidenav-link">Add genre</a>
-                <a href="add_label.html" class="sidenav-link">Add label</a>`;
+  return `      <li><a class="sidenav-link">${login}</a></li>
+                <li><a href="add_instrument.html" class="sidenav-link">Add instrument</a></li>
+                <li><a href="create_track.html" class="sidenav-link">Add track</a></li>
+                <li><a href="add_genre.html" class="sidenav-link">Add genre</a></li>
+                <li><a href="add_label.html" class="sidenav-link">Add label</a></li>`;
 }
 function generateUserFunctionality(login) {
-  return `  <a class="sidenav-link">${login}</a>
-            <a href="change_subscription.html" class="sidenav-link">Subscription</a>`;
+  return `  <li><a class="sidenav-link">${login}</a></li>
+            <li><a href="change_subscription.html" class="sidenav-link">Subscription</a></li>`;
 }
 const user = auth.currentUser;
 onAuthStateChanged(auth, (user) => {
