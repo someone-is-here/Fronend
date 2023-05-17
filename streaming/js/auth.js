@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
-import { getDatabase, ref, set, update } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
+import { getDatabase, ref, get, child, update } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
 import { getAuth, createUserWithEmailAndPassword,
   signInWithEmailAndPassword, onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
 
@@ -37,8 +37,21 @@ const user = auth.currentUser;
 onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
-    console.log(user.email)
-    document.getElementById("menu__additional").innerHTML = menuTemplateLogin(user.email);
+    console.log(user.email);
+    const dbRef = ref(getDatabase());
+    get(child(dbRef, `users/${uid}`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.val());
+        let role = snapshot.val().role_id;
+        if (role === "2") {
+          document.getElementById("menu__additional").innerHTML = menuTemplateLogin(user.email);
+        } else if (role === "3") {
+          document.getElementById("menu__additional").innerHTML = menuBaseTemplate();
+        }
+      }
+    }).catch(e=>{
+      console.log(e);
+    });
   } else {
     document.getElementById("menu__additional").innerHTML = menuBaseTemplate();
   }
