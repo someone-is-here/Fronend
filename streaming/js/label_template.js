@@ -69,19 +69,23 @@ const user = auth.currentUser;
 function setLabel(){
       let checked = document.querySelectorAll(".checked");
         console.log(checked);
-        let linkWithInfo = document.getElementsByClassName("a");
-        console.log(linkWithInfo);
-        let nameLabel = linkWithInfo.innerHTML;
-        let link = linkWithInfo.href;
-        console.log(nameLabel, link);
+        let checked_arr = [...checked]; // converts NodeList to Array
+        checked_arr.forEach(item => {
+          console.log(item);
+          let a_tag = item.getElementsByClassName("a");
+           let nameLabel = a_tag.innerHTML;
+          let link = a_tag.href;
+          console.log(nameLabel, link);
 
-    set(ref(database, `users/` + user.id + `/labels/`), {
+        set(ref(database, `users/` + user.uid + `/labels/`), {
           nameLabel: link
         });
+      });
+
 }
 document.getElementById("button_submit").addEventListener("click", function(event) {
   try {
-    get(child(dbRef, `users/` + user.id + `/labels/`)).then((snapshot) => {
+    get(child(dbRef, `users/` + user.uid + `/labels/`)).then((snapshot) => {
       if (snapshot.exists()) {
         console.log(snapshot.val());
         setLabel();
