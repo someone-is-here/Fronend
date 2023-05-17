@@ -72,7 +72,7 @@ function getItemTemplate(name, link, country, picture, tour_dates, instruments, 
     let labelsList = "";
 
      for (let l in labels){
-        labelsList +=  labelsList += labelTemplateItem(l, labels[l]);
+        labelsList += labelTemplateItem(l, labels[l]);
     }
 
     let labelsTemplate = `<div class="div__container-item__body">
