@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Streaming</title>
+    <link type="text/css" href="css/styles.css" rel="stylesheet"/>
+    <link type="text/css" href="css/register_styles.css" rel="stylesheet"/>
+    <link type="text/css" href="css/base_styles.css" rel="stylesheet"/>
+    <link type="text/css" href="css/create_form.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width">
+</head>
+<body>
+<nav class="navbar">
+    <a href="index.html"> <img src="images/icon.png" class="navbar__icon"></a>
+    <ul class="navbar__list">
+        <li class="navbar__list-item">
+            <a href="playlists.html" class="navbar__list-item-link">Playlists</a>
+         </li>
+        <li class="navbar__list-item">
+            <a href="artists.html" class="navbar__list-item-link">Artists</a>
+         </li>
+        <li class="navbar__list-item">
+            <a href="albums.html" class="navbar__list-item-link">Albums</a>
+         </li>
+        <li class="navbar__list-item">
+            <a href="tracks.html" class="navbar__list-item-link">Tracks</a>
+         </li>
+    </ul>
+    <hr class="navbar-line">
+     <span onclick="openNav()"><img src="images/login.png" class="js-login__img"></span>
+</nav>
+        <menu class="menu-additional">
+        <ul class="menu-additional__list" id="menu__additional">
+
+        </ul>
+    </menu>
+<aside id="sidenav" class="sidenav">
+  <a href="javascript:void(0)" class="sidenav-button__close" onclick="closeNav()">&times;</a>
+    <ul class="ul__sidenav-list">
+    </ul>
+</aside>
+
+<section class="section__register">
+    <div class="div__register">
+        <div>
+    <form action="" method="post" enctype="multipart/form-data" class="form__register">
+      <h2 class="login__title">Create album: </h2>
+        <input type="hidden" name="csrfmiddlewaretoken" value="NqyCsie1B9KgpNx5GDkAjrv4YQ8hFB3JPGluys04Cahjd8EZEYd5cA9BcsD993T3">
+            <div>
+                <p>
+                  <label for="id_album_title">Title:</label>
+                  <input type="text" required id="id_album_title">
+                </p>
+                <p>
+                  <label for="id_album_year">Year:</label>
+                  <input type="number" required id="id_album_year" min="0" max="2023">
+                </p>
+                <p>
+                    <label for="id_album_cover">Cover:</label> <label id="uploadProgress"></label>
+                    <input type="file" name="id_album_cover" required id="id_album_cover">
+                </p>
+
+            </div>
+            <input type="button" value="Submit" class="submit__form" id="button_submit"/>
+
+    </form>
+        </div>
+    </div>
+</section>
+
+<footer></footer>
+   <script src="js/base_script.js" ></script>
+   <script src="js/script.js" ></script>
+   <script src="js/register.js" type="module"></script>
+  <script src="js/sidenav.js" type="module" ></script>
+
+</body>
+</html>
