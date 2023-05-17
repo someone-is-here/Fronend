@@ -56,7 +56,7 @@ get(child(dbRef, `instruments/`)).then((snapshot) => {
     console.log(snapshot.val());
     let listWithLi = "";
     for (let key in listWithInstruments) {
-          listWithLi += listWithInstruments(listWithInstruments[key]);
+          listWithLi += getInstrumentsTemplate(listWithInstruments[key]);
     }
     document.getElementById("instruments__list").innerHTML += listWithLi;
   } else {
