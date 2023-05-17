@@ -45,7 +45,7 @@ function getLabelTemplate(item, link) {
                     <span class="checkbox">
                         <i class="fa-solid fa-check check-icon"></i>
                     </span>
-                    <span class="item-text"><a href="${link}" class="a__link__no-style">${item}</a></span>
+                    <span class="item-text"><a data-href="${link}" style="a__link__no-style">${item}</a></span>
                 </li>`;
 }
 
@@ -77,10 +77,10 @@ onAuthStateChanged(auth, (user) => {
           console.log(item);
           let a_tag = item.querySelector("a");
            let nameLabel = a_tag.innerHTML;
-          let link = a_tag.getAttribute("href");
+          let link = a_tag.dataset.href;
           console.log(nameLabel, link);
           let labelObj = {
-            [nameLabel] : link
+            nameLabel: link
           }
         ref(database, `users/` + user.uid + `/labels/`).push(labelObj);
       });
