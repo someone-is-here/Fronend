@@ -68,17 +68,22 @@ function getItemTemplate(name, link, country, picture, tour_dates, instruments, 
                         ${genreList}
                 </ul>
              </div>`;
+
     let labelsList = "";
-    if(labels !== undefined) {
-        for (var i = 0; i < labels.length; i++) {
-            if (labels[i] !== undefined) {
-                console.log(labels[i]);
-                console.log(Object.keys(labels[i]));
-                console.log(Object.values(labels[i]));
-                labelsList += labelTemplateItem(Object.keys(labels[i])[0], Object.values(labels[i])[0]);
-            }
-        }
+
+     for (let l in labels){
+        labelsList +=  labelsList += labelTemplateItem(l, labels[item]);
     }
+    // if(labels !== undefined) {
+    //     for (var i = 0; i < labels.length; i++) {
+    //         if (labels[i] !== undefined) {
+    //             console.log(labels[i]);
+    //             console.log(Object.keys(labels[i]));
+    //             console.log(Object.values(labels[i]));
+    //             labelsList += labelTemplateItem(Object.keys(labels[i])[0], Object.values(labels[i])[0]);
+    //         }
+    //     }
+    // }
 
     let labelsTemplate = `<div class="div__container-item__body">
                  <span class="span__headline">Labels:</span>
