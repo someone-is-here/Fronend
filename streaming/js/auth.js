@@ -37,7 +37,6 @@ function menuBaseTemplate(){
                 <li class="menu-additional__list-item"><a href="register.html" class="menu-additional-link">Register</a></li>`;
 }
 
-const user = auth.currentUser;
 onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;

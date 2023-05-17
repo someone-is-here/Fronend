@@ -11,6 +11,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
 import {
   getAuth,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
 
 
@@ -65,8 +66,10 @@ get(child(dbRef, `labels/`)).then((snapshot) => {
   console.error(error);
 });
 
-const user = auth.currentUser;
-function setLabel(){
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    document.getElementById("button_submit").addEventListener("click", function(event) {
+      let setLabel = function (){
       let checked = document.querySelectorAll(".checked");
         console.log(checked);
         let checked_arr = [...checked]; // converts NodeList to Array
@@ -83,8 +86,7 @@ function setLabel(){
       });
 
 }
-document.getElementById("button_submit").addEventListener("click", function(event) {
-  try {
+    try {
     get(child(dbRef, `users/` + user.uid + `/labels/`)).then((snapshot) => {
       if (snapshot.exists()) {
         console.log(snapshot.val());
@@ -100,3 +102,8 @@ document.getElementById("button_submit").addEventListener("click", function(even
     setLabel();
   }
 });
+  }else{
+    window.location.replace("login.html");
+  }
+});
+

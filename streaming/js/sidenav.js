@@ -41,7 +41,7 @@ function generateUserFunctionality(login) {
   return `  <li><a class="sidenav-link">${login}</a></li>
             <li><a href="change_subscription.html" class="sidenav-link">Subscription</a></li>`;
 }
-const user = auth.currentUser;
+
 onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
