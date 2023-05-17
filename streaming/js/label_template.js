@@ -81,6 +81,8 @@ onAuthStateChanged(auth, (user) => {
         }else{
           set(ref(database, 'users/' + user.uid + `/labels/`), labelObj);
         }
+        alert("Updated successfully!");
+        window.location.reload();
 
 }
 try {get(child(dbRef, `users/` + user.uid + `/labels/`)).then((snapshot) => {

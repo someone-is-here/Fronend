@@ -66,44 +66,47 @@ get(child(dbRef, `instruments/`)).then((snapshot) => {
   console.error(error);
 });
 
-// onAuthStateChanged(auth, (user) => {
-//   if (user) {
-//     document.getElementById("button_submit").addEventListener("click", function(event) {
-//       let setLabel = function (){
-//       let checked = document.querySelectorAll(".checked");
-//         console.log(checked);
-//         let checked_arr = [...checked]; // converts NodeList to Array
-//         checked_arr.forEach(item => {
-//           console.log(item);
-//           let a_tag = item.querySelector("a");
-//            let nameLabel = a_tag.innerHTML;
-//           let link = a_tag.href;
-//           console.log(nameLabel, link);
-//
-//         set(ref(database, `users/` + user.uid + `/labels/`), {
-//           nameLabel: link
-//         });
-//       });
-//
-// }
-//     try {
-//     get(child(dbRef, `users/` + user.uid + `/labels/`)).then((snapshot) => {
-//       if (snapshot.exists()) {
-//         console.log(snapshot.val());
-//         setLabel();
-//       } else {
-//         console.log("No label exists");
-//       }
-//     }).catch((error) => {
-//       console.error(error);
-//     });
-//   } catch (e){
-//     console.log(e);
-//     setLabel();
-//   }
-// });
-//   }else{
-//     window.location.replace("login.html");
-//   }
-// });
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    document.getElementById("button_submit").addEventListener("click", function(event) {
+      let setInstrument = function (isUpdate){
+      let checked = document.querySelectorAll(".checked");
+        console.log(checked);
+        let checked_arr = [...checked]; // converts NodeList to Array
+        let instrumentsObj = {};
+        checked_arr.forEach(item => {
+          console.log(item);
+          let span_tag = item.querySelector('span');
+          let value = span_tag.innerHTML;
+          instrumentsObj[value] = value;
+          console.log(instrumentsObj);
+      });
+        if(isUpdate) {
+          update(ref(database, 'users/' + user.uid + `/instruments/`), instrumentsObj);
+        }else{
+          set(ref(database, 'users/' + user.uid + `/instruments/`), instrumentsObj);
+        }
+        alert("Updated successfully!");
+        window.location.reload();
+
+}
+try {get(child(dbRef, `users/` + user.uid + `/instruments/`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.val());
+        setInstrument(true);
+      } else {
+        console.log("No instrument exists");
+        setInstrument();
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+  } catch (e){
+    console.log(e);
+  }
+});
+  }else{
+    window.location.replace("login.html");
+  }
+});
 

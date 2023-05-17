@@ -66,44 +66,47 @@ get(child(dbRef, `genres/`)).then((snapshot) => {
   console.error(error);
 });
 
-// onAuthStateChanged(auth, (user) => {
-//   if (user) {
-//     document.getElementById("button_submit").addEventListener("click", function(event) {
-//       let setLabel = function (){
-//       let checked = document.querySelectorAll(".checked");
-//         console.log(checked);
-//         let checked_arr = [...checked]; // converts NodeList to Array
-//         checked_arr.forEach(item => {
-//           console.log(item);
-//           let a_tag = item.querySelector("a");
-//            let nameLabel = a_tag.innerHTML;
-//           let link = a_tag.href;
-//           console.log(nameLabel, link);
-//
-//         set(ref(database, `users/` + user.uid + `/labels/`), {
-//           nameLabel: link
-//         });
-//       });
-//
-// }
-//     try {
-//     get(child(dbRef, `users/` + user.uid + `/labels/`)).then((snapshot) => {
-//       if (snapshot.exists()) {
-//         console.log(snapshot.val());
-//         setLabel();
-//       } else {
-//         console.log("No label exists");
-//       }
-//     }).catch((error) => {
-//       console.error(error);
-//     });
-//   } catch (e){
-//     console.log(e);
-//     setLabel();
-//   }
-// });
-//   }else{
-//     window.location.replace("login.html");
-//   }
-// });
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    document.getElementById("button_submit").addEventListener("click", function(event) {
+      let setGenre = function (isUpdate){
+      let checked = document.querySelectorAll(".checked");
+        console.log(checked);
+        let checked_arr = [...checked]; // converts NodeList to Array
+        let genreObj = {};
+        checked_arr.forEach(item => {
+          console.log(item);
+          let span_tag = item.querySelector('span');
+          let value = span_tag.innerHTML;
+          genreObj[value] = value;
+          console.log(genreObj);
+      });
+        if(isUpdate) {
+          update(ref(database, 'users/' + user.uid + `/genres/`), genreObj);
+        }else{
+          set(ref(database, 'users/' + user.uid + `/genres/`), genreObj);
+        }
+        alert("Updated successfully!");
+        window.location.reload();
+
+}
+try {get(child(dbRef, `users/` + user.uid + `/genres/`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.val());
+        setGenre(true);
+      } else {
+        console.log("No genre exists");
+        setGenre();
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+  } catch (e){
+    console.log(e);
+  }
+});
+  }else{
+    window.location.replace("login.html");
+  }
+});
 
