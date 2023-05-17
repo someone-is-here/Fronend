@@ -20,9 +20,8 @@ window.userSignOut = function userSignOut(e) {
   const database = getDatabase(app);
   const auth = getAuth();
 
-function menuTemplateLogin(res) {
+function menuTemplateLogout() {
   return `
-    <a class="sidenav-link">${res}</a>
     <a href="login.html" class="sidenav-link" onclick="userSignOut()">Logout</a>`;
 }
 function menuBaseTemplate(){
@@ -30,14 +29,16 @@ function menuBaseTemplate(){
   <a href="login.html" class="sidenav-link">Login</a>
   <a href="register.html" class="sidenav-link">Register</a>`;
 }
-function generateArtistFunctionality() {
-  return `      <a href="add_instrument.html" class="sidenav-link">Add instrument</a>
+function generateArtistFunctionality(login) {
+  return `      <a class="sidenav-link">${login}</a>
+                <a href="add_instrument.html" class="sidenav-link">Add instrument</a>
                 <a href="create_track.html" class="sidenav-link">Add track</a>
                 <a href="add_genre.html" class="sidenav-link">Add genre</a>
                 <a href="add_label.html" class="sidenav-link">Add label</a>`;
 }
-function generateUserFunctionality() {
-  return `<a href="change_subscription.html" class="sidenav-link">Subscription</a>`;
+function generateUserFunctionality(login) {
+  return `  <a class="sidenav-link">${login}</a>
+            <a href="change_subscription.html" class="sidenav-link">Subscription</a>`;
 }
 const user = auth.currentUser;
 onAuthStateChanged(auth, (user) => {
@@ -52,11 +53,11 @@ onAuthStateChanged(auth, (user) => {
     console.log(snapshot.val());
     let role = snapshot.val().role_id;
     if (role === "2"){
-        document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += generateArtistFunctionality();
+        document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += generateArtistFunctionality(snapshot.val().login);
     }else if(role === "3"){
-        document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += generateUserFunctionality();
+        document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += generateUserFunctionality(snapshot.val().login);
     }
-    document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += menuTemplateLogin(snapshot.val().login);
+    document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += menuTemplateLogout();
   } else {
     console.log("No data available");
   }
