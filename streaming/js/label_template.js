@@ -81,7 +81,7 @@ onAuthStateChanged(auth, (user) => {
           console.log(nameLabel, link);
 
         set(ref(database, `users/` + user.uid + `/labels/`), {
-          nameLabel: link
+          [nameLabel]: link
         });
       });
 
