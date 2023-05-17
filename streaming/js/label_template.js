@@ -80,7 +80,7 @@ onAuthStateChanged(auth, (user) => {
           let link = a_tag.dataset.href;
           console.log(nameLabel, link);
           let labelObj = {
-            nameLabel: link
+            [nameLabel]: link
           }
           set(ref(database, 'users/' + user.uid + `/labels/`), labelObj);
       });
