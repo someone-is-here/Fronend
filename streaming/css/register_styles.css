@@ -46,10 +46,7 @@ span{
     padding-top: 1rem;
     text-align: center;
 }
-input[name="aform_pre-login"], input[name="aform_pre-email"], select[name="aform_pre-role"],
-input[name="aform_pre-password1"], input[name="aform_pre-password2"], select[name="cform_pre-subscription"],
-input[name="bform_pre-name"], input[name="bform_pre-website"], select[name="bform_pre-country"],
-input[name="bform_pre-tour_dates"] {
+input{
     position: relative;
     margin: 0.5rem 0;
     width: 10rem;
@@ -60,9 +57,7 @@ input[name="bform_pre-tour_dates"] {
     color: white;
     letter-spacing: 0.15rem;
 }
-select[name="aform_pre-role"],
-select[name="cform_pre-subscription"],
-select[name="bform_pre-country"]{
+select{
     outline: none;
     border:none;
     background: transparent;
