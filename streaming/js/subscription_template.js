@@ -32,25 +32,32 @@ const auth = getAuth();
 const dbRef = ref(getDatabase());
 
 
-function getSubscriptionTemplate(name, cost){
+function getSubscriptionTemplate(name, cost, isSelected){
+    if (isSelected){
+         return `<li class="item">
+                  <span class="item-text"><option value="${cost}" class="option__box" selected>${name}</option></span>
+                </li>`;
+    }
     return `<li class="item">
                   <span class="item-text"><option value="${cost}" class="option__box">${name}</option></span>
                 </li>`;
 }
 
-get(child(dbRef, `subscriptions/`)).then((snapshot) => {
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+      get(child(dbRef, `subscriptions/`)).then((snapshot) => {
         if (snapshot.exists()) {
             const listWithSubscriptions = snapshot.val();
             console.log(snapshot.val());
             let listWithSubsc = "";
-            let value = undefined;
             for (let key in listWithSubscriptions) {
-                if(value === undefined){
-                    value = listWithSubscriptions[key];
+                if(user.subscription === key) {
+                    listWithSubsc += getSubscriptionTemplate(key, listWithSubscriptions[key], true);
+                }else{
+                     listWithSubsc += getSubscriptionTemplate(key, listWithSubscriptions[key]);
                 }
-                listWithSubsc += getSubscriptionTemplate(key, listWithSubscriptions[key]);
             }
-             document.getElementById("id_cost").innerHTML = value;
             const el = document.getElementById("id_cform_pre-subscription");
             el.onclick = function(ev){
                 document.getElementById("id_cost").innerHTML = ev.target.value;
@@ -61,10 +68,6 @@ get(child(dbRef, `subscriptions/`)).then((snapshot) => {
         }
     });
 
-
-
-onAuthStateChanged(auth, (user) => {
-  if (user) {
     document.getElementById("button_submit").addEventListener("click", function(event) {
       const selectSubscription = document.getElementById("id_cform_pre-subscription");
              ref(database, 'users/' + user.uid + `/subscription/`).remove();
