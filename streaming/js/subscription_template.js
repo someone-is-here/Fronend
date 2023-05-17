@@ -73,7 +73,6 @@ onAuthStateChanged(auth, (user) => {
 
     document.getElementById("button_submit").addEventListener("click", function(event) {
       const selectSubscription = document.getElementById("id_cform_pre-subscription");
-             ref(database, 'users/' + user.uid + `/subscription/`).remove();
              set(ref(database, 'users/' + user.uid + `/subscription/`), {
                 subscription: selectSubscription.options[selectSubscription.selectedIndex].text
             });
