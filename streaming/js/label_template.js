@@ -75,13 +75,14 @@ onAuthStateChanged(auth, (user) => {
         let checked_arr = [...checked]; // converts NodeList to Array
         checked_arr.forEach(item => {
           console.log(item);
-          let a_tag = item.querySelector("a");
+          let a_tag = item.querySelector('a');
            let nameLabel = a_tag.innerHTML;
           let link = a_tag.dataset.href;
           console.log(nameLabel, link);
           let labelObj = {
             [nameLabel]: link
           }
+          console.log(labelObj);
           set(ref(database, 'users/' + user.uid + `/labels/`), labelObj);
       });
 
@@ -89,7 +90,7 @@ onAuthStateChanged(auth, (user) => {
 try {get(child(dbRef, `users/` + user.uid + `/labels/`)).then((snapshot) => {
       if (snapshot.exists()) {
         console.log(snapshot.val());
-        //updateLabel();
+        setLabel();
       } else {
         console.log("No label exists");
         setLabel();
