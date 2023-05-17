@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Streaming</title>
+    <link type="text/css" href="css/styles.css" rel="stylesheet"/>
+    <link type="text/css" href="css/login_styles.css" rel="stylesheet"/>
+    <link type="text/css" href="css/base_styles.css" rel="stylesheet"/>
+    <link type="text/css" href="css/create_form.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width">
+</head>
+<body>
+<nav class="navbar">
+    <a href="index.html"> <img src="images/icon.png" class="navbar__icon"></a>
+    <ul class="navbar__list">
+        <li class="navbar__list-item">
+            <a href="playlists.html" class="navbar__list-item-link">Playlists</a>
+         </li>
+        <li class="navbar__list-item">
+            <a href="artists.html" class="navbar__list-item-link">Artists</a>
+         </li>
+        <li class="navbar__list-item">
+            <a href="albums.html" class="navbar__list-item-link">Albums</a>
+         </li>
+        <li class="navbar__list-item">
+            <a href="tracks.html" class="navbar__list-item-link">Tracks</a>
+         </li>
+    </ul>
+    <hr class="navbar-line">
+     <span onclick="openNav()"><img src="images/login.png" class="js-login__img"></span>
+</nav>
+        <menu class="menu-additional">
+        <ul class="menu-additional__list" id="menu__additional">
+
+        </ul>
+    </menu>
+<aside id="sidenav" class="sidenav">
+  <a href="javascript:void(0)" class="sidenav-button__close" onclick="closeNav()">&times;</a>
+    <ul class="ul__sidenav-list">
+    </ul>
+</aside>
+<section class="section__login">
+    <div class="div__login">
+        <div>
+        <form method="post" enctype="multipart/form-data" class="form__login">
+            <h2 class="login__title">Add label</h2>
+                        <input type="hidden" name="csrfmiddlewaretoken" value="NqyCsie1B9KgpNx5GDkAjrv4YQ8hFB3JPGluys04Cahjd8EZEYd5cA9BcsD993T3">
+            <p>
+        <div class="div__container-selection">
+            <div class="select-btn">
+                <span class="btn-text">Select label</span>
+                <span class="arrow-dwn">
+                    <svg role="img" height="24" width="24" aria-hidden="true"
+                            class="button__play-small" viewBox="0 0 24 24" data-encore-id="icon">
+                           <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6
+                           19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+                </span>
+            </div>
+            <ul class="list-items" id="labels__list">
+
+            </ul>
+        </div>
+            </p>
+            <input type="button" value="Submit" class="submit__form" id="button_submit"/>
+        </form>
+
+        </div>
+    </div>
+</section>
+
+<footer></footer>
+   <script src="js/base_script.js" ></script>
+   <script src="js/script.js" ></script>
+   <script src="js/playlist_create.js" ></script>
+      <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/sidenav.js"></script>
+  <script type="module" src="js/genre_template.js"></script>
+</body>
+</html>
