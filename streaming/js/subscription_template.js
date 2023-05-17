@@ -48,12 +48,13 @@ function getSubscriptionTemplate(name, cost, isSelected){
 onAuthStateChanged(auth, (user) => {
   if (user) {
       get(child(dbRef, `subscriptions/`)).then((snapshot) => {
+          get(child(dbRef, `users/`+user.uid)).then((snapshot2) => {
         if (snapshot.exists()) {
             const listWithSubscriptions = snapshot.val();
             console.log(snapshot.val());
             let listWithSubsc = "";
             for (let key in listWithSubscriptions) {
-                if(user.subscription === key) {
+                if(snapshot2.val().subscription === key) {
                     listWithSubsc += getSubscriptionTemplate(key, listWithSubscriptions[key], true);
                 }else{
                      listWithSubsc += getSubscriptionTemplate(key, listWithSubscriptions[key]);
@@ -67,6 +68,7 @@ onAuthStateChanged(auth, (user) => {
         } else {
           console.log("no subscriptions");
         }
+        });
     });
 
     document.getElementById("button_submit").addEventListener("click", function(event) {
