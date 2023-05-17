@@ -1,18 +1,13 @@
+import {initializeApp} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
 import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
-import {
+  child,
+  get,
   getDatabase,
   ref,
-  get,
   set,
-  update,
-  child
+  update
 } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
-import {
-  getAuth,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+import {getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
 
 
 const firebaseConfig = {
@@ -78,8 +73,7 @@ onAuthStateChanged(auth, (user) => {
           console.log(item);
           let a_tag = item.querySelector('a');
            let nameLabel = a_tag.innerHTML;
-          let link = a_tag.dataset.href;g
-          labelObj[nameLabel] = link;
+          labelObj[nameLabel] = a_tag.dataset.href;
           console.log(labelObj);
       });
         if(isUpdate) {
