@@ -34,6 +34,7 @@ const dbRef = ref(getDatabase());
 
 function getSubscriptionTemplate(name, cost, isSelected){
     if (isSelected){
+        document.getElementById("id_cost").innerHTML = cost;
          return `<li class="item">
                   <span class="item-text"><option value="${cost}" class="option__box" selected>${name}</option></span>
                 </li>`;
