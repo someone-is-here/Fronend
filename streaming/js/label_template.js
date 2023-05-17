@@ -72,7 +72,7 @@ function setLabel(){
         let checked_arr = [...checked]; // converts NodeList to Array
         checked_arr.forEach(item => {
           console.log(item);
-          let a_tag = item.getElementsByClassName("a");
+          let a_tag = item.querySelector("a");
            let nameLabel = a_tag.innerHTML;
           let link = a_tag.href;
           console.log(nameLabel, link);
