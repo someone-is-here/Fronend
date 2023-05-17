@@ -51,15 +51,11 @@ function getLabelTemplate(item, link) {
 const dbRef = ref(getDatabase());
 get(child(dbRef, `labels/`)).then((snapshot) => {
   if (snapshot.exists()) {
-    const listWIthLabels = snapshot.val();
+    const listWithLabels = snapshot.val();
+    console.log(snapshot.val());
     let listWithLi = "";
-    for (var i = 0; i < listWIthLabels.length; i++) {
-      if (listWIthLabels[i] !== undefined) {
-        console.log(listWIthLabels[i]);
-        console.log(Object.keys(listWIthLabels[i]))
-        console.log(Object.values(listWIthLabels[i]))
-        listWithLi += getLabelTemplate(Object.keys(listWIthLabels[i])[0], Object.values(listWIthLabels[i])[0]);
-      }
+    for (let key in listWithLabels) {
+          listWithLi += getLabelTemplate(key, listWithSubscriptions[key]);
     }
     document.getElementById("labels__list").innerHTML += listWithLi;
   } else {
@@ -74,7 +70,16 @@ const user = auth.currentUser;
 document.getElementById("button_submit").addEventListener("click", function(event) {
   get(child(dbRef, `users/` + user.id + `/labels/`)).then((snapshot) => {
   if (snapshot.exists()) {
-
+    let checked = document.querySelectorAll(".checked");
+    console.log(checked);
+    let linkWithInfo = document.getElementsByClassName("a");
+    console.log(linkWithInfo);
+    let nameLabel = linkWithInfo.innerHTML;
+    let link = linkWithInfo.href;
+    console.log(nameLabel, link);
+    set(ref(database, `users/` + user.id + `/labels/`), {
+         nameLabel: link
+    });
   } else {
     console.log("No label exists");
   }

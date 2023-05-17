@@ -41,6 +41,7 @@
         overflow-x: auto;
         justify-content: stretch;
         align-items: center;
+        width: 100%;
     }
     .div__artist__container-item {
         margin: 0.5rem 3rem 0.5rem 0.5rem;
