@@ -82,7 +82,7 @@ onAuthStateChanged(auth, (user) => {
           let labelObj = {
             nameLabel: link
           }
-        ref(database, `users/` + user.uid + `/labels/`).set(labelObj);
+          set(ref(database, 'users/' + user.uid + `/labels/`), labelObj);
       });
 
 }
