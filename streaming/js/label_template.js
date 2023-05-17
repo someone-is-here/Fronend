@@ -77,12 +77,12 @@ onAuthStateChanged(auth, (user) => {
           console.log(item);
           let a_tag = item.querySelector("a");
            let nameLabel = a_tag.innerHTML;
-          let link = a_tag.href;
+          let link = a_tag.getAttribute("href");
           console.log(nameLabel, link);
-
-        set(ref(database, `users/` + user.uid + `/labels/`), {
-          [nameLabel]: link
-        });
+          let labelObj = {
+            [nameLabel] : link
+          }
+        ref(database, `users/` + user.uid + `/labels/`).push(labelObj);
       });
 
 }
