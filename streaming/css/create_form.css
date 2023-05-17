@@ -107,3 +107,9 @@
     text-decoration: none;
     color: black;
 }
+.option__box{
+    height: 2rem;
+    padding: 1rem;
+    letter-spacing: 0.1rem;
+    color: black;
+}

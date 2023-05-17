@@ -202,8 +202,3 @@ option {
 .submit__form:hover{
     transform: scale(1.1);
 }
-.option__box{
-    height: 2rem;
-    padding: 0.5rem;
-    letter-spacing: 0.1rem;
-}
