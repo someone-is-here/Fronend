@@ -27,6 +27,10 @@ function menuTemplateLogin(res) {
                 <li class="menu-additional__list-item"><a href="#" class="menu-additional-link">Subscription</a></li>
                 <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link" onclick="userSignOut()">Logout</a></li>`;
 }
+function menuTemplateLoginArtist(res) {
+  return `                <li class="menu-additional__list-item menu-additional-email">${res}</li>
+                <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link" onclick="userSignOut()">Logout</a></li>`;
+}
 function menuBaseTemplate(){
   return `
                 <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link">Login</a></li>
@@ -44,9 +48,9 @@ onAuthStateChanged(auth, (user) => {
         console.log(snapshot.val());
         let role = snapshot.val().role_id;
         if (role === "2") {
-          document.getElementById("menu__additional").innerHTML = menuTemplateLogin(user.email);
+          document.getElementById("menu__additional").innerHTML = menuTemplateLoginArtist(snapshot.val().login);
         } else if (role === "3") {
-          document.getElementById("menu__additional").innerHTML = menuBaseTemplate();
+          document.getElementById("menu__additional").innerHTML = menuTemplateLogin(snapshot.val().login);
         }
       }
     }).catch(e=>{

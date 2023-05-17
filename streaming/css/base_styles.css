@@ -47,17 +47,8 @@ option {
     font-size: 1rem;
     padding: 1.5rem 1.5rem 1.5rem 0;
     text-decoration: none;
-    /*transition: color 2ms linear;*/
 }
-/*@media (max-width: 600px) {*/
-/*    .navbar__list-item-link{*/
-/*        font-size: 1rem;*/
-/*        letter-spacing: 0.05rem;*/
-/*    }*/
-/*    .navbar__list-item-link:first-of-type{*/
-/*        margin-top: 1rem;*/
-/*    }*/
-/*}*/
+
 .navbar__list-item:nth-child(1) > .navbar__list-item-link:hover{
     color: yellowgreen;
 }
@@ -106,14 +97,14 @@ option {
 /* The navigation menu links */
 .sidenav-link {
     display: block;
-    padding-top: 0.5rem;
+    padding-top: 1rem;
     margin: 0.5rem 1rem;
     text-decoration: none;
     transition: 0.3s;
     color: white;
 }
 
-.sidenav-link:nth-child(2) {
+.sidenav-link:nth-child(1) {
     padding-top: 1.5rem;
 }
 

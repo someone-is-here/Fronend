@@ -44,7 +44,6 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
     console.log(user.email)
-    document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += menuTemplateLogin(user.email);
 
     const dbRef = ref(getDatabase());
     console.log(`users/${uid}`);
@@ -57,6 +56,7 @@ onAuthStateChanged(auth, (user) => {
     }else if(role === "3"){
         document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += generateUserFunctionality();
     }
+    document.getElementsByClassName("ul__sidenav-list")[0].innerHTML += menuTemplateLogin(snapshot.val().login);
   } else {
     console.log("No data available");
   }
