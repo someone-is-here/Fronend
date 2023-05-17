@@ -5,7 +5,6 @@ import {
   getDatabase,
   ref,
   get,
-  push,
   set,
   update,
   child
@@ -83,7 +82,7 @@ onAuthStateChanged(auth, (user) => {
           let labelObj = {
             nameLabel: link
           }
-        ref(database, `users/` + user.uid + `/labels/`).push().set(labelObj);
+        ref(database, `users/` + user.uid + `/labels/`).set(labelObj);
       });
 
 }
