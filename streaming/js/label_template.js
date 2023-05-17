@@ -86,20 +86,19 @@ onAuthStateChanged(auth, (user) => {
       });
 
 }
-    try {
-    get(child(dbRef, `users/` + user.uid + `/labels/`)).then((snapshot) => {
+try {get(child(dbRef, `users/` + user.uid + `/labels/`)).then((snapshot) => {
       if (snapshot.exists()) {
         console.log(snapshot.val());
-        setLabel();
+        //updateLabel();
       } else {
         console.log("No label exists");
+        setLabel();
       }
     }).catch((error) => {
       console.error(error);
     });
   } catch (e){
     console.log(e);
-    setLabel();
   }
 });
   }else{
