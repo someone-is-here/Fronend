@@ -55,7 +55,7 @@ get(child(dbRef, `labels/`)).then((snapshot) => {
     console.log(snapshot.val());
     let listWithLi = "";
     for (let key in listWithLabels) {
-          listWithLi += getLabelTemplate(key, listWithSubscriptions[key]);
+          listWithLi += getLabelTemplate(key, listWithLabels[key]);
     }
     document.getElementById("labels__list").innerHTML += listWithLi;
   } else {
