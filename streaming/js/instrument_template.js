@@ -36,29 +36,29 @@ window.createClickListener = function(el) {
   if (checked && checked.length > 0) {
     btnText.innerText = `${checked.length} Selected`;
   } else {
-    btnText.innerText = "Select label";
+    btnText.innerText = "Select instruments";
   }
 }
 
-function getLabelTemplate(item, link) {
+function getInstrumentsTemplate(item) {
   return `<li class="item" onclick="createClickListener(this)">
                     <span class="checkbox">
                         <i class="fa-solid fa-check check-icon"></i>
                     </span>
-                    <span class="item-text"><a href="${link}" class="a__link__no-style">${item}</a></span>
+                    <span class="item-text">${item}</span>
                 </li>`;
 }
 
 const dbRef = ref(getDatabase());
-get(child(dbRef, `labels/`)).then((snapshot) => {
+get(child(dbRef, `instruments/`)).then((snapshot) => {
   if (snapshot.exists()) {
-    const listWithLabels = snapshot.val();
+    const listWithInstruments = snapshot.val();
     console.log(snapshot.val());
     let listWithLi = "";
-    for (let key in listWithLabels) {
-          listWithLi += getLabelTemplate(key, listWithLabels[key]);
+    for (let key in listWithInstruments) {
+          listWithLi += listWithInstruments(listWithInstruments[key]);
     }
-    document.getElementById("labels__list").innerHTML += listWithLi;
+    document.getElementById("instruments__list").innerHTML += listWithLi;
   } else {
     console.log("No data available");
   }
@@ -66,44 +66,44 @@ get(child(dbRef, `labels/`)).then((snapshot) => {
   console.error(error);
 });
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    document.getElementById("button_submit").addEventListener("click", function(event) {
-      let setLabel = function (){
-      let checked = document.querySelectorAll(".checked");
-        console.log(checked);
-        let checked_arr = [...checked]; // converts NodeList to Array
-        checked_arr.forEach(item => {
-          console.log(item);
-          let a_tag = item.querySelector("a");
-           let nameLabel = a_tag.innerHTML;
-          let link = a_tag.href;
-          console.log(nameLabel, link);
-
-        set(ref(database, `users/` + user.uid + `/labels/`), {
-          nameLabel: link
-        });
-      });
-
-}
-    try {
-    get(child(dbRef, `users/` + user.uid + `/labels/`)).then((snapshot) => {
-      if (snapshot.exists()) {
-        console.log(snapshot.val());
-        setLabel();
-      } else {
-        console.log("No label exists");
-      }
-    }).catch((error) => {
-      console.error(error);
-    });
-  } catch (e){
-    console.log(e);
-    setLabel();
-  }
-});
-  }else{
-    window.location.replace("login.html");
-  }
-});
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//     document.getElementById("button_submit").addEventListener("click", function(event) {
+//       let setLabel = function (){
+//       let checked = document.querySelectorAll(".checked");
+//         console.log(checked);
+//         let checked_arr = [...checked]; // converts NodeList to Array
+//         checked_arr.forEach(item => {
+//           console.log(item);
+//           let a_tag = item.querySelector("a");
+//            let nameLabel = a_tag.innerHTML;
+//           let link = a_tag.href;
+//           console.log(nameLabel, link);
+//
+//         set(ref(database, `users/` + user.uid + `/labels/`), {
+//           nameLabel: link
+//         });
+//       });
+//
+// }
+//     try {
+//     get(child(dbRef, `users/` + user.uid + `/labels/`)).then((snapshot) => {
+//       if (snapshot.exists()) {
+//         console.log(snapshot.val());
+//         setLabel();
+//       } else {
+//         console.log("No label exists");
+//       }
+//     }).catch((error) => {
+//       console.error(error);
+//     });
+//   } catch (e){
+//     console.log(e);
+//     setLabel();
+//   }
+// });
+//   }else{
+//     window.location.replace("login.html");
+//   }
+// });
 
