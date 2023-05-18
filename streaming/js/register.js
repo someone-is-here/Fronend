@@ -19,7 +19,6 @@ const database = getDatabase(app);
 const storage = getStorage();
 
 const auth = getAuth();
-const user = auth.currentUser;
 
 let files =[];
 let reader = new FileReader();

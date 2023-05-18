@@ -73,9 +73,10 @@ onAuthStateChanged(auth, (user) => {
 
     document.getElementById("button_submit").addEventListener("click", function(event) {
       const selectSubscription = document.getElementById("id_cform_pre-subscription");
-
              set(ref(database, 'users/' + user.uid + '/subscription/'),
                  selectSubscription.options[selectSubscription.selectedIndex].text);
+             alert("Subscription successfully changed!");
+             window.location.reload();
 });
   }else{
     window.location.replace("login.html");
