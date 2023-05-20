@@ -61,7 +61,7 @@ function setAlbums(albumsList){
     }
     selectAlbum.innerHTML = resultList;
 }
-
+const dbRef = ref(getDatabase());
 onAuthStateChanged(auth, (user) => {
     if (user) {
         try { get(child(dbRef, `users/` + user.uid + `/albums/`)).then((snapshot) => {
