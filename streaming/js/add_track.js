@@ -123,7 +123,9 @@ onAuthStateChanged(auth, (user) => {
                                     [trackTitle]:{
                                         cover: downloadURL,
                                         track: downloadURLTrack,
-                                        timing: window.duration
+                                        timing: window.duration,
+                                        streaming: 0,
+                                        likes: 0
                                     }
                                 };
 

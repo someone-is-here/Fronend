@@ -56,7 +56,8 @@ onAuthStateChanged(auth, (user) => {
                     let albumObj = {
                         [albumTitle]:{
                             year: albumYear,
-                            cover: downloadURL
+                            cover: downloadURL,
+                            likes: 0
                         }
                     };
 
