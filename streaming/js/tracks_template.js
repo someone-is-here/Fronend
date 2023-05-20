@@ -51,7 +51,7 @@ function trackTemplate(counter, title, image, streams, likes, timing, track){
            <div class="div__align-items">
            <audio controls>
                 <source src="${track}" type="audio/mpeg">
-            </audio></div>
+            </audio>
          </li>`;
 }
 
@@ -79,7 +79,7 @@ get(child(dbRef, `users/`)).then((snapshot) => {
                                          counter++,
                                          track,
                                          tracksList[track].cover,
-                                         tracksList[track].streams,
+                                         tracksList[track].streaming,
                                          tracksList[track].likes,
                                          timeRes,
                                          tracksList[track].track
