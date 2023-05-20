@@ -20,11 +20,29 @@ const storage = getStorage();
 
 const auth = getAuth();
 
-function trackTemplate(counter, title, image, streams, likes, timing, track){
-    return ` <li class="li__data">
+function trackTemplate(track){
+    return ` <audio controls>
+                <source src="${track}" type="audio/mpeg">
+            </audio>`;
+}
+
+function albumTemplate(counter, title, image, likes, year, tracks){
+    let trackList = "";
+    let timing=0;
+    for(let item in tracks){
+        trackList += trackTemplate(item);
+        timing += tracks[item].timing;
+    }
+    let time = undefined;
+    if(timing/3600<1){
+        time = `${Math.floor(timing / 60)}:${Math.ceil(timing - Math.floor(timing / 60) * 60)}`;
+    }else{
+        time = `${Math.floor(timing / 3600)}:${Math.floor((timing - Math.floor(timing / 3600) * 3600)/60)}:${Math.ceil(timing -Math.floor(timing / 3600) * 3600 - Math.floor((timing - Math.floor(timing / 3600) * 3600)/60) * 60)}`;
+    }
+    console.log(trackList);
+    return `<li class="li__data">
             <div class="div__align-items">
            <ul class="ul__data-item">
-               <li> <img src="${image}" class="img__track-icon"/></li>
                <li>
                    <span class="span__additional-tools">
                    <span>
@@ -33,11 +51,8 @@ function trackTemplate(counter, title, image, streams, likes, timing, track){
                             class="button__play-small" viewBox="0 0 24 24" data-encore-id="icon">
                            <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6
                            19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
-                   </a></span><span class="span__text">${counter}</span>
-               </span></li>
-               <li><div><a href="#" class="a__remove-style">${title}</a>
-                   <div class="div__plays-amount">${streams}</div>
-               </div></li>
+                   </a></span><span class="span__text">${counter}</span></span></li>
+               <li><a href="#" class="a__remove-style">${title}</a></li>
 
                <li><span class="span__additional-tools"><span class="span__heart">
                    <button type="button" name="play" class="button__remove-background"><svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="small__heart">
@@ -45,14 +60,14 @@ function trackTemplate(counter, title, image, streams, likes, timing, track){
                    3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348
                    8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262
                    0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501
-                    1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg></button><span class="span__hearts-amount">${likes}</span></span> ${timing}</span></li>
+                    1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg></button><span class="span__hearts-amount">${likes}</span></span> ${time}</span></li>
              </ul>
             </div>
-           <div class="div__align-items">
-           <audio controls>
-                <source src="${track}" type="audio/mpeg">
-            </audio></div>
-         </li>`;
+            <div style="display: none">
+               ${trackList}
+            </div>
+         </li>
+`;
 }
 
 const mainList = document.getElementById("id_full_list");
@@ -67,24 +82,32 @@ get(child(dbRef, `users/`)).then((snapshot) => {
                 get(child(dbRef, `users/` + item + '/albums/')).then((snapshot) => {
                     if (snapshot.exists()) {
                         console.log(snapshot.val());
-                        for(let alb in snapshot.val()){
+                        let counter = 1;
+                        const albumsList = snapshot.val();
+                        for(let alb in albumsList){
                              get(child(dbRef, `users/` + item + '/albums/' + alb + '/tracks/')).then((snapshot) => {
-                                 const tracksList = snapshot.val();
-                                 console.log(tracksList);
-                                 let counter = 1;
-                                 for(let track in tracksList) {
-                                    let timing = tracksList[track].timing;
-                                    let timeRes = `${Math.floor(timing / 60)}:${Math.ceil(timing - Math.floor(timing / 60) * 60)}`;
-                                     mainList.insertAdjacentHTML("beforeend", trackTemplate(
-                                         counter++,
-                                         track,
-                                         tracksList[track].cover,
-                                         tracksList[track].streams,
-                                         tracksList[track].likes,
-                                         timeRes,
-                                         tracksList[track].track
-                                         ));
-                                 }
+                                 mainList.insertAdjacentHTML("beforeend", albumTemplate(
+                                     counter++,
+                                     alb,
+                                     albumsList[alb].cover,
+                                     albumsList[alb].likes,
+                                     albumsList[alb].year,
+                                     snapshot.val()));
+                                 // console.log(tracksList);
+                                 // let counter = 1;
+                                 // for(let track in tracksList) {
+                                 //    let timing = tracksList[track].timing;
+                                 //    let timeRes = ``;
+                                 //     mainList.insertAdjacentHTML("beforeend", trackTemplate(
+                                 //         counter++,
+                                 //         track,
+                                 //         tracksList[track].cover,
+                                 //         tracksList[track].streams,
+                                 //         tracksList[track].likes,
+                                 //         timeRes,
+                                 //         tracksList[track].track
+                                 //         ));
+                                 // }
                              });
                         }
                     }
