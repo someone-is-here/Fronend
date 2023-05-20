@@ -96,7 +96,7 @@ const container = document.getElementById("artists");
 console.log(container);
 
 const dbRef = ref(getDatabase());
-const user = auth.currentUser;
+
 get(child(dbRef, `users/`)).then((snapshot) => {
   if (snapshot.exists()) {
     const usersList = snapshot.val();

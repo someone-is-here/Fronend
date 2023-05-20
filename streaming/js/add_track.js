@@ -99,7 +99,7 @@ onAuthStateChanged(auth, (user) => {
 
             uploadTask.on('state-changed', (snapshot) => {
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                uploadedProgressPicture.innerHTML = "Uploaded " + progress + "%";
+                uploadedProgressPicture.innerHTML = "Uploaded " + Math.floor(progress) + "%";
             }, (error) => {
                 alert("Error! Image not uploaded!");
             }, () => {
@@ -114,7 +114,7 @@ onAuthStateChanged(auth, (user) => {
                     const uploadTask = uploadBytesResumable(storageRef, trackToUpload, metaData);
                     uploadTask.on('state-changed', (snapshot) => {
                         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        uploadedProgressTrack.innerHTML = "Uploaded " + progress + "%";
+                        uploadedProgressTrack.innerHTML = "Uploaded " + Math.floor(progress) + "%";
                         }, (error) => {
                             alert("Error! Track not uploaded!");
                         }, () => {
@@ -130,10 +130,8 @@ onAuthStateChanged(auth, (user) => {
                                         likes: 0
                                     }
                                 };
-
                                 set(ref(database, 'users/' + user.uid + '/albums/' + albumName + '/tracks/'), trackObj);
                                 window.location.replace("add_track.html");
-
                             });
                     });
                 });
