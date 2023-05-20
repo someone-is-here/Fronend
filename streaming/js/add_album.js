@@ -34,8 +34,8 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         document.getElementById("button_submit").addEventListener("click", function (event) {
             event.preventDefault();
-            const albumTitle = document.getElementById("id_album_title");
-            const albumYear = document.getElementById("id_album_year")
+            const albumTitle = document.getElementById("id_album_title").value;
+            const albumYear = document.getElementById("id_album_year").value;
             const imageToUpload = files[0];
             const filename = imageToUpload.name;
             const metaData = {
@@ -61,6 +61,7 @@ onAuthStateChanged(auth, (user) => {
                     };
 
                     set(ref(database, 'users/' + user.uid + '/albums/'), albumObj);
+                    window.location.replace("add_track.html");
                 });
             });
         });
