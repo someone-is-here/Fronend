@@ -119,6 +119,8 @@ onAuthStateChanged(auth, (user) => {
                             alert("Error! Track not uploaded!");
                         }, () => {
                             getDownloadURL(uploadTask.snapshot.ref).then((downloadURLTrack) => {
+                                let albumName = selectAlbum.options[selectAlbum.selectedIndex].text;
+
                                 let trackObj = {
                                     [trackTitle]:{
                                         cover: downloadURL,
@@ -129,8 +131,9 @@ onAuthStateChanged(auth, (user) => {
                                     }
                                 };
 
-                                set(ref(database, 'users/' + user.uid + '/albums/tracks'), trackObj);
+                                set(ref(database, 'users/' + user.uid + '/albums/' + albumName + '/tracks/'), trackObj);
                                 window.location.replace("add_track.html");
+
                             });
                     });
                 });
