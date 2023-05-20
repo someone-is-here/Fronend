@@ -35,7 +35,6 @@ let audio = document.createElement('audio');
 
 trackInput.onchange = event => {
     filesTrack = event.target.files;
-    reader2.readAsDataURL(trackInput[0]);
      reader2.onload = function (e) {
          console.log(e);
             audio.src = e.target.result;
@@ -46,6 +45,7 @@ trackInput.onchange = event => {
                 window.duration = audioDur.toFixed(2);
             },false);
         };
+     reader2.readAsDataURL(filesTrack[0]);
 }
 
 let selectAlbum = document.getElementById("id_album_select");
