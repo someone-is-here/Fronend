@@ -33,7 +33,7 @@ function menuBaseTemplate(){
 function generateArtistFunctionality(login) {
   return `      <li><a class="sidenav-link">${login}</a></li>
                 <li><a href="add_instrument.html" class="sidenav-link">Add instrument</a></li>
-                <li><a href="create_track.html" class="sidenav-link">Add track</a></li>
+                <li><a href="add_track.html" class="sidenav-link">Add track</a></li>
                 <li><a href="add_genre.html" class="sidenav-link">Add genre</a></li>
                 <li><a href="add_album.html" class="sidenav-link">Add album</a></li>
                 <li><a href="add_label.html" class="sidenav-link">Add label</a></li>`;

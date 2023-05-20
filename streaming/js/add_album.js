@@ -61,6 +61,7 @@ onAuthStateChanged(auth, (user) => {
                     };
 
                     set(ref(database, 'users/' + user.uid + '/albums/'), albumObj);
+                    alert("Album added successfully!");
                     window.location.replace("add_track.html");
                 });
             });
