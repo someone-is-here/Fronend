@@ -13,9 +13,6 @@ ul{
 html::-webkit-scrollbar, body::-webkit-scrollbar{
     display: none;
 }
-select{
-    color: white;
-}
 option {
     color: black;
     height: 3rem;

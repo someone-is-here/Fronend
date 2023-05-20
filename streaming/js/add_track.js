@@ -22,6 +22,7 @@ const auth = getAuth();
 
 let filesPicture = [], filesTrack = [];
 let reader = new FileReader();
+let reader2 = new FileReader();
 let pictureInput = document.getElementById("id_track_cover");
 let trackInput = document.getElementById("id_track");
 
@@ -29,18 +30,22 @@ pictureInput.onchange = event => {
     filesPicture = event.target.files;
     reader.readAsDataURL(filesPicture[0]);
 };
+
 let audio = document.createElement('audio');
+
 trackInput.onchange = event => {
     filesTrack = event.target.files;
-    reader.onload = function (e) {
+    reader2.readAsDataURL(trackInput[0]);
+     reader2.onload = function (e) {
+         console.log(e);
             audio.src = e.target.result;
+            console.log(audio.src);
             audio.addEventListener('loadedmetadata', function(){
                 let audioDur = audio.duration;
+                console.log(audioDur);
                 window.duration = audioDur.toFixed(2);
-
             },false);
         };
-    reader.readAsDataURL(trackInput[0]);
 }
 
 let selectAlbum = document.getElementById("id_album_select");
