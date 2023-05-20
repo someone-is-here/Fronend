@@ -86,3 +86,10 @@ li:hover .div__plays-amount{
         margin-left: 0;
     }
 }
+audio::-webkit-media-controls-panel{
+    background: rgb(31, 31, 31);
+}
+audio::-webkit-media-controls-mute-button,
+audio::-webkit-media-controls-play-button{
+    color:white;
+}
