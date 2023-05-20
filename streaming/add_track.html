@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width">
     <style>
         .section__login {
-            background: url('https://images.pexels.com/photos/2609107/pexels-photo-2609107.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center;
+            background: url('hhttps://images.pexels.com/photos/1563355/pexels-photo-1563355.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center;
             background-size: cover;
         }
     </style>
@@ -49,22 +49,26 @@
     <div class="div__login">
         <div>
     <form action="" method="post" enctype="multipart/form-data" class="form__register">
-      <h2 class="login__title">Create album: </h2>
+      <h2 class="login__title">Add Track: </h2>
         <input type="hidden" name="csrfmiddlewaretoken" value="NqyCsie1B9KgpNx5GDkAjrv4YQ8hFB3JPGluys04Cahjd8EZEYd5cA9BcsD993T3">
             <div>
                 <p>
-                  <label for="id_album_title">Title:</label>
-                  <input type="text" required id="id_album_title">
+                  <label for="id_track_title">Title:</label>
+                  <input type="text" required id="id_track_title">
                 </p>
                 <p>
-                  <label for="id_album_year">Year:</label>
-                  <input type="number" required id="id_album_year" min="0" max="2023">
+                    <label for="id_track_cover">Cover:</label> <label id="uploadProgress"></label>
+                    <input type="file" required id="id_track_cover">
                 </p>
-                <p>
-                    <label for="id_album_cover">Cover:</label> <label id="uploadProgress"></label>
-                    <input type="file" name="id_album_cover" required id="id_album_cover">
+                 <p>
+                    <label for="id_track">Track:</label> <label id="uploadProgressTrack"></label>
+                    <input type="file" required id="id_track">
                 </p>
-
+            <p>
+                <label for="id_album_select">Album:</label>
+                <select name="id_album_select" required id="id_album_select">
+                </select>
+            </p>
             </div>
             <div class="button_align-center">
                 <input type="button" value="Submit" class="submit__form" id="button_submit"/>
@@ -80,7 +84,7 @@
    <script src="js/script.js" ></script>
     <script src="js/auth.js" type="module" ></script>
     <script src="js/sidenav.js" type="module" ></script>
-    <script src="js/add_album.js" type="module"></script>
+    <script src="js/add_track.js" type="module"></script>
 
 </body>
 </html>
