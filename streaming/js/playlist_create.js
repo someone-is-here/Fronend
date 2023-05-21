@@ -39,6 +39,17 @@ const storage = getStorage();
 
 const auth = getAuth();
 
+window.createClickListener = function(el) {
+  el.classList.toggle("checked");
+  let checked = document.querySelectorAll(".checked"),
+    btnText = document.querySelector(".btn-text");
+  if (checked && checked.length > 0) {
+    btnText.innerText = `${checked.length} Selected`;
+  } else {
+    btnText.innerText = "Select tracks:";
+  }
+}
+
 function trackTemplate(item) {
   return `<li class="item" onclick="createClickListener(this)">
                     <span class="checkbox">
