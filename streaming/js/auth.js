@@ -26,7 +26,7 @@ function menuTemplateLogin(res) {
 
   return `         <li>
                 <form action="" class="form__search-bar">
-                    <input type="text" placeholder="Search anything" name="input__search">
+                    <input type="text" placeholder="Search anything" name="input__search" class="input__search">
                     <button type="submit"><img src="images/search.png"></button>
                 </form>
 
@@ -38,7 +38,7 @@ function menuTemplateLogin(res) {
 function menuTemplateLoginArtist(res) {
   return `         <li>
                 <form action="" class="form__search-bar">
-                    <input type="text" placeholder="Search anything" name="input__search">
+                    <input type="text" placeholder="Search anything" name="input__search" class="input__search">
                     <button type="submit"><img src="images/search.png"></button>
                 </form>
 
@@ -50,7 +50,7 @@ function menuBaseTemplate(){
   return `
    <li>
                 <form action="" class="form__search-bar">
-                    <input type="text" placeholder="Search anything" name="input__search">
+                    <input type="text" placeholder="Search anything" name="input__search" class="input__search">
                     <button type="submit" ><img src="images/search.png"></button>
                 </form>
 
