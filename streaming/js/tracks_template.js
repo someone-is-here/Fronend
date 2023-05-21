@@ -59,7 +59,7 @@ window.play = counter => {
              get(child(dbRef, path)).then((snapshot) => {
                  const track = snapshot.val();
                  track.streaming = track.streaming+1;
-                 update(ref(dbRef, path), track);
+                 update(sRef(dbRef, path), track);
              });
         }, 45000);
     }
@@ -74,7 +74,7 @@ window.addHeart= (element, counter)=>{
              get(child(dbRef, path)).then((snapshot) => {
                  const track = snapshot.val();
                  track.likes = track.likes - 1;
-                 update(ref(dbRef, path), track);
+                 update(sRef(dbRef, path), track);
              });
         } else {
             element.classList.add("small__heart-red");
@@ -83,7 +83,7 @@ window.addHeart= (element, counter)=>{
              get(child(dbRef, path)).then((snapshot) => {
                  const track = snapshot.val();
                  track.likes = track.likes + 1;
-                 update(ref(dbRef, path), track);
+                 update(sRef(dbRef, path), track);
              });
         }
 }
