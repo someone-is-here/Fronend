@@ -119,8 +119,21 @@ onAuthStateChanged(auth, (user) => {
                         }, () => {
                             getDownloadURL(uploadTask.snapshot.ref).then((downloadURLTrack) => {
                                 let albumName = selectAlbum.options[selectAlbum.selectedIndex].text;
+                    get(child(ref(database, 'users/' + user.uid + '/albums/' + albumName + '/tracks/'))).then((snapshot) => {
+                         let trackObj = snapshot.val();
+                         trackObj[trackTitle] = {
+                                        cover: downloadURL,
+                                        track: downloadURLTrack,
+                                        timing: window.duration,
+                                        streaming: 0,
+                                        likes: 0
+                                    };
 
-                                let trackObj = {
+                    update(ref(database, 'users/' + user.uid + '/albums/' + albumName + '/tracks/'), trackObj);
+
+
+                    }).error((error)=>{
+                         let trackObj = {
                                     [trackTitle]: {
                                         cover: downloadURL,
                                         track: downloadURLTrack,
@@ -129,7 +142,8 @@ onAuthStateChanged(auth, (user) => {
                                         likes: 0
                                     }
                                 };
-                                set(ref(database, 'users/' + user.uid + '/albums/' + albumName + '/tracks/'), trackObj);
+                         set(ref(database, 'users/' + user.uid + '/albums/' + albumName + '/tracks/'), trackObj);
+                         });
                                 window.location.replace("add_track.html");
                             });
                         });
