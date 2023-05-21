@@ -80,7 +80,9 @@ window.addHeart= (element, counter)=>{
             element.classList.add("small__heart-red");
             el.innerHTML = el_content + 1;
             console.log(document.getElementsByClassName("span__path"));
-            const path = document.getElementsByClassName("span__path")[counter-1].innerHTML;
+            const path = document.getElementsByClassName("span__path")[counter-1];
+            console.log(path);
+            console.log(path.innerHTML);
              get(child(path)).then((snapshot) => {
                  const track = snapshot.val();
                  track.likes = track.likes + 1;
