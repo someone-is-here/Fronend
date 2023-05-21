@@ -37,6 +37,7 @@ function mainTemplate(counter, title, image, likes, year, tracks){
     let timing=0;
     for(let item in tracks){
         trackCounter += 1;
+        timing += tracks[item].timing;
     }
     let time = undefined;
 
