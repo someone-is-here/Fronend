@@ -50,7 +50,7 @@ document.getElementById("submit__login-form").addEventListener("click",function 
         const errorCode = error.code;
         const errorMessage = error.message;
 
-        alert(errorMessage);
+          document.getElementById("id__span-display-error-messages").innerHTML = error.message;
   });
 });
 
@@ -72,7 +72,7 @@ signInWithPopup(auth, GoogleProvider)
     const email = error.email;
     // The AuthCredential type that was used.
     const credential = GoogleAuthProvider.credentialFromError(error);
-        alert(errorMessage);
+      document.getElementById("id__span-display-error-messages").innerHTML = error.message;
   });
  });
 
@@ -94,7 +94,7 @@ signInWithPopup(auth, FacebookProvider)
     const email = error.customData.email;
     // The AuthCredential type that was used.
     const credential = FacebookAuthProvider.credentialFromError(error);
-        alert(errorMessage);
+       document.getElementById("id__span-display-error-messages").innerHTML = error.message;
   });
  });
 
@@ -118,6 +118,6 @@ signInWithPopup(auth, TwitterProvider)
     const email = error.customData.email;
     // The AuthCredential type that was used.
     const credential = TwitterAuthProvider.credentialFromError(error);
-    alert(errorMessage);
+      document.getElementById("id__span-display-error-messages").innerHTML = error.message;
   });
  });

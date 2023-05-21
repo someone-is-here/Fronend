@@ -33,6 +33,7 @@ let uploadedProgress = document.getElementById("uploadProgress");
 onAuthStateChanged(auth, (user) => {
     if (user) {
         document.getElementById("button_submit").addEventListener("click", function (event) {
+            try{
             event.preventDefault();
             const albumTitle = document.getElementById("id_album_title").value;
             const albumYear = document.getElementById("id_album_year").value;
@@ -49,7 +50,7 @@ onAuthStateChanged(auth, (user) => {
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                 uploadedProgress.innerHTML = "Uploaded " + progress + "%";
             }, (error) => {
-                alert("Error! Image not uploaded!");
+                document.getElementById("id__span-display-error-messages").innerHTML = error.message;
             }, () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                     console.log("Set album into db");
@@ -66,6 +67,9 @@ onAuthStateChanged(auth, (user) => {
                     window.location.replace("add_track.html");
                 });
             });
+                    }catch (error) {
+                  document.getElementById("id__span-display-error-messages").innerHTML = error.message;
+            }
         });
     } else {
         window.location.replace("login.html");

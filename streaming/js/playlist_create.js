@@ -112,49 +112,53 @@ let uploadedProgress = document.getElementById("uploadProgress");
 onAuthStateChanged(auth, (user) => {
     if (user) {
         document.getElementById("button_submit").addEventListener("click", function (event) {
-            event.preventDefault();
-            const playlistTitle = document.getElementById("id_title").value;
-            const imageToUpload = files[0];
-            const filename = imageToUpload.name;
-            const metaData = {
-                contentType: imageToUpload.type
-            }
-            const storageRef = sRef(storage, "images/playlists/" + user.uid + filename);
-            const uploadTask = uploadBytesResumable(storageRef, imageToUpload, metaData);
+            try {
+                event.preventDefault();
+                const playlistTitle = document.getElementById("id_title").value;
+                const imageToUpload = files[0];
+                const filename = imageToUpload.name;
+                const metaData = {
+                    contentType: imageToUpload.type
+                }
+                const storageRef = sRef(storage, "images/playlists/" + user.uid + filename);
+                const uploadTask = uploadBytesResumable(storageRef, imageToUpload, metaData);
 
 
-            uploadTask.on('state-changed', (snapshot) => {
-                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                uploadedProgress.innerHTML = "Uploaded " + progress + "%";
-            }, (error) => {
-                alert("Error! Image not uploaded!");
-            }, () => {
-                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    console.log("Set playlist into db");
-                    let checked = document.querySelectorAll(".checked");
-                    console.log(checked);
-                    let checked_arr = [...checked]; // converts NodeList to Array
-                    let tracksObj = {};
-                    checked_arr.forEach(item => {
-                        console.log(item);
-                        let span_tag = item.querySelector('.item-text');
-                        let value = span_tag.innerHTML;
-                        tracksObj[value] = span_tag.dataset.link;
-                        console.log(tracksObj);
+                uploadTask.on('state-changed', (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    uploadedProgress.innerHTML = "Uploaded " + progress + "%";
+                }, (error) => {
+                    alert("Error! Image not uploaded!");
+                }, () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                        console.log("Set playlist into db");
+                        let checked = document.querySelectorAll(".checked");
+                        console.log(checked);
+                        let checked_arr = [...checked]; // converts NodeList to Array
+                        let tracksObj = {};
+                        checked_arr.forEach(item => {
+                            console.log(item);
+                            let span_tag = item.querySelector('.item-text');
+                            let value = span_tag.innerHTML;
+                            tracksObj[value] = span_tag.dataset.link;
+                            console.log(tracksObj);
+                        });
+                        let playlistObj = {
+                            [playlistTitle]: {
+                                cover: downloadURL,
+                                likes: 0,
+                                tracks: tracksObj
+                            }
+                        };
+
+                        set(ref(database, 'users/' + user.uid + '/playlists/'), playlistObj);
+                        alert("Playlist added successfully!");
+                        window.location.replace("playlists.html");
                     });
-                    let playlistObj = {
-                        [playlistTitle]:{
-                            cover: downloadURL,
-                            likes: 0,
-                            tracks: tracksObj
-                        }
-                    };
-
-                    set(ref(database, 'users/' + user.uid + '/playlists/'), playlistObj);
-                    alert("Playlist added successfully!");
-                    window.location.replace("playlists.html");
                 });
-            });
+            }catch (error) {
+                  document.getElementById("id__span-display-error-messages").innerHTML = error.message;
+            }
         });
     } else {
         window.location.replace("login.html");

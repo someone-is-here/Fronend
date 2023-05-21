@@ -1,8 +1,25 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
-import { getDatabase, ref, set, get, update, child } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-      onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
-import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+import {
+    child,
+    get,
+    getDatabase,
+    ref,
+    set,
+    update
+} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
+import {
+    createUserWithEmailAndPassword,
+    getAuth,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signOut
+} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+import {
+    getDownloadURL,
+    getStorage,
+    ref as sRef,
+    uploadBytesResumable
+} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDd2TdBKvjDRzfaScSO5GZJOnJCQAIt9nA",
@@ -232,17 +249,14 @@ document.getElementById("submit__b-form").addEventListener("click", function(eve
             })
             .catch((error) => {
                 const errorCode = error.code;
-                const errorMessage = error.message;
-                alert(errorMessage);
+                document.getElementById("id__span-display-error-messages").innerHTML = error.message;
             });
       });
   });
 
     }).catch((error) => {
       const errorCode = error.code;
-      const errorMessage = error.message;
-
-      alert(errorMessage);
+      document.getElementById("id__span-display-error-messages").innerHTML = error.message;
     });
 }
 });

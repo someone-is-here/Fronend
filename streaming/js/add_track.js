@@ -84,35 +84,36 @@ onAuthStateChanged(auth, (user) => {
         }
 
         document.getElementById("button_submit").addEventListener("click", function (event) {
-            event.preventDefault();
-            const trackTitle = document.getElementById("id_track_title").value;
+            try {
+                event.preventDefault();
+                const trackTitle = document.getElementById("id_track_title").value;
 
-            const imageToUpload = filesPicture[0];
-            const filename = imageToUpload.name;
-            const metaData = {
-                contentType: imageToUpload.type
-            }
-            const storageRef = sRef(storage, "images/tracks/" + user.uid + filename);
-            const uploadTask = uploadBytesResumable(storageRef, imageToUpload, metaData);
+                const imageToUpload = filesPicture[0];
+                const filename = imageToUpload.name;
+                const metaData = {
+                    contentType: imageToUpload.type
+                }
+                const storageRef = sRef(storage, "images/tracks/" + user.uid + filename);
+                const uploadTask = uploadBytesResumable(storageRef, imageToUpload, metaData);
 
-            uploadTask.on('state-changed', (snapshot) => {
-                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                uploadedProgressPicture.innerHTML = "Uploaded " + Math.floor(progress) + "%";
-            }, (error) => {
-                alert("Error! Image not uploaded!");
-            }, () => {
-                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    console.log("Set album into db");
-                     const trackToUpload = filesTrack[0];
-                     const filename = trackToUpload.name;
-                      const metaData = {
-                        contentType: trackToUpload.type
+                uploadTask.on('state-changed', (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    uploadedProgressPicture.innerHTML = "Uploaded " + Math.floor(progress) + "%";
+                }, (error) => {
+                    document.getElementById("id__span-display-error-messages").innerHTML = error.message;
+                }, () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                        console.log("Set album into db");
+                        const trackToUpload = filesTrack[0];
+                        const filename = trackToUpload.name;
+                        const metaData = {
+                            contentType: trackToUpload.type
                         }
-                    const storageRef = sRef(storage, "tracks/" + user.uid + filename);
-                    const uploadTask = uploadBytesResumable(storageRef, trackToUpload, metaData);
-                    uploadTask.on('state-changed', (snapshot) => {
-                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        uploadedProgressTrack.innerHTML = "Uploaded " + Math.floor(progress) + "%";
+                        const storageRef = sRef(storage, "tracks/" + user.uid + filename);
+                        const uploadTask = uploadBytesResumable(storageRef, trackToUpload, metaData);
+                        uploadTask.on('state-changed', (snapshot) => {
+                            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            uploadedProgressTrack.innerHTML = "Uploaded " + Math.floor(progress) + "%";
                         }, (error) => {
                             alert("Error! Track not uploaded!");
                         }, () => {
@@ -120,7 +121,7 @@ onAuthStateChanged(auth, (user) => {
                                 let albumName = selectAlbum.options[selectAlbum.selectedIndex].text;
 
                                 let trackObj = {
-                                    [trackTitle]:{
+                                    [trackTitle]: {
                                         cover: downloadURL,
                                         track: downloadURLTrack,
                                         timing: window.duration,
@@ -131,9 +132,12 @@ onAuthStateChanged(auth, (user) => {
                                 set(ref(database, 'users/' + user.uid + '/albums/' + albumName + '/tracks/'), trackObj);
                                 window.location.replace("add_track.html");
                             });
+                        });
                     });
                 });
-            });
+            } catch (error) {
+                  document.getElementById("id__span-display-error-messages").innerHTML = error.message;
+            }
         });
     } else {
         window.location.replace("login.html");
