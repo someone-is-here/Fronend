@@ -20,6 +20,27 @@ const storage = getStorage();
 
 const auth = getAuth();
 
+var Timer = function(callback, delay) {
+    let timerId, start, remaining = delay;
+
+    this.pause = function() {
+        window.clearTimeout(timerId);
+        timerId = null;
+        remaining -= Date.now() - start;
+    };
+
+    this.resume = function() {
+        if (timerId) {
+            return;
+        }
+
+        start = Date.now();
+        timerId = window.setTimeout(callback, remaining);
+    };
+
+    this.resume();
+};
+
 window.play = counter => {
     console.log(counter);
     const audio = document.getElementsByTagName("audio")[counter-1];
@@ -29,13 +50,46 @@ window.play = counter => {
                            19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>`;
 
         audio.pause();
+        window.timer.resume();
     }else {
         document.getElementsByClassName("button__play-small")[counter-1].innerHTML=`<path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" fill="white"></path>`;
         audio.play();
+        window.timer = new Timer(function() {
+             const path = document.getElementsByClassName("span__path")[counter-1].innerHTML;
+             get(child(path)).then((snapshot) => {
+                 const track = snapshot.val();
+                 track.streaming = track.streaming+1;
+                 set(ref(path), track);
+             });
+        }, 45000);
     }
 }
+window.addHeart= (element, counter)=>{
+  let el = document.getElementsByClassName("span__hearts-amount")[counter-1];
+        let el_content = +el.innerHTML;
+        if(element.classList.contains("small__heart-red")){
+            element.classList.remove("small__heart-red");
+            el.innerHTML = el_content - 1;
+            const path = document.getElementsByClassName("span__path")[counter-1].innerHTML;
+             get(child(path)).then((snapshot) => {
+                 const track = snapshot.val();
+                 track.likes = track.likes - 1;
+                 set(ref(path), track);
+             });
+        } else {
+            element.classList.add("small__heart-red");
+            el.innerHTML = el_content + 1;
+            const path = document.getElementsByClassName("span__path")[counter-1].innerHTML;
+             get(child(path)).then((snapshot) => {
+                 const track = snapshot.val();
+                 track.likes = track.likes + 1;
+                 set(ref(path), track);
+             });
+        }
+}
 
-function trackTemplate(counter, title, image, streams, likes, timing, track){
+
+function trackTemplate(counter, title, image, streams, likes, timing, track, path){
     return ` <li class="li__data">
             <div class="div__align-items">
            <ul class="ul__data-item">
@@ -50,12 +104,12 @@ function trackTemplate(counter, title, image, streams, likes, timing, track){
                            19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
                    </button></span><span class="span__text">${counter}</span>
                </span></li>
-               <li><div><a href="#" class="a__remove-style">${title}</a>
+               <li><div><a href="#" class="a__remove-style track__title">${title}</a>
                    <div class="div__plays-amount">${streams}</div>
                </div></li>
 
                <li><span class="span__additional-tools"><span class="span__heart">
-                   <button type="button" name="play" class="button__remove-background"><svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="small__heart">
+                   <button type="button" name="play" class="button__remove-background"><svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="small__heart" onclick="addHeart(this, ${counter})">
                    <path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782
                    3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348
                    8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262
@@ -67,6 +121,7 @@ function trackTemplate(counter, title, image, streams, likes, timing, track){
            <audio controls>
                 <source src="${track}" type="audio/mpeg">
             </audio>
+            <span class="span__path">${path}</span>
          </li>`;
 }
 
@@ -97,7 +152,8 @@ get(child(dbRef, `users/`)).then((snapshot) => {
                                          tracksList[track].streaming,
                                          tracksList[track].likes,
                                          timeRes,
-                                         tracksList[track].track
+                                         tracksList[track].track,
+                                         dbRef, `users/` + item + '/albums/' + alb + '/tracks/' + track
                                          ));
                                  }
                              });

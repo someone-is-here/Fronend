@@ -204,3 +204,7 @@ select{
     padding: 0.5rem;
     border: none;
 }
+.span__hearts-amount{
+    display: inline-block;
+    margin-left: 1rem;
+}

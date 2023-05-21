@@ -47,10 +47,6 @@
 .a__remove-style{
     color: white;
 }
-.span__hearts-amount{
-    display: inline-block;
-    margin-left: 1rem;
-}
 .div__plays-amount{
     letter-spacing: 0.1rem;
     font-size: 0.8rem;

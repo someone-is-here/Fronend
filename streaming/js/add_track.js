@@ -75,14 +75,12 @@ onAuthStateChanged(auth, (user) => {
                 setAlbums(snapshot.val());
             } else {
                 console.log("not found");
-               // window.location.replace("add_album.html");
             }
         }).catch((error) => {
             console.error(error);
         });
         } catch (e){
             console.log(e.message);
-            //window.location.replace("add_album.html");
         }
 
         document.getElementById("button_submit").addEventListener("click", function (event) {
