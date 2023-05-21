@@ -79,6 +79,7 @@ window.addHeart= (element, counter)=>{
         } else {
             element.classList.add("small__heart-red");
             el.innerHTML = el_content + 1;
+            console.log(document.getElementsByClassName("span__path"));
             const path = document.getElementsByClassName("span__path")[counter-1].innerHTML;
              get(child(path)).then((snapshot) => {
                  const track = snapshot.val();
