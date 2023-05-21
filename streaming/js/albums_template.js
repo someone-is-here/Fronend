@@ -25,12 +25,18 @@ function trackTemplate(track){
                 <source src="${track}" type="audio/mpeg">
             </audio>`;
 }
-
+window.play = counter => {
+    console.log(counter);
+    const audioContainer = document.getElementsByClassName("div__tracks-container")[counter-1];
+    const audio = audioContainer.querySelector("audio")[0];
+    console.log(audio);
+    audio.play();
+}
 function albumTemplate(counter, title, image, likes, year, tracks){
     let trackList = "";
     let timing=0;
     for(let item in tracks){
-        trackList += trackTemplate(item);
+        trackList += trackTemplate(tracks[item].track);
         timing += tracks[item].timing;
     }
     let time = undefined;
@@ -46,12 +52,12 @@ function albumTemplate(counter, title, image, likes, year, tracks){
                <li>
                    <span class="span__additional-tools">
                    <span>
-                       <a href="#">
+                       <button onclick="play(${counter})">
                        <svg role="img" height="24" width="24" aria-hidden="true"
                             class="button__play-small" viewBox="0 0 24 24" data-encore-id="icon">
                            <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6
                            19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
-                   </a></span><span class="span__text">${counter}</span></span></li>
+                   </button></span><span class="span__text">${counter}</span></span></li>
                <li><a href="#" class="a__remove-style">${title}</a></li>
 
                <li><span class="span__additional-tools"><span class="span__heart">
@@ -63,7 +69,8 @@ function albumTemplate(counter, title, image, likes, year, tracks){
                     1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg></button><span class="span__hearts-amount">${likes}</span></span> ${time}</span></li>
              </ul>
             </div>
-            <div style="display: none">
+            <div style="display: none" class="div__tracks-container">
+                <span id="id_album_year">Year: ${year}</span>
                ${trackList}
             </div>
          </li>
@@ -76,13 +83,13 @@ const dbRef = ref(getDatabase());
 get(child(dbRef, `users/`)).then((snapshot) => {
   if (snapshot.exists()) {
     const usersList = snapshot.val();
+    let counter = 1;
     for(let item in usersList){
         if(usersList[item].role_id === "2"){
             try {
                 get(child(dbRef, `users/` + item + '/albums/')).then((snapshot) => {
                     if (snapshot.exists()) {
                         console.log(snapshot.val());
-                        let counter = 1;
                         const albumsList = snapshot.val();
                         for(let alb in albumsList){
                              get(child(dbRef, `users/` + item + '/albums/' + alb + '/tracks/')).then((snapshot) => {

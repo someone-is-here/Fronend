@@ -20,6 +20,12 @@ const storage = getStorage();
 
 const auth = getAuth();
 
+window.play = counter => {
+    console.log(counter);
+    const audio = document.getElementsByTagName("audio")[counter-1];
+    audio.play();
+}
+
 function trackTemplate(counter, title, image, streams, likes, timing, track){
     return ` <li class="li__data">
             <div class="div__align-items">
@@ -28,12 +34,12 @@ function trackTemplate(counter, title, image, streams, likes, timing, track){
                <li>
                    <span class="span__additional-tools">
                    <span>
-                       <a href="#">
+                       <button onclick="play(${counter})">
                        <svg role="img" height="24" width="24" aria-hidden="true"
                             class="button__play-small" viewBox="0 0 24 24" data-encore-id="icon">
                            <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6
                            19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
-                   </a></span><span class="span__text">${counter}</span>
+                   </button></span><span class="span__text">${counter}</span>
                </span></li>
                <li><div><a href="#" class="a__remove-style">${title}</a>
                    <div class="div__plays-amount">${streams}</div>
@@ -61,6 +67,7 @@ const dbRef = ref(getDatabase());
 get(child(dbRef, `users/`)).then((snapshot) => {
   if (snapshot.exists()) {
     const usersList = snapshot.val();
+    let counter = 1;
     for(let item in usersList){
         if(usersList[item].role_id === "2"){
             try {
@@ -71,7 +78,6 @@ get(child(dbRef, `users/`)).then((snapshot) => {
                              get(child(dbRef, `users/` + item + '/albums/' + alb + '/tracks/')).then((snapshot) => {
                                  const tracksList = snapshot.val();
                                  console.log(tracksList);
-                                 let counter = 1;
                                  for(let track in tracksList) {
                                     let timing = tracksList[track].timing;
                                     let timeRes = `${Math.floor(timing / 60)}:${Math.ceil(timing - Math.floor(timing / 60) * 60)}`;
