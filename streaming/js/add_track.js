@@ -119,7 +119,7 @@ onAuthStateChanged(auth, (user) => {
                         }, () => {
                             getDownloadURL(uploadTask.snapshot.ref).then((downloadURLTrack) => {
                                 let albumName = selectAlbum.options[selectAlbum.selectedIndex].text;
-                    get(child(ref(database, 'users/' + user.uid + '/albums/' + albumName + '/tracks/'))).then((snapshot) => {
+                    get(child(dbRef, 'users/' + user.uid + '/albums/' + albumName + '/tracks/')).then((snapshot) => {
                          let trackObj = snapshot.val();
                          trackObj[trackTitle] = {
                                         cover: downloadURL,

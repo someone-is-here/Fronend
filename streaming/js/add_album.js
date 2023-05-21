@@ -28,7 +28,7 @@ pictureInput.onchange = event => {
     files = event.target.files;
     reader.readAsDataURL(files[0]);
 };
-
+const dbRef = ref(getDatabase());
 let uploadedProgress = document.getElementById("uploadProgress");
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -54,7 +54,7 @@ onAuthStateChanged(auth, (user) => {
             }, () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 
-                     get(child(ref(database, 'users/' + user.uid + '/albums/'))).then((snapshot) => {
+                     get(child(dbRef, 'users/' + user.uid + '/albums/')).then((snapshot) => {
                          let albumObj = snapshot.val();
                          albumObj[albumTitle]= {
                             year: albumYear,
