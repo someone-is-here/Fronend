@@ -65,7 +65,7 @@ onAuthStateChanged(auth, (user) => {
                     update(ref(database, 'users/' + user.uid + '/albums/'), albumObj);
 
 
-                    }).error((error)=>{
+                    }).catch((error)=>{
                         let albumObj = {
                         [albumTitle]: {
                             year: albumYear,

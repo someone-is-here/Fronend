@@ -132,7 +132,7 @@ onAuthStateChanged(auth, (user) => {
                     update(ref(database, 'users/' + user.uid + '/albums/' + albumName + '/tracks/'), trackObj);
 
 
-                    }).error((error)=>{
+                    }).catch((error)=>{
                          let trackObj = {
                                     [trackTitle]: {
                                         cover: downloadURL,
