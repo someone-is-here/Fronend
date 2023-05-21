@@ -17,7 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const storage = getStorage();
-
+const dbRef = ref(getDatabase());
 const auth = getAuth();
 
 var Timer = function(callback, delay) {
@@ -56,7 +56,7 @@ window.play = counter => {
         audio.play();
         window.timer = new Timer(function() {
              const path = document.getElementsByClassName("span__path")[counter-1].innerHTML;
-             get(child(path)).then((snapshot) => {
+             get(child(dbRef, path)).then((snapshot) => {
                  const track = snapshot.val();
                  track.streaming = track.streaming+1;
                  set(ref(path), track);
@@ -74,7 +74,7 @@ window.addHeart= (element, counter)=>{
              get(child(path)).then((snapshot) => {
                  const track = snapshot.val();
                  track.likes = track.likes - 1;
-                 set(ref(path), track);
+                 set(ref(dbRef, path), track);
              });
         } else {
             element.classList.add("small__heart-red");
@@ -83,7 +83,7 @@ window.addHeart= (element, counter)=>{
              get(child(path)).then((snapshot) => {
                  const track = snapshot.val();
                  track.likes = track.likes + 1;
-                 set(ref(path), track);
+                 set(ref(dbRef, path), track);
              });
         }
 }
@@ -126,7 +126,7 @@ function trackTemplate(counter, title, image, streams, likes, timing, track, pat
 }
 
 const mainList = document.getElementById("id_full_list");
-const dbRef = ref(getDatabase());
+
 
 get(child(dbRef, `users/`)).then((snapshot) => {
   if (snapshot.exists()) {
@@ -153,7 +153,7 @@ get(child(dbRef, `users/`)).then((snapshot) => {
                                          tracksList[track].likes,
                                          timeRes,
                                          tracksList[track].track,
-                                         dbRef + `users/` + item + '/albums/' + alb + '/tracks/' + track
+                                         `users/` + item + '/albums/' + alb + '/tracks/' + track
                                          ));
                                  }
                              });
