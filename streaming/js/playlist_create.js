@@ -78,7 +78,7 @@ get(child(dbRef, `users/`)).then((snapshot) => {
                                  for(let track in tracksList) {
                                     mainList.insertAdjacentHTML("beforeend", trackTemplate(
                                          track,
-                                         dbRef + `users/` + item + '/albums/' + alb + '/tracks/'
+                                         dbRef + `users/` + item + '/albums/' + alb + '/tracks/' + track
                                         ));
                                  }
                              });
