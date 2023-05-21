@@ -1,18 +1,26 @@
-const items = [{
-    image: 	'https://i.scdn.co/image/ab67616d00001e0228ccaf8cb23d857cb9361ec4',
-    name: 'Name',
-    trackId: 2
-},{
-    image: 	'https://i.scdn.co/image/ab67616d00001e0228ccaf8cb23d857cb9361ec4',
-    name: 'Name',
-    trackId: 2
-},{
-    image: 	'https://i.scdn.co/image/ab67616d00001e0228ccaf8cb23d857cb9361ec4',
-    name: 'Name',
-    trackId: 2
-}];
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+import { getDatabase, ref, set, get, update, child } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+      onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
 
-function getItemTemplate(item){
+const firebaseConfig = {
+    apiKey: "AIzaSyDd2TdBKvjDRzfaScSO5GZJOnJCQAIt9nA",
+    authDomain: "streaming-service-a0d17.firebaseapp.com",
+    projectId: "streaming-service-a0d17",
+    storageBucket: "streaming-service-a0d17.appspot.com",
+    messagingSenderId: "970367674144",
+    appId: "1:970367674144:web:de960ab528bbca0c83d945",
+    measurementId: "G-EZE9Q32626"
+};
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const storage = getStorage();
+
+const auth = getAuth();
+
+function getItemTemplate(image,href, name){
     return `<div class="div__track-item">
     <div class="div__track-cover">
       <a href="#" class="glightbox_video play__icon-hidden">
@@ -22,29 +30,96 @@ function getItemTemplate(item){
                     <polygon points="47,45 55,50 47,55" style="fill:#6a00ff;stroke:#6a00ff;stroke-width:1" class="play"/>
                 </svg>
                 </a>
-        <img alt="" src="${item.image}" class="div__track-cover-img"/>
-        <li><h3><a href="${item.trackId}" class="item-link">${item.name}</a></h3></li>
+        <img alt="" src="${image}" class="div__track-cover-img"/>
+        <li><h3><a href="${href}" class="item-link">${name}</a></h3></li>
     </div>
 </div>`
 }
-// <img src="./images/play_button.png" class="play__icon-hidden"/>
+
 const containerPopular = document.getElementById("popular");
-containerPopular.innerHTML = '';
-
-for(let item of items){
-    containerPopular.insertAdjacentHTML("beforeend", getItemTemplate(item));
-}
 const containerAlbums = document.getElementById("albums");
-containerAlbums.innerHTML = '';
-
-for(let item of items){
-    containerAlbums.insertAdjacentHTML("beforeend", getItemTemplate(item));
-}
-
 const containerPlaylists = document.getElementById("playlists");
+
+containerPopular.innerHTML = '';
+containerAlbums.innerHTML = '';
 containerPlaylists.innerHTML = '';
 
-for(let item of items){
-    containerPlaylists.insertAdjacentHTML("beforeend", getItemTemplate(item));
+const dbRef = ref(getDatabase());
+
+function compare( a, b ) {
+  if ( a.likes < b.likes ){
+    return -1;
+  }
+  if ( a.likes > b.likes ){
+    return 1;
+  }
+  return 0;
 }
 
+get(child(dbRef, `users/`)).then((snapshot) => {
+  if (snapshot.exists()) {
+    const usersList = snapshot.val();
+    for(let item in usersList){
+        if(usersList[item].role_id === "2"){
+            try {
+                get(child(dbRef, `users/` + item + '/albums/')).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        console.log(snapshot.val());
+                        const albumsList = snapshot.val();
+                        albumsList.sort(compare);
+                        let counter = 10;
+                        for(let alb in albumsList){
+                            containerAlbums.insertAdjacentHTML("beforeend", getItemTemplate(
+                                         alb,
+                                         albumsList[alb].cover));
+                            if(--counter === 0){
+                                break;
+                            }
+
+                        }
+                    }
+                });
+                get(child(dbRef, `users/` + item + '/playlists/')).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        console.log(snapshot.val());
+                        const playlistsList = snapshot.val();
+                        playlistsList.sort(compare);
+                        let counter = 10;
+                        for(let pl in playlistsList){
+                            containerPlaylists.insertAdjacentHTML("beforeend", getItemTemplate(
+                                         pl,
+                                         playlistsList[pl].cover));
+                            if(--counter === 0){
+                                break;
+                            }
+                        }
+                    }
+                });
+                 get(child(dbRef, `users/` + item + '/playlists/')).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        console.log(snapshot.val());
+                        const playlistsList = snapshot.val();
+                        playlistsList.sort(compare);
+                        let counter = 10;
+                        for(let pl in playlistsList){
+                            containerPopular.insertAdjacentHTML("beforeend", getItemTemplate(
+                                         pl,
+                                         playlistsList[pl].cover));
+                            if(--counter === 0){
+                                break;
+                            }
+                        }
+                    }
+                });
+            } catch (e) {
+
+            }
+
+        }
+    }
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
