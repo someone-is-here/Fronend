@@ -26,12 +26,46 @@ function trackTemplate(track){
             </audio>`;
 }
 window.play = counter => {
-    console.log(counter);
     const audioContainer = document.getElementsByClassName("div__tracks-container")[counter-1];
-    const audio = audioContainer.querySelector("audio")[0];
+    const audio = audioContainer.querySelector("audio");
     console.log(audio);
-    audio.play();
+
+    if(!audio.paused){
+        document.getElementsByClassName("button__play-small")[counter-1].innerHTML=
+            ` <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6
+                           19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>`;
+
+        audio.pause();
+    }else {
+        document.getElementsByClassName("button__play-small")[counter-1].innerHTML=`<path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" fill="white"></path>`;
+        audio.play();
+    }
 }
+
+window.addHeart = (element, counter)=>{
+  let el = document.getElementsByClassName("span__hearts-amount")[counter-1];
+        let el_content = +el.innerHTML;
+        if(element.classList.contains("small__heart-red")){
+            element.classList.remove("small__heart-red");
+            el.innerHTML = el_content - 1;
+            const path = document.getElementsByClassName("span__path")[counter-1].innerHTML;
+             get(child(dbRef, path)).then((snapshot) => {
+                 const track = snapshot.val();
+                 track.likes = track.likes - 1;
+                 update(ref(database, path + `/`), track);
+             });
+        } else {
+            element.classList.add("small__heart-red");
+            el.innerHTML = el_content + 1;
+            const path = document.getElementsByClassName("span__path")[counter-1].innerHTML;
+             get(child(dbRef, path)).then((snapshot) => {
+                 const track = snapshot.val();
+                 track.likes = track.likes + 1;
+                 update(ref(database, path + `/`), track);
+             });
+        }
+}
+
 function mainTemplate(counter, title, image, likes, year, tracks){
     let trackCounter=0;
     let timing=0;
@@ -59,7 +93,7 @@ function mainTemplate(counter, title, image, likes, year, tracks){
         </div>
     </div>`;
 }
-function albumTemplate(counter, title, image, likes, year, tracks){
+function albumTemplate(counter, title, image, likes, year, tracks,path){
     let trackList = "";
     let timing=0;
     for(let item in tracks){
@@ -81,7 +115,7 @@ function albumTemplate(counter, title, image, likes, year, tracks){
                    <span>
                        <button onclick="play(${counter})">
                        <svg role="img" height="24" width="24" aria-hidden="true"
-                            class="button__play-small" viewBox="0 0 24 24" data-encore-id="icon">
+                            class="button__play-small" viewBox="0 0 24 24" data-encore-id="icon" onclick="addHeart(${counter})">
                            <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6
                            19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
                    </button></span><span class="span__text">${counter}</span></span></li>
@@ -99,6 +133,7 @@ function albumTemplate(counter, title, image, likes, year, tracks){
             <div style="display: none" class="div__tracks-container">
                 <span id="id_album_year">Year: ${year}</span>
                ${trackList}
+                <span class="span__path" style="display:none;">${path}</span>
             </div>
          </li>
 `;
@@ -135,7 +170,8 @@ get(child(dbRef, `users/`)).then((snapshot) => {
                                          albumsList[alb].cover,
                                          albumsList[alb].likes,
                                          albumsList[alb].year,
-                                         snapshot.val()));
+                                         snapshot.val(),
+                                         `users/` + item + '/albums/' + alb));
                              });
                         }
                     }

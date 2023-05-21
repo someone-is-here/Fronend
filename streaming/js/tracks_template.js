@@ -87,8 +87,6 @@ window.addHeart= (element, counter)=>{
              });
         }
 }
-
-
 function trackTemplate(counter, title, image, streams, likes, timing, track, path){
     return ` <li class="li__data">
             <div class="div__align-items">
