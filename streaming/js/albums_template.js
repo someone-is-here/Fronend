@@ -115,14 +115,14 @@ function albumTemplate(counter, title, image, likes, year, tracks,path){
                    <span>
                        <button onclick="play(${counter})">
                        <svg role="img" height="24" width="24" aria-hidden="true"
-                            class="button__play-small" viewBox="0 0 24 24" data-encore-id="icon" onclick="addHeart(${counter})">
+                            class="button__play-small" viewBox="0 0 24 24" data-encore-id="icon" >
                            <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6
                            19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
                    </button></span><span class="span__text">${counter}</span></span></li>
                <li><a href="#" class="a__remove-style">${title}</a></li>
 
                <li><span class="span__additional-tools"><span class="span__heart">
-                   <button type="button" name="play" class="button__remove-background"><svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="small__heart">
+                   <button type="button" name="play" class="button__remove-background" onclick="addHeart(this, ${counter})"><svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="small__heart">
                    <path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782
                    3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348
                    8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262
