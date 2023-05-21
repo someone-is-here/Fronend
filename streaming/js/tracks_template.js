@@ -59,7 +59,7 @@ window.play = counter => {
              get(child(dbRef, path)).then((snapshot) => {
                  const track = snapshot.val();
                  track.streaming = track.streaming+1;
-                 set(ref(path), track);
+                 set(ref(dbRef, path), track);
              });
         }, 45000);
     }
@@ -71,7 +71,7 @@ window.addHeart= (element, counter)=>{
             element.classList.remove("small__heart-red");
             el.innerHTML = el_content - 1;
             const path = document.getElementsByClassName("span__path")[counter-1].innerHTML;
-             get(child(path)).then((snapshot) => {
+             get(child(dbRef, path)).then((snapshot) => {
                  const track = snapshot.val();
                  track.likes = track.likes - 1;
                  set(ref(dbRef, path), track);
@@ -80,7 +80,7 @@ window.addHeart= (element, counter)=>{
             element.classList.add("small__heart-red");
             el.innerHTML = el_content + 1;
             const path = document.getElementsByClassName("span__path")[counter-1].innerHTML;
-             get(child(path)).then((snapshot) => {
+             get(child(dbRef, path)).then((snapshot) => {
                  const track = snapshot.val();
                  track.likes = track.likes + 1;
                  set(ref(dbRef, path), track);
@@ -118,7 +118,7 @@ function trackTemplate(counter, title, image, streams, likes, timing, track, pat
              </ul>
             </div>
            <div class="div__align-items">
-           <audio controls>
+           <audio controls onplay="play(${counter})">
                 <source src="${track}" type="audio/mpeg">
             </audio>
             <span class="span__path" style="display:none;">${path}</span>
