@@ -26,7 +26,14 @@ function menuTemplateLogin(res) {
 
   return `         <li>
                 <form action="" class="form__search-bar">
-                    <input type="text" placeholder="Search anything" name="input__search" class="input__search">
+                <div>
+<select class="js-example-basic-single" name="state">
+  <option value="AL">Alabama</option>
+  <option value="WY">Wyoming</option>
+</select>
+    <input type="text" placeholder="Search anything" name="input__search" class="input__search" autoComplete="on" list="suggestions">
+</div>
+                    
                     <button type="submit"><img src="images/search.png"></button>
                 </form>
 

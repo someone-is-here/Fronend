@@ -53,16 +53,30 @@ onAuthStateChanged(auth, (user) => {
                 document.getElementById("id__span-display-error-messages").innerHTML = error.message;
             }, () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    console.log("Set album into db");
-                    let albumObj = {
-                        [albumTitle]:{
+
+                     get(child(ref(database, 'users/' + user.uid + '/albums/'))).then((snapshot) => {
+                         let albumObj = snapshot.val();
+                         albumObj[albumTitle]= {
+                            year: albumYear,
+                            cover: downloadURL,
+                            likes: 0
+                        };
+
+                    update(ref(database, 'users/' + user.uid + '/albums/'), albumObj);
+
+
+                    }).error((error)=>{
+                        let albumObj = {
+                        [albumTitle]: {
                             year: albumYear,
                             cover: downloadURL,
                             likes: 0
                         }
-                    };
+                    }
+                         set(ref(database, 'users/' + user.uid + '/albums/'), albumObj);
+                         });
 
-                    set(ref(database, 'users/' + user.uid + '/albums/'), albumObj);
+
                     alert("Album added successfully!");
                     window.location.replace("add_track.html");
                 });

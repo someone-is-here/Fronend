@@ -6,6 +6,7 @@
     <link type="text/css" href="css/styles.css" rel="stylesheet"/>
     <link type="text/css" href="css/track_styles.css" rel="stylesheet"/>
     <link type="text/css" href="css/base_styles.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width">
 </head>
 <body>
@@ -30,7 +31,20 @@
 </nav>
         <menu class="menu-additional">
         <ul class="menu-additional__list" id="menu__additional">
+<li>
+                <form action="" class="form__search-bar">
+                <div>
+<select class="js-example-basic-single" name="input__search">
+  <option value="AL">Alabama</option>
+  <option value="WY">Wyoming</option>
+</select>
+    <input type="text" placeholder="Search anything" name="input__search" class="input__search" autoComplete="on">
+</div>
 
+                    <button type="submit"><img src="images/search.png"></button>
+                </form>
+
+            </li>
         </ul>
     </menu>
 <aside id="sidenav" class="sidenav">
@@ -71,9 +85,9 @@
 </section>
 </main>
    <script src="js/base_script.js" ></script>
-   <script src="js/script.js" ></script>
    <script type="module" src="js/template.js" ></script>
-   <script type="module" src="js/auth.js"></script>
+   <script  src="js/auth.js"></script>
     <script type="module" src="js/sidenav.js"></script>
+   <script src="js/script.js" ></script>
 </body>
 </html>

@@ -169,6 +169,7 @@ input[name="name"]{
     padding: 0.5rem 1rem;
 }
 .form__search-bar .input__search{
+    margin: 0!important;
     background: transparent;
     flex: 1;
     border: 0;
