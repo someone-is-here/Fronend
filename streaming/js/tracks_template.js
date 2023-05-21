@@ -55,7 +55,7 @@ window.play = counter => {
         document.getElementsByClassName("button__play-small")[counter-1].innerHTML=`<path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" fill="white"></path>`;
         audio.play();
         window.timer = new Timer(function() {
-             const path = document.getElementsByClassName("span__path")[counter-1];
+             const path = document.getElementsByClassName("span__path")[counter-1].innerHTML;
              get(child(dbRef, path)).then((snapshot) => {
                  const track = snapshot.val();
                  track.streaming = track.streaming+1;
@@ -70,7 +70,7 @@ window.addHeart= (element, counter)=>{
         if(element.classList.contains("small__heart-red")){
             element.classList.remove("small__heart-red");
             el.innerHTML = el_content - 1;
-            const path = document.getElementsByClassName("span__path")[counter-1];
+            const path = document.getElementsByClassName("span__path")[counter-1].innerHTML;
              get(child(path)).then((snapshot) => {
                  const track = snapshot.val();
                  track.likes = track.likes - 1;
@@ -79,7 +79,7 @@ window.addHeart= (element, counter)=>{
         } else {
             element.classList.add("small__heart-red");
             el.innerHTML = el_content + 1;
-            const path = document.getElementsByClassName("span__path")[counter-1];
+            const path = document.getElementsByClassName("span__path")[counter-1].innerHTML;
              get(child(path)).then((snapshot) => {
                  const track = snapshot.val();
                  track.likes = track.likes + 1;
