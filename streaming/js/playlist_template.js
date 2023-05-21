@@ -148,12 +148,12 @@ onAuthStateChanged(auth, (user1) => {
           let user = snapshot.val();
           if (user.role_id === "2") {
               try {
-                  get(child(dbRef, `users/` + user.uid + '/playlists/')).then((snapshot) => {
+                  get(child(dbRef, `users/` + user1.uid + '/playlists/')).then((snapshot) => {
                       if (snapshot.exists()) {
                           console.log(snapshot.val());
                           const playlistsList = snapshot.val();
                           for (let pl in playlistsList) {
-                              get(child(dbRef, `users/` + user.uid + '/playlists/' + pl + '/tracks/')).then((snapshot) => {
+                              get(child(dbRef, `users/` + user1.uid + '/playlists/' + pl + '/tracks/')).then((snapshot) => {
                                   if (counter === 1) {
                                       document.getElementById("main_section").insertAdjacentHTML("beforeend", mainTemplate(
                                           counter,
@@ -168,7 +168,7 @@ onAuthStateChanged(auth, (user1) => {
                                       playlistsList[pl].cover,
                                       playlistsList[pl].likes,
                                       snapshot.val(),
-                                      `users/` + user.uid + '/playlists/' + pl));
+                                      `users/` + user1.uid + '/playlists/' + pl));
                               });
                           }
                       }
