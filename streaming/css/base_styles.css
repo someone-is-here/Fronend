@@ -214,3 +214,6 @@ button::-moz-focus-inner {
 button{
     outline: none;
 }
+button:focus {
+    outline:none;
+}

@@ -32,6 +32,32 @@ window.play = counter => {
     console.log(audio);
     audio.play();
 }
+function mainTemplate(counter, title, image, likes, year, tracks){
+    let trackCounter=0;
+    let timing=0;
+    for(let item in tracks){
+        trackCounter += 1;
+    }
+    let time = undefined;
+
+    if(timing/3600<1){
+        time = `${Math.floor(timing / 60)}:${Math.ceil(timing - Math.floor(timing / 60) * 60)}`;
+    }else{
+        time = `${Math.floor(timing / 3600)}:${Math.floor((timing - Math.floor(timing / 3600) * 3600)/60)}:${Math.ceil(timing -Math.floor(timing / 3600) * 3600 - Math.floor((timing - Math.floor(timing / 3600) * 3600)/60) * 60)}`;
+    }
+
+    return `<div class="div__container-header">
+        <img src="${image}" class="img__playlist-icon"/>
+        <div class="div__playlist-info">
+            <h1 class="h1__playlist-title"><a href="#" class="a__playlist-link">${title}</a></h1>
+            <span class="span__additional-info">
+            <span>${year}</span>
+            <span>${trackCounter} tracks</span>
+            <span class="span__additional-info__grey">${time}</span>
+            </span>
+        </div>
+    </div>`;
+}
 function albumTemplate(counter, title, image, likes, year, tracks){
     let trackList = "";
     let timing=0;
@@ -93,28 +119,22 @@ get(child(dbRef, `users/`)).then((snapshot) => {
                         const albumsList = snapshot.val();
                         for(let alb in albumsList){
                              get(child(dbRef, `users/` + item + '/albums/' + alb + '/tracks/')).then((snapshot) => {
-                                 mainList.insertAdjacentHTML("beforeend", albumTemplate(
-                                     counter++,
-                                     alb,
-                                     albumsList[alb].cover,
-                                     albumsList[alb].likes,
-                                     albumsList[alb].year,
-                                     snapshot.val()));
-                                 // console.log(tracksList);
-                                 // let counter = 1;
-                                 // for(let track in tracksList) {
-                                 //    let timing = tracksList[track].timing;
-                                 //    let timeRes = ``;
-                                 //     mainList.insertAdjacentHTML("beforeend", trackTemplate(
-                                 //         counter++,
-                                 //         track,
-                                 //         tracksList[track].cover,
-                                 //         tracksList[track].streams,
-                                 //         tracksList[track].likes,
-                                 //         timeRes,
-                                 //         tracksList[track].track
-                                 //         ));
-                                 // }
+                                 if(counter === 1){
+                                     document.getElementById("main_section").insertAdjacentHTML("beforeend", mainTemplate(
+                                         counter,
+                                         alb,
+                                         albumsList[alb].cover,
+                                         albumsList[alb].likes,
+                                         albumsList[alb].year,
+                                         snapshot.val()));
+                                 }
+                                     mainList.insertAdjacentHTML("beforeend", albumTemplate(
+                                         counter++,
+                                         alb,
+                                         albumsList[alb].cover,
+                                         albumsList[alb].likes,
+                                         albumsList[alb].year,
+                                         snapshot.val()));
                              });
                         }
                     }
