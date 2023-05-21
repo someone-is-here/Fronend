@@ -161,3 +161,34 @@ input[name="name"]{
     fill: white !important;
     transition:fill .4s .3s ease-out;
 }
+.form__search-bar{
+    margin: 0.5rem;
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+}
+.form__search-bar input{
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 0.2rem;
+    font-size: 1.2rem;
+    color: #cac7ff;
+}
+::placeholder{
+    color: #cac7ff;
+}
+.form__search-bar button img{
+    width: 1.5rem;
+}
+.form__search-bar button {
+    border: 0;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: #58629b;
+    cursor: pointer;
+}
