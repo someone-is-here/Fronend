@@ -208,3 +208,6 @@ select{
     display: inline-block;
     margin-left: 1rem;
 }
+button::-moz-focus-inner {
+  border: 0;
+}
