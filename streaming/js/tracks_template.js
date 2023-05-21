@@ -121,7 +121,7 @@ function trackTemplate(counter, title, image, streams, likes, timing, track, pat
            <audio controls>
                 <source src="${track}" type="audio/mpeg">
             </audio>
-            <span class="span__path">${path}</span>
+            <span class="span__path" style="display:none;">${path}</span>
          </li>`;
 }
 
@@ -153,7 +153,7 @@ get(child(dbRef, `users/`)).then((snapshot) => {
                                          tracksList[track].likes,
                                          timeRes,
                                          tracksList[track].track,
-                                         dbRef, `users/` + item + '/albums/' + alb + '/tracks/' + track
+                                         dbRef + `users/` + item + '/albums/' + alb + '/tracks/' + track
                                          ));
                                  }
                              });
