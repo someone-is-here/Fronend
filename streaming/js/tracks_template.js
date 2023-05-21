@@ -23,7 +23,16 @@ const auth = getAuth();
 window.play = counter => {
     console.log(counter);
     const audio = document.getElementsByTagName("audio")[counter-1];
-    audio.play();
+    if(!audio.paused){
+        document.getElementsByClassName("button__play-small")[counter-1].innerHTML=
+            ` <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6
+                           19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>`;
+
+        audio.pause();
+    }else {
+        document.getElementsByClassName("button__play-small")[counter-1].innerHTML=`<path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" fill="white"></path>`;
+        audio.play();
+    }
 }
 
 function trackTemplate(counter, title, image, streams, likes, timing, track){
@@ -34,7 +43,7 @@ function trackTemplate(counter, title, image, streams, likes, timing, track){
                <li>
                    <span class="span__additional-tools">
                    <span>
-                       <button onclick="play(${counter})">
+                       <button onclick="play(${counter})" >
                        <svg role="img" height="24" width="24" aria-hidden="true"
                             class="button__play-small" viewBox="0 0 24 24" data-encore-id="icon">
                            <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6
