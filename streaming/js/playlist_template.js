@@ -140,42 +140,45 @@ function playlistTemplate(counter, title, image, likes, tracks, path){
 const mainList = document.getElementById("id_full_list");
 const dbRef = ref(getDatabase());
 
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        let counter = 1;
-        if (user.role_id === "2") {
-                        try {
-                            get(child(dbRef, `users/` + user.uid + '/playlists/')).then((snapshot) => {
-                                if (snapshot.exists()) {
-                                    console.log(snapshot.val());
-                                    const playlistsList = snapshot.val();
-                                    for (let pl in playlistsList) {
-                                        get(child(dbRef, `users/` + user.uid + '/playlists/' + pl + '/tracks/')).then((snapshot) => {
-                                            if (counter === 1) {
-                                                document.getElementById("main_section").insertAdjacentHTML("beforeend", mainTemplate(
-                                                    counter,
-                                                    pl,
-                                                    playlistsList[pl].cover,
-                                                    playlistsList[pl].likes,
-                                                    snapshot.val()));
-                                            }
-                                            mainList.insertAdjacentHTML("beforeend", playlistTemplate(
-                                                counter++,
-                                                pl,
-                                                playlistsList[pl].cover,
-                                                playlistsList[pl].likes,
-                                                snapshot.val(),
-                                                `users/` + user.uid + '/playlists/' + pl));
-                                        });
-                                    }
-                                }
-                            });
-                        } catch (e) {
+onAuthStateChanged(auth, (user1) => {
+    if (user1) {
+     get(child(dbRef, `users/${user1.uid}`)).then((snapshot) => {
+      if (snapshot.exists()) {
+          let counter = 1;
+          let user = snapshot.val();
+          if (user.role_id === "2") {
+              try {
+                  get(child(dbRef, `users/` + user.uid + '/playlists/')).then((snapshot) => {
+                      if (snapshot.exists()) {
+                          console.log(snapshot.val());
+                          const playlistsList = snapshot.val();
+                          for (let pl in playlistsList) {
+                              get(child(dbRef, `users/` + user.uid + '/playlists/' + pl + '/tracks/')).then((snapshot) => {
+                                  if (counter === 1) {
+                                      document.getElementById("main_section").insertAdjacentHTML("beforeend", mainTemplate(
+                                          counter,
+                                          pl,
+                                          playlistsList[pl].cover,
+                                          playlistsList[pl].likes,
+                                          snapshot.val()));
+                                  }
+                                  mainList.insertAdjacentHTML("beforeend", playlistTemplate(
+                                      counter++,
+                                      pl,
+                                      playlistsList[pl].cover,
+                                      playlistsList[pl].likes,
+                                      snapshot.val(),
+                                      `users/` + user.uid + '/playlists/' + pl));
+                              });
+                          }
+                      }
+                  });
+              } catch (e) {
 
-                        }
-
-                    }
-
+              }
+          }
+      }
+      });
     }
 
 });
