@@ -63,7 +63,7 @@ function updateHeader(counter){
     document.getElementsByClassName("button__like")[0].onclick = window.addHeart(mainContainer.querySelector(".small__heart"), counter);
 }
 window.play = (counter, is_update=true) => {
-    const audioContainer = document.getElementsByClassName("div__tracks-container")[counter-1];
+    const audioContainer = document.getElementsByClassName("ul__tracks-container")[counter-1];
     const audio = audioContainer.querySelector("audio");
     console.log(audio);
 
