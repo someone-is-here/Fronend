@@ -131,6 +131,7 @@ onAuthStateChanged(auth, (user) => {
                                     };
 
                             update(ref(database, 'users/' + user.uid + '/albums/' + albumName + '/tracks/'), trackObj);
+                            alert("Track added successfully!!!");
                             window.location.replace("add_track.html");
 
                     }).catch((error)=>{
@@ -144,6 +145,7 @@ onAuthStateChanged(auth, (user) => {
                                     }
                                 };
                          set(ref(database, 'users/' + user.uid + '/albums/' + albumName + '/tracks/'), trackObj);
+                         alert("Track added successfully!!!");
                          window.location.replace("add_track.html");
                          });
                             });
