@@ -116,7 +116,7 @@ function trackTemplate(counter, title, image, streams, likes, timing, track, pat
              </ul>
             </div>
            <div class="div__align-items">
-           <audio controls onplay="play(${counter})">
+           <audio controls onclick="play(${counter})">
                 <source src="${track}" type="audio/mpeg">
             </audio>
             <span class="span__path" style="display:none;">${path}</span>

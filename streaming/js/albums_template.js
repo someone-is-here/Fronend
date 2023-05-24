@@ -45,8 +45,8 @@ function updateHeader(counter){
     const year = mainContainer.querySelector(".album__year").innerHTML;
     const trackCounter = mainContainer.querySelector(".album__tracks-amount").innerHTML;
     const time = mainContainer.querySelector(".album__duration").innerHTML;
-    document.getElementById("main_section").insertAdjacentHTML("beforeend", headerTemplate(
-    image, title, year, trackCounter, time ));
+    document.getElementById("main_section").innerHTML = headerTemplate(
+    image, title, year, trackCounter, time );
 }
 window.play = counter => {
     const audioContainer = document.getElementsByClassName("div__tracks-container")[counter-1];
@@ -128,7 +128,7 @@ function albumTemplate(counter, title, image, likes, year, tracks,path){
                <li>
                    <span class="span__additional-tools">
                    <span>
-                       <<button  class="button__display-none" onclick="play(${counter})">
+                       <button  class="button__display-none" onclick="play(${counter})">
                        <svg role="img" height="24" width="24" aria-hidden="true"
                             class="button__play-small" viewBox="0 0 24 24" data-encore-id="icon" >
                            <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6
@@ -137,7 +137,7 @@ function albumTemplate(counter, title, image, likes, year, tracks,path){
                <li><a href="#" class="a__remove-style album__title">${title}</a></li>
 
                <li><span class="span__additional-tools"><span class="span__heart">
-                   <button type="button" name="play" class="button__remove-background" onclick="addHeart(this, ${counter})"><svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="small__heart">
+                   <button type="button" name="play" class="button__remove-background" ><svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="small__heart" onclick="addHeart(this, ${counter})">
                    <path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782
                    3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348
                    8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262
@@ -148,7 +148,7 @@ function albumTemplate(counter, title, image, likes, year, tracks,path){
             <div style="display: none" class="div__tracks-container">
                 <span class="album__year">${year}</span>
                 <span class="album__cover">${image}</span>
-                <span class="album__tracks-amount">${trackList.length}</span>
+                <span class="album__tracks-amount">${tracks.length}</span>
                ${trackList}
                 <span class="span__path" style="display:none;">${path}</span>
             </div>

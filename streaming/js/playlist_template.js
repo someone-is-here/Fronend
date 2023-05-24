@@ -25,6 +25,26 @@ function trackTemplate(track){
                 <source src="${track}" type="audio/mpeg">
             </audio>`;
 }
+function headerTemplate(image, title, trackCounter){
+    return `<div class="div__container-header">
+        <img src="${image}" class="img__playlist-icon"/>
+        <div class="div__playlist-info">
+            <h1 class="h1__playlist-title"><a href="#" class="a__playlist-link">${title}</a></h1>
+            <span class="span__additional-info">
+            <span>${trackCounter} tracks</span>
+            </span>
+        </div>
+    </div>`;
+}
+function updateHeader(counter){
+    const mainContainer = document.getElementsByClassName("li__data")[counter-1];
+    const image = mainContainer.querySelector(".playlist__image").innerHTML;
+    const title = mainContainer.querySelector(".playlist__title").innerHTML;
+    const trackCounter = mainContainer.querySelector(".playlist__track-amount").innerHTML;
+    document.getElementById("main_section").innerHTML = headerTemplate(
+    image, title, trackCounter);
+}
+
 window.play = counter => {
     const audioContainer = document.getElementsByClassName("div__tracks-container")[counter-1];
     const audio = audioContainer.querySelector("audio");
@@ -38,6 +58,7 @@ window.play = counter => {
         audio.pause();
     }else {
         document.getElementsByClassName("button__play-small")[counter-1].innerHTML=`<path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" fill="white"></path>`;
+        updateHeader(counter);
         audio.play();
     }
 }
@@ -71,21 +92,14 @@ function mainTemplate(counter, title, image, likes, tracks){
     for(let item in tracks){
         trackCounter += 1;
     }
-
-    return `<div class="div__container-header">
-        <img src="${image}" class="img__playlist-icon"/>
-        <div class="div__playlist-info">
-            <h1 class="h1__playlist-title"><a href="#" class="a__playlist-link">${title}</a></h1>
-            <span class="span__additional-info">
-            <span>${trackCounter} tracks</span>
-            </span>
-        </div>
-    </div>`;
+    return headerTemplate(image, title, trackCounter);
 }
 function playlistTemplate(counter, title, image, likes, tracks, path){
     let trackList = "";
+    let trackCounter = 0;
+
     for(let item in tracks){
-        console.log(item);
+        trackCounter += 1;
         trackList += trackTemplate(tracks[item]);
     }
 
@@ -96,13 +110,13 @@ function playlistTemplate(counter, title, image, likes, tracks, path){
                <li>
                    <span class="span__additional-tools">
                    <span>
-                       <<button  class="button__display-none" onclick="play(${counter})">
+                       <button  class="button__display-none" onclick="play(${counter})">
                        <svg role="img" height="24" width="24" aria-hidden="true"
                             class="button__play-small" viewBox="0 0 24 24" data-encore-id="icon">
                            <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6
                            19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
                    </input></span><span class="span__text">${counter}</span></span></li>
-               <li><a href="#" class="a__remove-style">${title}</a></li>
+               <li><a href="#" class="a__remove-style playlist__title">${title}</a></li>
 
                <li><span class="span__additional-tools"><span class="span__heart">
                    <button type="button" name="play" class="button__remove-background"><svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="small__heart"  onclick="addHeart(this, ${counter})">
@@ -115,6 +129,8 @@ function playlistTemplate(counter, title, image, likes, tracks, path){
             </div>
             <div style="display: none" class="div__tracks-container">
                ${trackList}
+               <span class="playlist__track-amount">${tracks.length}</span>
+                <span class="playlist__image">${image}</span>
                 <span class="span__path" style="display:none;">${path}</span>
             </div>
          </li>
