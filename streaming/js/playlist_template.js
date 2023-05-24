@@ -43,11 +43,11 @@ function updateHeader(counter){
     const trackCounter = mainContainer.querySelector(".playlist__track-amount").innerHTML;
     document.getElementById("main_section").innerHTML = headerTemplate(
     image, title, trackCounter);
-    document.getElementsByName("button__play")[0].onclick = play(counter);
+    document.getElementsByName("button__play")[0].onclick = play(counter,false);
     document.getElementsByName("button__like")[0].onclick = addHeart(mainContainer.querySelector(".small__heart"), counter);
 }
 
-window.play = counter => {
+window.play = (counter, is_update=true) => {
     const audioContainer = document.getElementsByClassName("div__tracks-container")[counter-1];
     const audio = audioContainer.querySelector("audio");
     console.log(audio);
@@ -60,7 +60,9 @@ window.play = counter => {
         audio.pause();
     }else {
         document.getElementsByClassName("button__play-small")[counter-1].innerHTML=`<path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" fill="white"></path>`;
-        updateHeader(counter);
+         if (is_update) {
+            updateHeader(counter);
+        }
         audio.play();
     }
 }
