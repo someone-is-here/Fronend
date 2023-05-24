@@ -43,6 +43,8 @@ function updateHeader(counter){
     const trackCounter = mainContainer.querySelector(".playlist__track-amount").innerHTML;
     document.getElementById("main_section").innerHTML = headerTemplate(
     image, title, trackCounter);
+    document.getElementsByName("button__play")[0].onclick = play(counter);
+    document.getElementsByName("button__like")[0].onclick = addHeart(mainContainer.querySelector(".small__heart"), counter);
 }
 
 window.play = counter => {
@@ -129,7 +131,7 @@ function playlistTemplate(counter, title, image, likes, tracks, path){
             </div>
             <div style="display: none" class="div__tracks-container">
                ${trackList}
-               <span class="playlist__track-amount">${tracks.length}</span>
+               <span class="playlist__track-amount">${trackCounter}</span>
                 <span class="playlist__image">${image}</span>
                 <span class="span__path" style="display:none;">${path}</span>
             </div>

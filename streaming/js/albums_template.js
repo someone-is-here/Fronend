@@ -47,6 +47,8 @@ function updateHeader(counter){
     const time = mainContainer.querySelector(".album__duration").innerHTML;
     document.getElementById("main_section").innerHTML = headerTemplate(
     image, title, year, trackCounter, time );
+    document.getElementsByName("button__play")[0].onclick = play(counter);
+    document.getElementsByName("button__like")[0].onclick = addHeart(mainContainer.querySelector(".small__heart"), counter);
 }
 window.play = counter => {
     const audioContainer = document.getElementsByClassName("div__tracks-container")[counter-1];
