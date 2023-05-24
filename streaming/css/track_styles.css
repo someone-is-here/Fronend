@@ -124,57 +124,10 @@ audio:hover, audio:focus, audio:active {
     /*top: 0;*/
     transform: translate(-50%, -50%);
 }
-/*.button__live{*/
-/*    height: 1.2rem;*/
-/*    width: 1.2rem;*/
-/*    background: blue;*/
-/*    border-radius: 2rem;*/
-/*    margin-top: 1rem;*/
-/*}*/
-/*.button__live:before{*/
-/*      content: '';*/
-/*      background-color: rgba(229, 16, 16, 0.6);*/
-/*      display: block;*/
-/*      position: absolute;*/
-/*      height: 1.2rem;*/
-/*      width: 1.2rem;*/
-/*      border-radius: 50%;*/
-/*      animation: live 2s ease-in-out infinite;*/
-/*      z-index: -1;*/
-/*    }*/
-/*@keyframes live {*/
-/*  0% {*/
-/*    transform: scale(1,1);*/
-/*  }*/
-/*  100% {*/
-/*      transform: scale(1.55, 1.55);*/
-/*      background-color: rgba(229, 16, 16, 0);*/
-/*  }*/
-/*}*/
+
 @media (max-width: 600px) {
     .audio{
         float:none;
         margin-bottom: 0.4rem;
     }
 }
-/*audio::-webkit-media-controls-timeline-container*/
-
-/*audio::-webkit-media-controls-current-time-display*/
-
-/*audio::-webkit-media-controls-time-remaining-display*/
-
-/*audio::-webkit-media-controls-timeline*/
-
-/*audio::-webkit-media-controls-volume-slider-container*/
-
-/*audio::-webkit-media-controls-volume-slider*/
-
-/*audio::-webkit-media-controls-seek-back-button*/
-
-/*audio::-webkit-media-controls-seek-forward-button*/
-
-/*audio::-webkit-media-controls-fullscreen-button*/
-
-/*audio::-webkit-media-controls-rewind-button*/
-
-/*audio::-webkit-media-controls-return-to-realtime-button*/
