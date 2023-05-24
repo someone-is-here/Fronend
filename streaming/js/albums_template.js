@@ -25,6 +25,29 @@ function trackTemplate(track){
                 <source src="${track}" type="audio/mpeg">
             </audio>`;
 }
+function headerTemplate(image, title, year, trackCounter, time){
+    return `<div class="div__container-header">
+        <img src="${image}" class="img__playlist-icon"/>
+        <div class="div__playlist-info">
+            <h1 class="h1__playlist-title"><a href="#" class="a__playlist-link">${title}</a></h1>
+            <span class="span__additional-info">
+            <span>${year}</span>
+            <span>${trackCounter} tracks</span>
+            <span class="span__additional-info__grey">${time}</span>
+            </span>
+        </div>
+    </div>`;
+}
+function updateHeader(counter){
+    const mainContainer = document.getElementsByClassName("li__data")[counter-1];
+    const image = mainContainer.querySelector(".album__cover").innerHTML;
+    const title = mainContainer.querySelector(".album__title").innerHTML;
+    const year = mainContainer.querySelector(".album__year").innerHTML;
+    const trackCounter = mainContainer.querySelector(".album__tracks-amount").innerHTML;
+    const time = mainContainer.querySelector(".album__duration").innerHTML;
+    document.getElementById("main_section").insertAdjacentHTML("beforeend", headerTemplate(
+    image, title, year, trackCounter, time ));
+}
 window.play = counter => {
     const audioContainer = document.getElementsByClassName("div__tracks-container")[counter-1];
     const audio = audioContainer.querySelector("audio");
@@ -38,6 +61,7 @@ window.play = counter => {
         audio.pause();
     }else {
         document.getElementsByClassName("button__play-small")[counter-1].innerHTML=`<path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" fill="white"></path>`;
+        updateHeader(counter);
         audio.play();
     }
 }
@@ -82,17 +106,7 @@ function mainTemplate(counter, title, image, likes, year, tracks){
         time = `${Math.floor(timing / 3600)}:${Math.floor((timing - Math.floor(timing / 3600) * 3600)/60)}:${Math.ceil(timing -Math.floor(timing / 3600) * 3600 - Math.floor((timing - Math.floor(timing / 3600) * 3600)/60) * 60)}`;
     }
 
-    return `<div class="div__container-header">
-        <img src="${image}" class="img__playlist-icon"/>
-        <div class="div__playlist-info">
-            <h1 class="h1__playlist-title"><a href="#" class="a__playlist-link">${title}</a></h1>
-            <span class="span__additional-info">
-            <span>${year}</span>
-            <span>${trackCounter} tracks</span>
-            <span class="span__additional-info__grey">${time}</span>
-            </span>
-        </div>
-    </div>`;
+    return headerTemplate(image, title, year, trackCounter, time);
 }
 function albumTemplate(counter, title, image, likes, year, tracks,path){
     let trackList = "";
@@ -120,7 +134,7 @@ function albumTemplate(counter, title, image, likes, year, tracks,path){
                            <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6
                            19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
                    </input></span><span class="span__text">${counter}</span></span></li>
-               <li><a href="#" class="a__remove-style">${title}</a></li>
+               <li><a href="#" class="a__remove-style album__title">${title}</a></li>
 
                <li><span class="span__additional-tools"><span class="span__heart">
                    <button type="button" name="play" class="button__remove-background" onclick="addHeart(this, ${counter})"><svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="small__heart">
@@ -128,11 +142,13 @@ function albumTemplate(counter, title, image, likes, year, tracks,path){
                    3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348
                    8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262
                    0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501
-                    1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg></button><span class="span__hearts-amount">${likes}</span></span> ${time}</span></li>
+                    1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg></button><span class="span__hearts-amount">${likes}</span></span><span class="album__duration"> ${time}</span></span></li>
              </ul>
             </div>
             <div style="display: none" class="div__tracks-container">
-                <span id="id_album_year">Year: ${year}</span>
+                <span class="album__year">${year}</span>
+                <span class="album__cover">${image}</span>
+                <span class="album__tracks-amount">${trackList.length}</span>
                ${trackList}
                 <span class="span__path" style="display:none;">${path}</span>
             </div>
