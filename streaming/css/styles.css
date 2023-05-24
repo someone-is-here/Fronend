@@ -177,6 +177,7 @@ input[name="name"]{
     padding: 0.2rem;
     font-size: 1.2rem;
     color: #cac7ff;
+    letter-spacing: 0.05rem !important;
 }
 ::placeholder{
     color: #cac7ff;
