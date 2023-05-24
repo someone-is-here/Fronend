@@ -66,6 +66,7 @@ function menuBaseTemplate(){
                 <li class="menu-additional__list-item"><a href="register.html" class="menu-additional-link">Register</a></li>`;
 }
 const menuContainer = document.getElementById("menu__additional");
+document.addEventListener("DOMContentLoaded", function(){
 onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
@@ -87,4 +88,5 @@ onAuthStateChanged(auth, (user) => {
   } else {
     menuContainer.insertAdjacentHTML("beforeend", menuBaseTemplate());
   }
+});
 });
