@@ -21,12 +21,14 @@ const storage = getStorage();
 const auth = getAuth();
 
 function trackTemplate(title, track){
-    return ` <li> <a href="#" class="a__remove-style album__title">${title}</li>
-            <div class="div__align-items">
+    return ` <div class="div__align-items">
+            <li> <a href="#" class="a__remove-style album__title">${title}</a>
+           
               <audio controls>
                 <source src="${track}" type="audio/mpeg">
             </audio>
-         </li>`;
+         </li>
+</div>`;
 }
 function headerTemplate(image, title, year, trackCounter, time){
     return `<div class="div__container-header">
