@@ -47,9 +47,10 @@ function updateHeader(counter){
     const time = mainContainer.querySelector(".album__duration").innerHTML;
     document.getElementById("main_section").innerHTML = headerTemplate(
     image, title, year, trackCounter, time );
-    document.getElementsByName("button__play")[0].addEventListener("click", window.play(counter, false));
-    document.getElementsByName("button__like")[0].addEventListener("click", window.addHeart(mainContainer.querySelector(".small__heart"), counter));
+    document.getElementsByClassName("button__play")[0].onclick= window.play(counter, false);
+    document.getElementsByClassName("button__like")[0].onclick = window.addHeart(mainContainer.querySelector(".small__heart"), counter);
 }
+
 window.play = (counter, is_update=true) => {
     const audioContainer = document.getElementsByClassName("div__tracks-container")[counter-1];
     const audio = audioContainer.querySelector("audio");
