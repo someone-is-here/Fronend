@@ -65,7 +65,7 @@ function menuBaseTemplate(){
                 <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link">Login</a></li>
                 <li class="menu-additional__list-item"><a href="register.html" class="menu-additional-link">Register</a></li>`;
 }
-
+const menuContainer = document.getElementById("menu__additional");
 onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
@@ -76,15 +76,15 @@ onAuthStateChanged(auth, (user) => {
         console.log(snapshot.val());
         let role = snapshot.val().role_id;
         if (role === "2") {
-          document.getElementById("menu__additional").innerHTML = menuTemplateLoginArtist(snapshot.val().login);
+          menuContainer.insertAdjacentHTML("beforeend", menuTemplateLoginArtist(snapshot.val().login));
         } else if (role === "3") {
-          document.getElementById("menu__additional").innerHTML = menuTemplateLogin(snapshot.val().login);
+          menuContainer.insertAdjacentHTML("beforeend", menuTemplateLogin(snapshot.val().login));
         }
       }
     }).catch(e=>{
       console.log(e);
     });
   } else {
-    document.getElementById("menu__additional").innerHTML = menuBaseTemplate();
+    menuContainer.insertAdjacentHTML("beforeend", menuBaseTemplate());
   }
 });

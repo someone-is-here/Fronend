@@ -48,7 +48,7 @@ onAuthStateChanged(auth, (user) => {
 
             uploadTask.on('state-changed', (snapshot) => {
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                uploadedProgress.innerHTML = "Uploaded " + progress + "%";
+                uploadedProgress.innerHTML = "Uploaded " + Math.floor(progress) + "%";
             }, (error) => {
                 document.getElementById("id__span-display-error-messages").innerHTML = error.message;
             }, () => {

@@ -143,6 +143,19 @@ onAuthStateChanged(auth, (user) => {
                             tracksObj[value] = span_tag.dataset.link;
                             console.log(tracksObj);
                         });
+
+                        get(child(dbRef, 'users/' + user.uid + '/playlists/')).then((snapshot) => {
+                         let playlistObj = snapshot.val();
+                         playlistObj[playlistTitle]=  {
+                                cover: downloadURL,
+                                likes: 0,
+                                tracks: tracksObj
+                         };
+
+                    update(ref(database, 'users/' + user.uid + '/playlists/'), playlistObj);
+
+
+                    }).catch((error)=>{
                         let playlistObj = {
                             [playlistTitle]: {
                                 cover: downloadURL,
@@ -151,7 +164,8 @@ onAuthStateChanged(auth, (user) => {
                             }
                         };
 
-                        set(ref(database, 'users/' + user.uid + '/playlists/'), playlistObj);
+                         set(ref(database, 'users/' + user.uid + '/playlists/'), playlistObj);
+                         });
                         alert("Playlist added successfully!");
                         window.location.replace("playlists.html");
                     });

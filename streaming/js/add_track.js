@@ -74,7 +74,8 @@ onAuthStateChanged(auth, (user) => {
                 console.log(snapshot.val());
                 setAlbums(snapshot.val());
             } else {
-                console.log("not found");
+                alert("No albums found! Create album first.");
+                window.location.replace("add_album.html");
             }
         }).catch((error) => {
             console.error(error);
@@ -119,9 +120,9 @@ onAuthStateChanged(auth, (user) => {
                         }, () => {
                             getDownloadURL(uploadTask.snapshot.ref).then((downloadURLTrack) => {
                                 let albumName = selectAlbum.options[selectAlbum.selectedIndex].text;
-                    get(child(dbRef, 'users/' + user.uid + '/albums/' + albumName + '/tracks/')).then((snapshot) => {
-                         let trackObj = snapshot.val();
-                         trackObj[trackTitle] = {
+                                get(child(dbRef, 'users/' + user.uid + '/albums/' + albumName + '/tracks/')).then((snapshot) => {
+                                let trackObj = snapshot.val();
+                                trackObj[trackTitle] = {
                                         cover: downloadURL,
                                         track: downloadURLTrack,
                                         timing: window.duration,
@@ -129,8 +130,8 @@ onAuthStateChanged(auth, (user) => {
                                         likes: 0
                                     };
 
-                    update(ref(database, 'users/' + user.uid + '/albums/' + albumName + '/tracks/'), trackObj);
-
+                            update(ref(database, 'users/' + user.uid + '/albums/' + albumName + '/tracks/'), trackObj);
+                            window.location.replace("add_track.html");
 
                     }).catch((error)=>{
                          let trackObj = {
@@ -143,8 +144,8 @@ onAuthStateChanged(auth, (user) => {
                                     }
                                 };
                          set(ref(database, 'users/' + user.uid + '/albums/' + albumName + '/tracks/'), trackObj);
+                         window.location.replace("add_track.html");
                          });
-                                window.location.replace("add_track.html");
                             });
                         });
                     });
