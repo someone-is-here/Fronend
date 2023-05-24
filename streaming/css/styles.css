@@ -194,5 +194,10 @@ input[name="name"]{
     cursor: pointer;
 }
 .button__display-none {
-    display: none;
+    background: transparent;
+    border: none;
+    color: white;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
+    font-size: 0.9rem;
 }

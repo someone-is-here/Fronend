@@ -247,7 +247,6 @@
     position: absolute;
     fill: white !important;
     cursor: pointer;
-    margin-top:-0.9rem;
     margin-left: -0.5rem;
     visibility: hidden;
 }

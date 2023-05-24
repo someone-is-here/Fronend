@@ -73,6 +73,7 @@ function mainTemplate(counter, title, image, likes, year, tracks){
         trackCounter += 1;
         timing += +tracks[item].timing;
     }
+
     let time = undefined;
 
     if(timing/3600<1){
