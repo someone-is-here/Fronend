@@ -45,8 +45,8 @@ function updateHeader(counter){
     if (document.getElementsByClassName("li__data")[counter-1].querySelector(".album__title").innerHTML !==
             document.getElementsByClassName("div__container-header")[0].querySelector(".album__title").innerHTML) {
         const allItems = document.getElementsByClassName("ul__tracks-container");
-        for(let item in allItems){
-            allItems[item].style.display = "none";
+        for(let i; i < allItems.length; i++){
+            allItems[i].style.display = "none";
         }
         document.getElementsByClassName("ul__tracks-container")[counter-1].style.display = "static";
     }
