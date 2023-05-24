@@ -46,7 +46,7 @@ function updateHeader(counter){
             document.getElementsByClassName("div__container-header")[0].querySelector(".album__title").innerHTML) {
         const allItems = document.getElementsByClassName("ul__tracks-container");
         for(let item in allItems){
-            item.style.display = "none";
+            allItems[item].style.display = "none";
         }
         document.getElementsByClassName("ul__tracks-container")[counter-1].style.display = "static";
     }
