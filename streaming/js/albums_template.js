@@ -42,6 +42,14 @@ function headerTemplate(image, title, year, trackCounter, time){
     </div>`;
 }
 function updateHeader(counter){
+    if (document.getElementsByClassName("li__data")[counter-1].querySelector(".album__title").innerHTML !==
+            document.getElementsByClassName("div__container-header")[0].querySelector(".album__title").innerHTML) {
+        const allItems = document.getElementsByClassName("ul__tracks-container");
+        for(let item in allItems){
+            item.style.display = "none";
+        }
+        document.getElementsByClassName("ul__tracks-container")[counter-1].style.display = "static";
+    }
     const mainContainer = document.getElementsByClassName("li__data")[counter-1];
     const image = mainContainer.querySelector(".album__cover").innerHTML;
     const title = mainContainer.querySelector(".album__title").innerHTML;
@@ -51,14 +59,7 @@ function updateHeader(counter){
     document.getElementById("main_section").innerHTML = headerTemplate(
     image, title, year, trackCounter, time );
 
-    if (document.getElementsByClassName("li__data")[counter-1].querySelector(".album__title").innerHTML !==
-            document.getElementsByClassName("div__container-header")[0].querySelector(".album__title").innerHTML) {
-        const allItems = document.getElementsByClassName("ul__tracks-container");
-        for(let item in allItems){
-            item.style.display = "none";
-        }
-        document.getElementsByClassName("ul__tracks-container")[counter-1].style.display = "static";
-    }
+
     document.getElementsByClassName("button__play")[0].onclick= window.play(counter, false);
     document.getElementsByClassName("button__like")[0].onclick = window.addHeart(mainContainer.querySelector(".small__heart"), counter);
 }
