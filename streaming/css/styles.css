@@ -206,3 +206,14 @@ input[name="name"]{
         width: 5rem;
     }
 }
+audio::-webkit-media-controls-panel{
+    background: rgb(31, 31, 31);
+    width: 100%;
+}
+audio::-webkit-media-controls-mute-button,
+audio::-webkit-media-controls-play-button{
+    color:white;
+}
+audio{
+    width: 100%;
+}
