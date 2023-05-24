@@ -225,7 +225,7 @@
     font-family: "Franklin Gothic Medium";
 }
 .div__align-items{
-    height: 2rem;
+    height: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
