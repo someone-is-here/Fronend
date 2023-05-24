@@ -95,7 +95,7 @@ function trackTemplate(counter, title, image, streams, likes, timing, track, pat
                <li>
                    <span class="span__additional-tools">
                    <span>
-                       <input  type="button" onclick="play(${counter})" >
+                       <button  class="button__display-none" onclick="play(${counter})" >
                        <svg role="img" height="24" width="24" aria-hidden="true"
                             class="button__play-small" viewBox="0 0 24 24" data-encore-id="icon">
                            <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6

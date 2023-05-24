@@ -193,3 +193,6 @@ input[name="name"]{
     background: #58629b;
     cursor: pointer;
 }
+.button__display-none {
+    display: none;
+}

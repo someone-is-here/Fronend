@@ -71,7 +71,7 @@ function mainTemplate(counter, title, image, likes, year, tracks){
     let timing=0;
     for(let item in tracks){
         trackCounter += 1;
-        timing += tracks[item].timing;
+        timing += +tracks[item].timing;
     }
     let time = undefined;
 
@@ -98,7 +98,7 @@ function albumTemplate(counter, title, image, likes, year, tracks,path){
     let timing=0;
     for(let item in tracks){
         trackList += trackTemplate(tracks[item].track);
-        timing += tracks[item].timing;
+        timing += +tracks[item].timing;
     }
     let time = undefined;
     if(timing/3600<1){
@@ -113,7 +113,7 @@ function albumTemplate(counter, title, image, likes, year, tracks,path){
                <li>
                    <span class="span__additional-tools">
                    <span>
-                       <input type="button" onclick="play(${counter})">
+                       <<button  class="button__display-none" onclick="play(${counter})">
                        <svg role="img" height="24" width="24" aria-hidden="true"
                             class="button__play-small" viewBox="0 0 24 24" data-encore-id="icon" >
                            <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6
