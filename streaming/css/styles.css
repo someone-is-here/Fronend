@@ -201,3 +201,8 @@ input[name="name"]{
     padding-right: 1rem;
     font-size: 0.9rem;
 }
+@media (max-width: 600px) {
+    .form__search-bar .input__search{
+        width: 5rem;
+    }
+}

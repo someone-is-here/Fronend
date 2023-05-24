@@ -21,47 +21,29 @@ import { getAuth, createUserWithEmailAndPassword,
 window.userSignOut = function userSignOut(e) {
   signOut(auth).then(() => {});
 }
-
-function menuTemplateLogin(res) {
-
-  return `         <li>
-                <form action="" class="form__search-bar">
+function searchTemplate(){
+  return `                <form action="" class="form__search-bar">
                 <div>
-<select class="js-example-basic-single" name="state">
-  <option value="AL">Alabama</option>
-  <option value="WY">Wyoming</option>
-</select>
     <input type="text" placeholder="Search anything" name="input__search" class="input__search" autoComplete="on" list="suggestions">
 </div>
                     
                     <button type="submit"><img src="images/search.png"></button>
-                </form>
+                </form>`;
+}
+function menuTemplateLogin(res) {
 
-            </li>          
+  return `         <li>${searchTemplate()}</li>          
                 <li class="menu-additional__list-item menu-additional-email">${res}</li>
                 <li class="menu-additional__list-item"><a href="change_subscription.html" class="menu-additional-link">Subscription</a></li>
                 <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link" onclick="userSignOut()">Logout</a></li>`;
 }
 function menuTemplateLoginArtist(res) {
-  return `         <li>
-                <form action="" class="form__search-bar">
-                    <input type="text" placeholder="Search anything" name="input__search" class="input__search">
-                    <button type="submit"><img src="images/search.png"></button>
-                </form>
-
-            </li>          
+  return `      <li>${searchTemplate()}</li>           
                 <li class="menu-additional__list-item menu-additional-email">${res}</li>
                 <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link" onclick="userSignOut()">Logout</a></li>`;
 }
 function menuBaseTemplate(){
-  return `
-   <li>
-                <form action="" class="form__search-bar">
-                    <input type="text" placeholder="Search anything" name="input__search" class="input__search">
-                    <button type="submit" ><img src="images/search.png"></button>
-                </form>
-
-            </li>
+  return `      <li>${searchTemplate()}</li>    
                 <li class="menu-additional__list-item"><a href="login.html" class="menu-additional-link">Login</a></li>
                 <li class="menu-additional__list-item"><a href="register.html" class="menu-additional-link">Register</a></li>`;
 }
