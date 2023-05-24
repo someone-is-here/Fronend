@@ -20,16 +20,19 @@ const storage = getStorage();
 
 const auth = getAuth();
 
-function trackTemplate(track){
-    return ` <audio controls>
+function trackTemplate(title, track){
+    return ` <li> <a href="#" class="a__remove-style album__title">${title}</li>
+            <div class="div__align-items">
+              <audio controls>
                 <source src="${track}" type="audio/mpeg">
-            </audio>`;
+            </audio>
+         </li>`;
 }
 function headerTemplate(image, title, year, trackCounter, time){
     return `<div class="div__container-header">
         <img src="${image}" class="img__playlist-icon"/>
         <div class="div__playlist-info">
-            <h1 class="h1__playlist-title"><a href="#" class="a__playlist-link">${title}</a></h1>
+            <h1 class="h1__playlist-title"><a href="#" class="a__playlist-link album__title">${title}</a></h1>
             <span class="span__additional-info">
             <span>${year}</span>
             <span>${trackCounter} tracks</span>
@@ -47,10 +50,18 @@ function updateHeader(counter){
     const time = mainContainer.querySelector(".album__duration").innerHTML;
     document.getElementById("main_section").innerHTML = headerTemplate(
     image, title, year, trackCounter, time );
+
+    if (document.getElementsByClassName("li__data")[counter-1].querySelector(".album__title").innerHTML !==
+            document.getElementsByClassName("div__container-header")[0].querySelector(".album__title").innerHTML) {
+        const allItems = document.getElementsByClassName("ul__tracks-container");
+        for(let item in allItems){
+            item.style.display = "none";
+        }
+        document.getElementsByClassName("ul__tracks-container")[counter-1].style.display = "static";
+    }
     document.getElementsByClassName("button__play")[0].onclick= window.play(counter, false);
     document.getElementsByClassName("button__like")[0].onclick = window.addHeart(mainContainer.querySelector(".small__heart"), counter);
 }
-
 window.play = (counter, is_update=true) => {
     const audioContainer = document.getElementsByClassName("div__tracks-container")[counter-1];
     const audio = audioContainer.querySelector("audio");
@@ -64,7 +75,7 @@ window.play = (counter, is_update=true) => {
         audio.pause();
     }else {
         document.getElementsByClassName("button__play-small")[counter-1].innerHTML=`<path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" fill="white"></path>`;
-        if (is_update) {
+        if (is_update){
             updateHeader(counter);
         }
         audio.play();
@@ -116,8 +127,10 @@ function mainTemplate(counter, title, image, likes, year, tracks){
 function albumTemplate(counter, title, image, likes, year, tracks,path){
     let trackList = "";
     let timing=0;
+    let trackCounter = 0;
     for(let item in tracks){
-        trackList += trackTemplate(tracks[item].track);
+        trackList += trackTemplate(item, tracks[item].track);
+        trackCounter += 1;
         timing += +tracks[item].timing;
     }
     let time = undefined;
@@ -150,11 +163,13 @@ function albumTemplate(counter, title, image, likes, year, tracks,path){
                     1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg></button><span class="span__hearts-amount">${likes}</span></span><span class="album__duration"> ${time}</span></span></li>
              </ul>
             </div>
+            <ul style="display: none" class="ul__tracks-container">
+                           ${trackList}
+            </ul>
             <div style="display: none" class="div__tracks-container">
                 <span class="album__year">${year}</span>
                 <span class="album__cover">${image}</span>
-                <span class="album__tracks-amount">${tracks.length}</span>
-               ${trackList}
+                <span class="album__tracks-amount">${trackCounter}</span>
                 <span class="span__path" style="display:none;">${path}</span>
             </div>
          </li>
