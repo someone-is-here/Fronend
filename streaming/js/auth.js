@@ -24,7 +24,7 @@ window.userSignOut = function userSignOut(e) {
 function searchTemplate(){
   return `                <form action="" class="form__search-bar">
                 <div>
-    <input type="text" placeholder="Search anything" name="input__search" class="input__search" autoComplete="on" list="suggestions">
+    <input type="text" placeholder="Search" name="input__search" class="input__search" autoComplete="on" list="suggestions">
 </div>
                     
                     <button type="submit"><img src="images/search.png"></button>
