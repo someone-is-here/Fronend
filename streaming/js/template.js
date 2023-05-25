@@ -47,10 +47,10 @@ containerPlaylists.innerHTML = '';
 const dbRef = ref(getDatabase());
 
 function compare( a, b ) {
-  if ( a.likes < b.likes ){
+  if ( a[Object.keys(a)].likes > b[Object.keys(b)].likes ){
     return -1;
   }
-  if ( a.likes > b.likes ){
+  if ( a[Object.keys(a)].likes < b[Object.keys(b)].likes ){
     return 1;
   }
   return 0;
@@ -65,17 +65,22 @@ get(child(dbRef, `users/`)).then((snapshot) => {
                 get(child(dbRef, `users/` + item + '/albums/')).then((snapshot) => {
                     if (snapshot.exists()) {
                         console.log(snapshot.val());
+
                         const albumsList = snapshot.val();
-                        albumsList.sort(compare);
+                        const albums = Object.entries(albumsList).map((e) => ( { [e[0]]: e[1] } ));
+                        console.log(albums);
+
+                        const sorted = albums.sort(compare);
                         let counter = 10;
-                        for(let alb in albumsList){
+                        for(let i=0; i < sorted.length; i++){
+                            for(let alb in sorted[i]){
                             containerAlbums.insertAdjacentHTML("beforeend", getItemTemplate(
                                          alb,
-                                         albumsList[alb].cover));
+                                         sorted[i][alb].cover));
                             if(--counter === 0){
                                 break;
                             }
-
+                            }
                         }
                     }
                 });
@@ -83,33 +88,46 @@ get(child(dbRef, `users/`)).then((snapshot) => {
                     if (snapshot.exists()) {
                         console.log(snapshot.val());
                         const playlistsList = snapshot.val();
-                        playlistsList.sort(compare);
+                        const playlists = Object.entries(playlistsList).map((e) => ( { [e[0]]: e[1] } ));
+                        console.log(playlists);
+
+                        const sorted = playlists.sort(compare);
+
                         let counter = 10;
-                        for(let pl in playlistsList){
+                        for(let i=0; i < sorted.length; i++){
+                             for(let pl in sorted[i]){
                             containerPlaylists.insertAdjacentHTML("beforeend", getItemTemplate(
                                          pl,
-                                         playlistsList[pl].cover));
+                                         sorted[i][pl].cover));
                             if(--counter === 0){
                                 break;
                             }
+                        }
                         }
                     }
                 });
                  get(child(dbRef, `users/` + item + '/playlists/')).then((snapshot) => {
-                    if (snapshot.exists()) {
-                        console.log(snapshot.val());
-                        const playlistsList = snapshot.val();
-                        playlistsList.sort(compare);
-                        let counter = 10;
-                        for(let pl in playlistsList){
+                      get(child(dbRef, `users/` + item + '/albums/')).then((snapshot2) => {
+                          if (snapshot.exists() || snapshot2.exists()) {
+                              const playlistsList = snapshot.val();
+                              const albumsList = snapshot2.val();
+                              const playlists = Object.entries(playlistsList).map((e) => ( { [e[0]]: e[1] } ));
+                              const albums = Object.entries(albumsList).map((e) => ( { [e[0]]: e[1] } ));
+                              const concatList = playlists.concat(albums);
+                              const sorted = concatList.sort(compare);
+                              let counter = 10;
+                        for(let i=0; i < sorted.length; i++){
+                             for(let item in sorted[i]){
                             containerPopular.insertAdjacentHTML("beforeend", getItemTemplate(
-                                         pl,
-                                         playlistsList[pl].cover));
+                                         item,
+                                         sorted[i][item].cover));
                             if(--counter === 0){
                                 break;
                             }
                         }
-                    }
+                        }
+                          }
+                      });
                 });
             } catch (e) {
 
