@@ -21,15 +21,22 @@ import { getAuth, createUserWithEmailAndPassword,
 window.userSignOut = function userSignOut(e) {
   signOut(auth).then(() => {});
 }
+function resultOfSearch(title, image, info){
+  return ` <div class="div__search-result">
+                <img src="${image}" class="img__search-result">
+                    <div><span class="span__search-result__title">${title}</span><br>
+                    <span class="span__search-additional__info">Likes: ${info}</span></div>
+                </div>`;
+}
 function searchTemplate(){
-  return `                                <div class="div__search-container">
-                <form action="" class="form__search-bar">
-    <input type="text" placeholder="Search" name="input__search" class="input__search" autoComplete="on" list="suggestions">
-                    
+  return `                   <div class="div__search-container form__search-bar">
+
+    <input type="text" placeholder="Search" id="input__search" class="input__search" autoComplete="on" onkeyup="searchFunction()">
+
                     <button type="submit"><img src="images/search.png"></button>
-                </form>
-                <div class="div__search-result">
                 </div>
+                <div class="div__search-result__container">
+               
                 </div>`;
 }
 function menuTemplateLogin(res) {
@@ -74,3 +81,70 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 });
+
+const dbRef = ref(getDatabase());
+function getInfo(){
+  get(child(dbRef, `users/`)).then((snapshot) => {
+  if (snapshot.exists()) {
+    const usersList = snapshot.val();
+    for(let item in usersList){
+        if(usersList[item].role_id === "2"){
+            try {
+                 get(child(dbRef, `users/` + item + '/playlists/')).then((snapshot) => {
+                      get(child(dbRef, `users/` + item + '/albums/')).then((snapshot2) => {
+                          if (snapshot.exists() || snapshot2.exists()) {
+                            window.playlistsList = snapshot.val();
+                            window.albumsList = snapshot2.val();
+                             for(let alb in snapshot.val()){
+                             get(child(dbRef, `users/` + item + '/albums/' + alb + '/tracks/')).then((snapshot3) => {
+                                 window.tracksList = Object.assign(window.tracksList, snapshot3.val());
+                             });
+                        }
+                          }
+                      });
+                });
+            } catch (e) {
+
+            }
+
+        }
+    }
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+}
+
+window.searchFunction = (event) => {
+  let input_value = event.target.value.toLocaleUpperCase();
+  const containerForOutput = document.getElementById("div__search-result__container");
+  containerForOutput.innerHTML = "";
+  if(window.playlistsList) {
+    for (let item in window.playlistsList){
+      if (item.toUpperCase().indexOf(input_value) > -1) {
+         containerForOutput.insertAdjacentHTML("beforeend", resultOfSearch(item,
+             window.playlistsList[item].cover, window.playlistsList[item].likes));
+      }
+    }
+  }
+  if(window.tracksList) {
+    for (let item in window.tracksList){
+      if (item.toUpperCase().indexOf(input_value) > -1) {
+         containerForOutput.insertAdjacentHTML("beforeend", resultOfSearch(item,
+             window.tracksList[item].cover, window.tracksList[item].likes));
+      }
+    }
+  }
+  if(window.albumsList) {
+    for (let item in window.albumsList){
+      if (item.toUpperCase().indexOf(input_value) > -1) {
+         containerForOutput.insertAdjacentHTML("beforeend", resultOfSearch(item,
+             window.albumsList[item].cover, window.albumsList[item].likes));
+      }
+    }
+  }
+};
+
+getInfo();

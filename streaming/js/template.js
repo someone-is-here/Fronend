@@ -29,7 +29,7 @@ function getItemTemplate(name, cover){
                     <circle cx="50" cy="50" r="15" stroke="white" stroke-width="2" fill="white" class="inner-circle"/>
                     <polygon points="47,45 55,50 47,55" style="fill:#6a00ff;stroke:#6a00ff;stroke-width:1" class="play"/>
                 </svg>
-                </a>g
+                </a>
         <img alt="" src="${cover}" class="div__track-cover-img"/>
         <li><h3><a href="#" class="item-link">${name}</a></h3></li>
     </div>
