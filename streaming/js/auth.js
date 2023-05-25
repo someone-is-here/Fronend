@@ -120,7 +120,7 @@ function getInfo(){
 
 window.searchFunction = (el) => {
   let input_value = el.value.toLocaleUpperCase();
-  const containerForOutput = document.getElementById("div__search-result__container");
+  const containerForOutput = document.getElementsByClassName("div__search-result__container")[0];
   containerForOutput.style.display = 'flex';
   containerForOutput.innerHTML = "";
   if(window.playlistsList) {
