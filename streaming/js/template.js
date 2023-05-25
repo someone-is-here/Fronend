@@ -20,7 +20,7 @@ const storage = getStorage();
 
 const auth = getAuth();
 
-function getItemTemplate(image,href, name){
+function getItemTemplate(name, cover){
     return `<div class="div__track-item">
     <div class="div__track-cover">
       <a href="#" class="glightbox_video play__icon-hidden">
@@ -29,9 +29,9 @@ function getItemTemplate(image,href, name){
                     <circle cx="50" cy="50" r="15" stroke="white" stroke-width="2" fill="white" class="inner-circle"/>
                     <polygon points="47,45 55,50 47,55" style="fill:#6a00ff;stroke:#6a00ff;stroke-width:1" class="play"/>
                 </svg>
-                </a>
-        <img alt="" src="${image}" class="div__track-cover-img"/>
-        <li><h3><a href="${href}" class="item-link">${name}</a></h3></li>
+                </a>g
+        <img alt="" src="${cover}" class="div__track-cover-img"/>
+        <li><h3><a href="#" class="item-link">${name}</a></h3></li>
     </div>
 </div>`
 }

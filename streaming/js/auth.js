@@ -22,13 +22,15 @@ window.userSignOut = function userSignOut(e) {
   signOut(auth).then(() => {});
 }
 function searchTemplate(){
-  return `                <form action="" class="form__search-bar">
-                <div>
+  return `                                <div class="div__search-container">
+                <form action="" class="form__search-bar">
     <input type="text" placeholder="Search" name="input__search" class="input__search" autoComplete="on" list="suggestions">
-</div>
                     
                     <button type="submit"><img src="images/search.png"></button>
-                </form>`;
+                </form>
+                <div class="div__search-result">
+                </div>
+                </div>`;
 }
 function menuTemplateLogin(res) {
 
