@@ -220,7 +220,6 @@ audio{
     display: none;
     position: relative;
     z-index: 3;
-        height: 4rem;
     background: black;
     border-radius: 1.5rem;
     font-size: 1.2rem;

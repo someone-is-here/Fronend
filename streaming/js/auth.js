@@ -26,7 +26,7 @@ function resultOfSearch(title, image, info){
                 <img src="${image}" class="img__search-result">
                     <div><span class="span__search-result__title">${title}</span><br>
                     <span class="span__search-additional__info">Likes: ${info}</span></div>
-                </div>`;
+                </div><br>`;
 }
 function searchTemplate(){
   return `                   <div class="div__search-container form__search-bar">
