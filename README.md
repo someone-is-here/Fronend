@@ -5,16 +5,16 @@ Streaming Service is a web-application the main purpose of which is to create a 
 https://someone-is-here.github.io/Frontend/streaming/index.html
 
 # MockUps
-For main page:
+##For main page:
 ![image](https://github.com/someone-is-here/Frontend/assets/48770804/25d842a9-6432-497e-a2e6-de48891c6eac)
 
-For artists:
+##For artists:
 ![image](https://github.com/someone-is-here/Frontend/assets/48770804/96e0a3d8-61c4-4b79-9d93-eea66d0f1649)
 
-For albums:
+##For albums:
 ![image](https://github.com/someone-is-here/Frontend/assets/48770804/be1e07b7-4ac1-4e97-8db8-643a950eca2c)
 
-For tracks:
+##For tracks:
 ![image](https://github.com/someone-is-here/Frontend/assets/48770804/1655fff0-57a5-4b7b-abf7-6f5b3883aca1)
 
 #
