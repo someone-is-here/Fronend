@@ -50,7 +50,7 @@ function updateHeader(counter){
         for(let i = 0; i < allItems.length; i++){
             allItems[i].style.display = "none";
         }
-        document.getElementsByClassName("ul__tracks-container")[counter-1].style.display = "static";
+        document.getElementsByClassName("ul__tracks-container")[counter-1].style.display = "block";
     }
     const mainContainer = document.getElementsByClassName("li__data")[counter-1];
     const image = mainContainer.querySelector(".album__cover").innerHTML;
