@@ -217,6 +217,7 @@ audio{
     width: 100%;
 }
 .div__search-result__container {
+    display: none;
     position: relative;
     z-index: 3;
         height: 4rem;

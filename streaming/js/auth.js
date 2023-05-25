@@ -31,7 +31,7 @@ function resultOfSearch(title, image, info){
 function searchTemplate(){
   return `                   <div class="div__search-container form__search-bar">
 
-    <input type="text" placeholder="Search" id="input__search" class="input__search" autoComplete="on" onkeyup="searchFunction()">
+    <input type="text" placeholder="Search" id="input__search" class="input__search" autoComplete="on" onkeyup="searchFunction(this)">
 
                     <button type="submit"><img src="images/search.png"></button>
                 </div>
@@ -95,6 +95,7 @@ function getInfo(){
                           if (snapshot.exists() || snapshot2.exists()) {
                             window.playlistsList = snapshot.val();
                             window.albumsList = snapshot2.val();
+                             window.tracksList = {};
                              for(let alb in snapshot.val()){
                              get(child(dbRef, `users/` + item + '/albums/' + alb + '/tracks/')).then((snapshot3) => {
                                  window.tracksList = Object.assign(window.tracksList, snapshot3.val());
@@ -117,9 +118,10 @@ function getInfo(){
 });
 }
 
-window.searchFunction = (event) => {
-  let input_value = event.target.value.toLocaleUpperCase();
+window.searchFunction = (el) => {
+  let input_value = el.value.toLocaleUpperCase();
   const containerForOutput = document.getElementById("div__search-result__container");
+  containerForOutput.style.display = 'flex';
   containerForOutput.innerHTML = "";
   if(window.playlistsList) {
     for (let item in window.playlistsList){
