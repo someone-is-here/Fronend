@@ -128,12 +128,13 @@ window.searchFunction = (el) => {
     return;
   }
   containerForOutput.style.display = 'block';
-
+  let found = 0;
   if(window.playlistsList) {
     for (let item in window.playlistsList){
       if (item.toUpperCase().indexOf(input_value) > -1) {
          containerForOutput.insertAdjacentHTML("beforeend", resultOfSearch(item,
              window.playlistsList[item].cover, window.playlistsList[item].likes));
+             found += 1;
       }
     }
   }
@@ -142,6 +143,7 @@ window.searchFunction = (el) => {
       if (item.toUpperCase().indexOf(input_value) > -1) {
          containerForOutput.insertAdjacentHTML("beforeend", resultOfSearch(item,
              window.tracksList[item].cover, window.tracksList[item].likes));
+             found += 1;
       }
     }
   }
@@ -150,8 +152,12 @@ window.searchFunction = (el) => {
       if (item.toUpperCase().indexOf(input_value) > -1) {
          containerForOutput.insertAdjacentHTML("beforeend", resultOfSearch(item,
              window.albumsList[item].cover, window.albumsList[item].likes));
+             found += 1;
       }
     }
+  }
+  if(found === 0){
+    containerForOutput.style.display = 'none';
   }
 };
 
