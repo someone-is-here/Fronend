@@ -124,6 +124,7 @@ window.searchFunction = (el) => {
   containerForOutput.innerHTML = "";
 
   if(input_value.length === 0){
+    containerForOutput.style.display = 'none';
     return;
   }
   containerForOutput.style.display = 'block';
