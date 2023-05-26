@@ -121,11 +121,13 @@ function getInfo(){
 window.searchFunction = (el) => {
   let input_value = el.value.toLocaleUpperCase();
   const containerForOutput = document.getElementsByClassName("div__search-result__container")[0];
-  containerForOutput.style.display = 'block';
   containerForOutput.innerHTML = "";
+
   if(input_value.length === 0){
     return;
   }
+  containerForOutput.style.display = 'block';
+
   if(window.playlistsList) {
     for (let item in window.playlistsList){
       if (item.toUpperCase().indexOf(input_value) > -1) {
