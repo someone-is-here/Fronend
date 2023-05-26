@@ -123,6 +123,9 @@ window.searchFunction = (el) => {
   const containerForOutput = document.getElementsByClassName("div__search-result__container")[0];
   containerForOutput.style.display = 'block';
   containerForOutput.innerHTML = "";
+  if(input_value.length === 0){
+    return;
+  }
   if(window.playlistsList) {
     for (let item in window.playlistsList){
       if (item.toUpperCase().indexOf(input_value) > -1) {
