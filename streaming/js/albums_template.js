@@ -44,14 +44,14 @@ function headerTemplate(image, title, year, trackCounter, time){
     </div>`;
 }
 function updateHeader(counter){
-    if (document.getElementsByClassName("li__data")[counter-1].querySelector(".album__title").innerHTML !==
-            document.getElementsByClassName("div__container-header")[0].querySelector(".album__title").innerHTML) {
-        const allItems = document.getElementsByClassName("ul__tracks-container");
-        for(let i = 0; i < allItems.length; i++){
-            allItems[i].style.display = "none";
-        }
-        document.getElementsByClassName("ul__tracks-container")[counter-1].style.display = "block";
-    }
+    // if (document.getElementsByClassName("li__data")[counter-1].querySelector(".album__title").innerHTML !==
+    //         document.getElementsByClassName("div__container-header")[0].querySelector(".album__title").innerHTML) {
+    //     const allItems = document.getElementsByClassName("ul__tracks-container");
+    //     for(let i = 0; i < allItems.length; i++){
+    //         allItems[i].style.display = "none";
+    //     }
+    //     document.getElementsByClassName("ul__tracks-container")[counter-1].style.display = "block";
+    // }
     const mainContainer = document.getElementsByClassName("li__data")[counter-1];
     const image = mainContainer.querySelector(".album__cover").innerHTML;
     const title = mainContainer.querySelector(".album__title").innerHTML;
@@ -62,8 +62,8 @@ function updateHeader(counter){
     image, title, year, trackCounter, time );
 
 
-    document.getElementsByClassName("button__play")[0].onclick= window.play(counter, false);
-    document.getElementsByClassName("button__like")[0].onclick = window.addHeart(mainContainer.querySelector(".small__heart"), counter);
+    // document.getElementsByClassName("button__play")[0].onclick= window.play(counter, false);
+    // document.getElementsByClassName("button__like")[0].onclick = window.addHeart(mainContainer.querySelector(".small__heart"), counter);
 }
 window.play = (counter, is_update=true) => {
     const audioContainer = document.getElementsByClassName("ul__tracks-container")[counter-1];
